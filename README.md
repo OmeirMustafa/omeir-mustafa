@@ -69,10 +69,13 @@ This project is configured to be deployed instantly on Vercel for free.
 > 
 > #AI #React #WebDev #PromptEngineering #SoftwareEngineering #Portfolio"
 
-**Gemini Image Prompts (for generating assets):**
-1.  *Hero Background:* "Abstract 3D flow of digital data streams, dark charcoal background, neon blue and violet gradient lines, minimalist, cybernetic, 8k resolution, depth of field."
-2.  *Logo Icon:* "Minimalist geometric mesh icon, hexagon shape, interconnected nodes, white lines on black background, vector style."
-3.  *OG Image Background:* "Futuristic workspace desk, dark mode, glowing monitor displaying code, subtle blue ambient light, cinematic angle."
-
 ## 📄 License
-MIT
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+### 📬 Contact
+
+Created by **Omeir Mustafa** - AI Engineer & Full Stack Developer.
+[LinkedIn](https://www.linkedin.com/in/omeir-mustafa-uddin/) • [Email](mailto:kaziomeirmustafa@gmail.com)
