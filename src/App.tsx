@@ -298,7 +298,7 @@ const Contact = () => (
         If you need an engineer who understands both code and product, let's connect.
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        {/* ULTIMATE EMAIL FIX: OPENS GMAIL COMPOSE WINDOW DIRECTLY */}
+        {/* EMAIL LINK (Gmail Direct) */}
         <a 
           href="https://mail.google.com/mail/?view=cm&fs=1&to=kaziomeirmustafa@gmail.com&su=Portfolio%20Inquiry%20from%20Website" 
           target="_blank" 
@@ -307,7 +307,7 @@ const Contact = () => (
           <Mail size={20} /> Email Me
         </a>
         
-        {/* LINKEDIN LINK (VERIFIED) */}
+        {/* LINKEDIN LINK */}
         <a 
           href="https://www.linkedin.com/in/omeir-mustafa-uddin/" 
           target="_blank" 
@@ -323,3 +323,18 @@ const Contact = () => (
     </div>
   </section>
 );
+
+const App = () => {
+  return (
+    <div className="bg-bg min-h-screen text-slate-300 selection:bg-blue-500/30 selection:text-blue-200">
+      <Navbar />
+      <Hero />
+      <About />
+      <FeaturedProject />
+      <Skills />
+      <Contact />
+    </div>
+  );
+};
+
+export default App;
