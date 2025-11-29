@@ -290,40 +290,35 @@ const Skills = () => {
 };
 
 const Contact = () => (
-  <section id="contact" className="py-32 relative overflow-hidden">
-    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-    <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
+  <section id="contact" className="py-32 text-center">
+    <div className="max-w-3xl mx-auto px-6">
       <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something Smart.</h2>
-      <p className="text-xl text-slate-400 mb-10">
-        I am currently open to freelance projects and full-time opportunities in AI Engineering.
+      <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
+        I am currently open to freelance projects and full-time opportunities in AI Engineering. 
+        If you need an engineer who understands both code and product, let's connect.
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="mailto:contact@omeirmustafa.com" className="px-8 py-4 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform flex items-center justify-center gap-2">
+        {/* CORRECTED EMAIL LINK */}
+        <a 
+          href="mailto:kaziomeirmustafa@gmail.com" 
+          className="px-8 py-4 bg-white text-black font-semibold rounded-full hover:scale-105 transition-transform flex items-center justify-center gap-2"
+        >
           <Mail size={20} /> Email Me
         </a>
-        <a href="https://linkedin.com/in/OmeirMustafa" target="_blank" className="px-8 py-4 glass-panel text-white font-medium rounded-full hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+        
+        {/* CORRECTED LINKEDIN LINK */}
+        <a 
+          href="https://www.linkedin.com/in/omeir-mustafa-uddin/" 
+          target="_blank" 
+          className="px-8 py-4 glass-panel text-white font-medium rounded-full hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+        >
           <Linkedin size={20} /> LinkedIn
         </a>
       </div>
+      
+      <footer className="mt-24 text-center text-sm text-slate-500">
+        <p>&copy; {new Date().getFullYear()} Omeir Mustafa. Engineered with React & Gemini.</p>
+      </footer>
     </div>
-    
-    <footer className="mt-32 text-center text-sm text-slate-600">
-      <p>© {new Date().getFullYear()} Omeir Mustafa. Engineered with React & Gemini.</p>
-    </footer>
   </section>
 );
-
-const App = () => {
-  return (
-    <div className="bg-bg min-h-screen text-slate-300 selection:bg-blue-500/30 selection:text-blue-200">
-      <Navbar />
-      <Hero />
-      <About />
-      <FeaturedProject />
-      <Skills />
-      <Contact />
-    </div>
-  );
-};
-
-export default App;
