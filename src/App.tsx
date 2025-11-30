@@ -317,8 +317,9 @@ const Contact = () => (
         </a>
       </div>
       
-      <footer className="mt-24 text-center text-sm text-slate-500">
-        <p>&copy; {new Date().getFullYear()} Omeir Mustafa. Engineered with React & Gemini.</p>
+      {/* Footer Section */}
+      <footer className="py-8 text-center text-slate-500 text-sm border-t border-white/10 mt-12">
+        <p>&copy; {new Date().getFullYear()} Omeir Mustafa. All rights reserved.</p>
       </footer>
     </div>
   </section>
