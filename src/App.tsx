@@ -222,23 +222,77 @@ const About = () => (
   </section>
 );
 
-const FeaturedProject = () => {
-  // Removed useViewportScroll, useTransform for performance on Parallax
-  const [currentImage, setCurrentImage] = useState('/dashboard.png'); // State added for the next dynamic image upgrade
+// ADD THIS KEYFRAME ANIMATION TO YOUR CSS (e.g., in index.css or if you have a custom CSS file)
+// If you are using Tailwind CSS directly without a custom CSS file, this will need a slight adjustment
+// but for now, we'll assume a place for custom keyframes.
+// If you don't have a custom CSS file, let me know, and I'll show you how to add it via Tailwind config.
 
-  // Continuous floating animation
+/* In your custom CSS file (e.g., src/index.css or public/index.css) */
+/*
+@keyframes line-scan {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+*/
+
+const FeaturedProject = () => {
+  const [currentImage, setCurrentImage] = useState('/dashboard.png'); 
+
+  // Continuous floating animation for the project image
   const continuousFloatAndRotate = {
     animate: { y: [0, -10, 0], rotateY: [0, 2, -2, 0] }, 
     transition: { duration: 6, repeat: Infinity, ease: "easeInOut" }
   };
 
+  useEffect(() => {
+    const images = ['/dashboard.png', '/dashboard2.png']; 
+    let currentIndex = 0;
+
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      setCurrentImage(images[currentIndex]);
+    }, 5000); 
+
+    return () => clearInterval(interval); 
+  }, []);
+
+
   return (
-    <section id="work" className="py-24 relative"> {/* REDUCED PADDING */}
+    <section id="work" className="py-24 relative"> 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="flex items-center gap-4 mb-16 opacity-70">
-          <div className="h-px bg-cyan-500 flex-grow shadow-[0_0_10px_#06b6d4]"></div>
-          <span className="text-xs font-mono text-cyan-400 tracking-[0.3em] uppercase drop-shadow-[0_0_5px_#06b6d4]">Flagship Project</span>
-          <div className="h-px bg-cyan-500 flex-grow shadow-[0_0_10px_#06b6d4]"></div>
+          {/* Animated Left Line */}
+          <div className="h-px flex-grow relative overflow-hidden">
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/80 to-transparent"
+              initial={{ x: '-100%' }}
+              animate={{ x: '100%' }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              style={{ width: '200%' }} // Make the gradient wider than the div
+            />
+             <div className="h-px bg-cyan-500/20 w-full absolute top-0 left-0"></div> {/* Base line */}
+          </div>
+
+          <motion.span 
+            initial={{ opacity: 0.5, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", repeatType: "mirror" }}
+            className="text-xs font-mono text-cyan-400 tracking-[0.3em] uppercase drop-shadow-[0_0_5px_#06b6d4]"
+          >
+            Flagship Project
+          </motion.span>
+          
+          {/* Animated Right Line */}
+          <div className="h-px flex-grow relative overflow-hidden">
+             <motion.div 
+              className="absolute inset-0 bg-gradient-to-l from-transparent via-cyan-500/80 to-transparent" // Reversed gradient
+              initial={{ x: '100%' }}
+              animate={{ x: '-100%' }} // Reversed animation direction
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              style={{ width: '200%' }}
+            />
+            <div className="h-px bg-cyan-500/20 w-full absolute top-0 left-0"></div> {/* Base line */}
+          </div>
         </div>
 
         <motion.div 
@@ -283,15 +337,17 @@ const FeaturedProject = () => {
             {/* VISUAL MOCKUP */}
             <div className="bg-black/50 p-10 flex items-center justify-center relative overflow-hidden min-h-[400px] border-l border-white/5">
               
-              {/* The Image Container with continuous float and subtle rotate */}
               <motion.div 
-                // Using continuousFloatAndRotate defined outside (as per previous instructions)
                 animate={continuousFloatAndRotate.animate}
                 transition={continuousFloatAndRotate.transition}
                 className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-white/20 group cursor-pointer"
               >
-                <img 
-                  src={currentImage} // Using state for future dynamic images
+                <motion.img 
+                  key={currentImage} // Key prop forces re-render and animation on image change
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  src={currentImage} 
                   alt="SeeThruo Dashboard" 
                   className="w-full h-full object-cover bg-slate-800"
                   onError={(e) => {
