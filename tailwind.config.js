@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = { // FIXED: Changed 'export default' to 'module.exports'
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -11,8 +11,7 @@ module.exports = { // FIXED: Changed 'export default' to 'module.exports'
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
-        // FIXED: Using a safe, dark hex code to guarantee dark background
-        bg: '#030014', 
+        bg: '#030014', // Use bg-slate-950/bg-black in App.tsx for safety, as done previously
         glass: 'rgba(255, 255, 255, 0.05)',
         glassBorder: 'rgba(255, 255, 255, 0.1)',
         primary: '#3b82f6',
@@ -21,7 +20,7 @@ module.exports = { // FIXED: Changed 'export default' to 'module.exports'
       },
       animation: {
         'blob': 'blob 7s infinite',
-        // Also ensure the neon glow animation is defined if you want the cards to pulse:
+        // 1. Defined animation name
         'neon-glow-border': 'neon-glow-border 4s ease-in-out infinite alternate',
       },
       keyframes: {
@@ -31,18 +30,19 @@ module.exports = { // FIXED: Changed 'export default' to 'module.exports'
           '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
           '100%': { transform: 'translate(0px, 0px) scale(1)' },
         },
+        // 2. Defined keyframes for the pulsing box-shadow
         'neon-glow-border': {
             '0%, 100%': {
               'box-shadow': '0 0 5px rgba(6, 182, 212, 0.4), 0 0 15px rgba(6, 182, 212, 0.4)',
-              'border-color': 'rgba(6, 182, 212, 0.4)',
+              'border-color': 'rgba(6, 182, 212, 0.4)', // Added border color pulse
             },
             '50%': {
               'box-shadow': '0 0 8px rgba(6, 182, 212, 0.6), 0 0 25px rgba(6, 182, 212, 0.6)',
               'border-color': 'rgba(6, 182, 212, 0.6)',
             },
           },
-      }
+      },
     },
   },
   plugins: [],
-};
+}
