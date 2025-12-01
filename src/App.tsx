@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Sparkles, Terminal, ShieldAlert, Layout, ChevronDown, Cpu, Globe, Zap, ScanEye, Code2 } from 'lucide-react';
 
-// --- ANIMATIONS ---
+// --- ANIMATION VARIANTS ---
 const float = {
   animate: {
     y: [0, -10, 0],
@@ -42,21 +42,22 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           className="font-bold text-xl tracking-wider text-white group cursor-pointer"
         >
-          {/* FIXED: Full Name in one block with colored dot at the end */}
-          <span className="drop-shadow-lg">Omeir Mustafa</span>
-          <span className="text-cyan-400 group-hover:text-purple-400 transition-colors duration-300 ml-0.5">.</span>
+          {/* LOGO FIX: Omeir Mustafa with soft glow */}
+          <span className="drop-shadow-lg text-2xl font-extrabold tracking-tighter">Omeir Mustafa</span>
+          <span className="inline-block w-1 h-1 rounded-full bg-cyan-500 ml-1 animate-pulse"></span>
         </motion.div>
 
         <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
           {['About', 'Work', 'Stack', 'Contact'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="relative group hover:text-cyan-400 transition-colors">
+            <a key={item} href={`#${item.toLowerCase()}`} className="relative group hover:text-cyan-400 transition-colors duration-300">
               {item}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+              {/* NEON GLOW UNDERLINE EFFECT */}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300 shadow-[0_0_10px_#06b6d4]"></span>
             </a>
           ))}
         </div>
         
-        <a href="#contact" className="relative px-6 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/50 text-cyan-300 text-sm font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)]">
+        <a href="#contact" className="relative px-6 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/50 text-cyan-300 text-sm font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
           Let's Talk
         </a>
       </div>
@@ -100,20 +101,27 @@ const Hero = () => {
           SHIPPING SEETHRUO v2.0
         </motion.div>
 
-        {/* NEON HEADLINE */}
+        {/* NEON HEADLINE - Size reduced for readability */}
         <motion.h1 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-6xl md:text-9xl font-black tracking-tighter text-white mb-8 leading-[1.1] drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+          className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.95] mb-12 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
         >
           Engineering <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 drop-shadow-[0_0_30px_rgba(6,182,212,0.5)]">
+          {/* FIX: Animated reveal for the word 'Intelligent' */}
+          <motion.span
+            initial={{ filter: "blur(10px)", opacity: 0 }}
+            animate={{ filter: "blur(0px)", opacity: 1 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+            className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 drop-shadow-[0_0_20px_rgba(6,182,212,0.8)]"
+          >
             Intelligent
-          </span> <br />
+          </motion.span> <br />
           Interfaces.
         </motion.h1>
 
+        {/* Subhead */}
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -121,7 +129,7 @@ const Hero = () => {
           className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light"
         >
           I orchestrate systems. I build full-stack AI products 
-          that merge <span className="text-cyan-200 font-medium glow-text">LLMs</span> with <span className="text-cyan-200 font-medium glow-text">forensic UX</span>. 
+          that merge <strong className="text-cyan-200 font-medium">LLMs</strong> with <strong className="text-cyan-200 font-medium">forensic UX</strong>. 
         </motion.p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -171,8 +179,8 @@ const About = () => (
         ].map((item, i) => (
           <motion.div 
             key={i}
-            animate={float.animate} /* FIX 1: Apply floating animation */
-            whileHover={glowHover.hover} /* FIX 2: Apply magnetic hover glow */
+            animate={float.animate}
+            whileHover={glowHover.hover}
             className="p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-lg"
           >
             <div className={`w-14 h-14 rounded-2xl bg-slate-800/50 border border-white/10 flex items-center justify-center mb-6 shadow-inner`}>
@@ -203,14 +211,14 @@ const FeaturedProject = () => (
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* TEXT CONTENT */}
           <div className="p-10 md:p-20 flex flex-col justify-center relative">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/10 to-transparent opacity-20"></div>
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/5 to-transparent opacity-20"></div>
             
             <div className="relative z-10">
               <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-8 shadow-[0_0_20px_rgba(6,182,212,0.2)]">
                 <ScanEye className="w-8 h-8 text-cyan-400" />
               </div>
               <h3 className="text-5xl font-bold text-white mb-4 tracking-tight">SeeThruo</h3>
-              <p className="text-xl text-cyan-300 mb-8 font-mono">Decision Intelligence Engine</p>
+              <p className="text-xl text-cyan-300/80 mb-6 font-mono">Decision Intelligence Engine</p>
               <p className="text-slate-400 mb-10 leading-loose text-lg">
                 A proprietary AI system that decodes corporate comms, media bias, and hidden intent. 
                 Built with a forensic "Glass & Glow" interface for rapid information processing.
@@ -225,7 +233,7 @@ const FeaturedProject = () => (
               </div>
 
               <div className="flex gap-4">
-                <a href="https://seethruo-engine.vercel.app/" target="_blank" className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-xl transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                <a href="https://seethruo-engine.vercel.app/" target="_blank" className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-cyan-900/20">
                   Live System <ExternalLink size={18} />
                 </a>
                 <a href="https://github.com/OmeirMustafa/seethruo" target="_blank" className="px-8 py-4 border border-white/10 hover:bg-white/5 text-white font-medium rounded-xl transition-colors flex items-center gap-2">
@@ -237,14 +245,10 @@ const FeaturedProject = () => (
 
           {/* VISUAL MOCKUP */}
           <div className="bg-black/50 p-10 flex items-center justify-center relative overflow-hidden min-h-[500px] border-l border-white/5">
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
             
-            {/* Floating Card Animation */}
-            <motion.div 
-              animate={{ y: [0, -20, 0], rotate: [0, 2, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-white/20 group"
-            >
+            {/* The Image Container with Tilt Effect */}
+            <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl transform rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 border border-white/20 group">
+              {/* NOTE: Put a file named dashboard.png in your public folder for this to work. */}
               <img 
                 src="/dashboard.png" 
                 alt="SeeThruo Dashboard" 
@@ -266,7 +270,7 @@ const FeaturedProject = () => (
                     <span className="text-sm font-mono text-green-400 font-bold">System Online</span>
                  </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -295,8 +299,8 @@ const Skills = () => {
            ].map((stack, i) => (
              <motion.div 
                key={i}
-               animate={float.animate} /* FIX 1: Apply floating animation */
-               whileHover={glowHover.hover} /* FIX 2: Apply magnetic hover glow */
+               animate={float.animate}
+               whileHover={glowHover.hover}
                className={`p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-lg transition-colors ${stack.border} group`}
              >
                 <div className="flex items-center gap-3 mb-6">
