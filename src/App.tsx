@@ -193,18 +193,20 @@ const About = () => (
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
           The Builder's Protocol
         </h2>
+        <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          Code is useless if it doesn't ship. My process is ruthless prioritization of functionality, security, and user experience.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          { icon: Zap, title: "Ship to Learn", desc: "Don't theorize. Build, deploy, break, fix, and ship again. Speed is the ultimate advantage.", color: "text-yellow-400" },
-          { icon: ShieldAlert, title: "Security First", desc: "API keys and environment variables are sacred. I build military-grade secure architectures.", color: "text-red-400" },
-          { icon: Layout, title: "Forensic UX", desc: "A powerful backend needs a clean frontend. I obsess over pixel-perfect spacing and interactions.", color: "text-cyan-400" },
+          { icon: Zap, title: "Rapid Iteration", desc: "We prioritize rapid iteration. The fastest path to a market-fit product is through continuous deployment and empirical learning, not theoretical perfection.", color: "text-yellow-400" },
+          { icon: ShieldAlert, title: "Security First", desc: "Security is architectural. I implement server-side environment segregation to eliminate key leakage and mitigate deployment risk.", color: "text-red-400" },
+          { icon: Layout, title: "Forensic UX", desc: "Interface design must build trust. I focus on information architecture and micro-interactions that lead to high clarity and user conversion.", color: "text-cyan-400" },
         ].map((item, i) => (
           <motion.div 
             key={i}
-            variants={continuousFloat} // Use continuous float for cards
-            animate="animate"
+            animate={continuousFloat.animate}
             whileHover={cardGlowHover.hover}
             className="p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-lg"
           >
@@ -212,7 +214,6 @@ const About = () => (
               <item.icon className={`w-7 h-7 ${item.color}`} />
             </div>
             <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
-            {/* FIX: Smaller text size for card descriptions */}
             <p className="text-slate-400 leading-relaxed text-sm">{item.desc}</p>
           </motion.div>
         ))}
