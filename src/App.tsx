@@ -1,26 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Sparkles, ShieldAlert, Layout, ChevronDown, Cpu, Globe, Zap, ScanEye } from 'lucide-react';
 
 // --- ANIMATION VARIANTS ---
 
-const float = {
+// Continuous subtle floating for cards (About & Skills)
+const continuousFloat = {
   animate: {
-    y: [0, -10, 0],
+    y: [0, -5, 0],
     transition: {
-      duration: 4,
+      duration: 5,
       repeat: Infinity,
       ease: "easeInOut"
     }
   }
 };
 
-const glowHover = {
+// Continuous floating/rotating for the main project image
+const continuousFloatAndRotate = {
+  animate: { y: [0, -10, 0], rotateY: [0, 2, -2, 0] },
+  transition: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+};
+
+// Glow on hover for cards
+const cardGlowHover = {
   hover: {
     scale: 1.02,
     boxShadow: "0 0 25px rgba(6, 182, 212, 0.3)",
     borderColor: "rgba(6, 182, 212, 0.5)",
     transition: { duration: 0.3 }
+  }
+};
+
+// Pulsing animation for elements like the logo dot or status indicator
+const pulse = {
+  animate: {
+    scale: [1, 1.1, 1],
+    opacity: [0.8, 1, 0.8],
+    transition: {
+      duration: 1.5,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
   }
 };
 
@@ -43,20 +64,30 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           className="font-bold text-xl tracking-wider text-white group cursor-pointer"
         >
-          <span className="drop-shadow-lg text-2xl font-extrabold tracking-tighter">Omeir Mustafa</span>
-          <span className="inline-block w-1 h-1 rounded-full bg-cyan-500 ml-1 animate-pulse">.</span>
+          {/* LOGO: Full Name */}
+          <span className="text-2xl font-extrabold tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">Omeir Mustafa</span>
+          <motion.span variants={pulse} animate="animate" className="inline-block w-1 h-1 rounded-full bg-cyan-500 ml-1">.</motion.span>
         </motion.div>
 
         <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
           {['About', 'Work', 'Stack', 'Contact'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="relative group hover:text-cyan-400 transition-colors duration-300">
+            <motion.a 
+              key={item} 
+              href={`#${item.toLowerCase()}`} 
+              whileHover={{ 
+                y: -3, 
+                textShadow: '0 0 10px #06b6d4', 
+                color: '#22d3ee' 
+              }}
+              className="relative group transition-colors duration-300"
+            >
               {item}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300 shadow-[0_0_10px_#06b6d4]"></span>
-            </a>
+            </motion.a>
           ))}
         </div>
         
-        <a href="#contact" className="relative px-6 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/50 text-cyan-300 text-sm font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+        <a href="#contact" className="relative px-6 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/50 text-cyan-300 text-sm font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)]">
           Let's Talk
         </a>
       </div>
@@ -67,10 +98,13 @@ const Navbar = () => {
 const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+      
+      {/* Cybernetic Grid & Glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950"></div>
         
+        {/* Moving Orbs */}
         <motion.div 
           animate={{ x: [0, 100, 0], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
@@ -84,18 +118,20 @@ const Hero = () => {
       </div>
 
       <div className="max-w-5xl mx-auto px-6 text-center z-10">
+        {/* Status Badge */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-cyan-500/30 text-xs font-bold text-cyan-300 mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.2)]"
         >
-          <span className="relative flex h-2 w-2">
+          <motion.span variants={pulse} animate="animate" className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-          </span>
+          </motion.span>
           SHIPPING SEETHRUO v2.0
         </motion.div>
 
+        {/* NEON HEADLINE */}
         <motion.h1 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -114,6 +150,7 @@ const Hero = () => {
           Interfaces.
         </motion.h1>
 
+        {/* Subhead */}
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -142,6 +179,14 @@ const Hero = () => {
           </motion.a>
         </div>
       </div>
+      
+      <motion.div 
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-cyan-500/50"
+      >
+        <ChevronDown size={32} />
+      </motion.div>
     </section>
   );
 };
@@ -166,8 +211,8 @@ const About = () => (
         ].map((item, i) => (
           <motion.div 
             key={i}
-            animate={float.animate}
-            whileHover={glowHover.hover}
+            animate={continuousFloat.animate}
+            whileHover={cardGlowHover.hover}
             className="p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-lg"
           >
             <div className={`w-14 h-14 rounded-2xl bg-slate-800/50 border border-white/10 flex items-center justify-center mb-6 shadow-inner`}>
@@ -184,7 +229,7 @@ const About = () => (
 
 const FeaturedProject = () => {
   const [currentImage, setCurrentImage] = useState('/dashboard.png'); 
-  
+
   const continuousFloatAndRotate = {
     animate: { y: [0, -10, 0], rotateY: [0, 2, -2, 0] }, 
     transition: { duration: 6, repeat: Infinity, ease: "easeInOut" }
@@ -193,16 +238,20 @@ const FeaturedProject = () => {
   useEffect(() => {
     const images = ['/dashboard.png', '/dashboard2.png']; 
     let currentIndex = 0;
+
     const interval = setInterval(() => {
       currentIndex = (currentIndex + 1) % images.length;
       setCurrentImage(images[currentIndex]);
     }, 5000); 
+
     return () => clearInterval(interval); 
   }, []);
+
 
   return (
     <section id="work" className="py-20 relative"> 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
+        
         <div className="flex items-center gap-4 mb-10 opacity-70">
           <div className="h-px flex-grow relative overflow-hidden">
             <motion.div 
@@ -238,7 +287,8 @@ const FeaturedProject = () => {
 
         <motion.div 
           whileHover={{ scale: 1.005 }}
-          className="glass-panel rounded-[2.5rem] overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur-xl shadow-2xl shadow-black/50 neon-border-glow"
+          // UPDATED CLASS NAME HERE:
+          className="glass-panel rounded-[2.5rem] overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur-xl shadow-2xl shadow-black/50 animate-neon-glow-border"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="p-8 md:p-14 flex flex-col justify-center relative"> 
@@ -288,6 +338,14 @@ const FeaturedProject = () => {
                   src={currentImage} 
                   alt="SeeThruo Dashboard" 
                   className="w-full h-full object-cover bg-slate-800"
+                  onError={(e) => {
+                     const parent = e.currentTarget.parentElement;
+                     if(parent) {
+                       e.currentTarget.style.display = 'none';
+                       parent.classList.add('bg-gradient-to-br', 'from-slate-800', 'to-black');
+                       parent.innerHTML = '<div class="h-80 flex items-center justify-center text-slate-500 font-mono">System Preview</div>';
+                     }
+                  }}
                 />
                 
                 <div className="absolute -right-6 top-12 bg-black/80 backdrop-blur-md p-4 rounded-xl border border-green-500/30 shadow-[0_0_30px_rgba(34,197,94,0.2)] transform translate-x-4">
@@ -325,7 +383,7 @@ const Skills = () => (
          ].map((stack, i) => (
            <motion.div 
              key={i}
-             animate={float.animate}
+             animate={continuousFloat.animate}
              whileHover={cardGlowHover.hover}
              className={`p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-lg transition-colors ${stack.border} group`}
            >
@@ -353,6 +411,7 @@ const Contact = () => (
       <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
         Let's Build.
       </h2>
+      
       <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
         I’m open to freelance and full-time opportunities. If you need an engineer who understands product strategy as well as code, let’s talk.
       </p>
