@@ -7,10 +7,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // This links the font-sans class to the Inter font we imported in index.css
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'], // Ensures clean Google Font
       },
+      colors: {
+        // We are using standard Tailwind colors (blue-600, gray-900) so no custom ones needed
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'), // Optional: Good for text blocks
+  ],
 }

@@ -1,210 +1,227 @@
- import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Code, Cpu, Layers, Zap } from 'lucide-react';
 
-// --- ICONS ---
-const ArrowRight = () => (
-  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-);
-const ExternalLink = () => (
-  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-);
-const CodeIcon = () => (
-  <svg className="w-6 h-6 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-);
-const LayoutIcon = () => (
-  <svg className="w-6 h-6 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+// --- COMPONENTS ---
+
+const Navbar = () => {
+  return (
+    <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-4">
+      <div className="max-w-4xl mx-auto px-6 flex items-center justify-between">
+        <div className="font-bold text-xl tracking-tight text-gray-900">
+          Omeir<span className="text-blue-600">.</span>
+        </div>
+        <div className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
+          {['About', 'Work', 'Skills', 'Contact'].map((item) => (
+            <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-blue-600 transition-colors">
+              {item}
+            </a>
+          ))}
+        </div>
+        <a href="#contact" className="px-5 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all shadow-sm">
+          Let's Connect
+        </a>
+      </div>
+    </nav>
+  );
+};
+
+const Hero = () => {
+  return (
+    <section className="min-h-screen flex items-center justify-center bg-white pt-20">
+      <div className="max-w-3xl mx-auto px-6 text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-8 leading-tight">
+            Building fast, modern, <br/>
+            <span className="text-blue-600">reliable web experiences.</span>
+          </h1>
+          
+          <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+            I turn ideas into clean, functional digital products — prototypes, websites, and apps.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#work" className="px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center justify-center gap-2 shadow-lg">
+              View My Work <ArrowRight size={18} />
+            </a>
+            <a href="#contact" className="px-8 py-4 bg-white text-gray-900 border border-gray-200 font-semibold rounded-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
+              Let's Connect
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const About = () => (
+  <section id="about" className="py-24 bg-gray-50">
+    <div className="max-w-4xl mx-auto px-6">
+      <div className="mb-12">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">About Me</h2>
+        <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
+      </div>
+      
+      <div className="prose prose-lg text-gray-600 leading-relaxed">
+        <p className="mb-6">
+          I’m a self-taught developer who builds clean, modern digital experiences.
+        </p>
+        <p className="mb-6">
+          I specialize in fast web apps, intuitive interfaces, and simple systems that help businesses grow.
+          I use AI tools like Gemini for rapid prototyping, then refine everything manually in VS Code to produce stable, scalable, customized solutions.
+        </p>
+        <p>
+          My goal is to work with clients worldwide — creating websites, tools, and apps that are fast, functional, and easy to use.
+        </p>
+      </div>
+    </div>
+  </section>
 );
 
-function App() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+const Projects = () => {
+  const projects = [
+    {
+      title: "SeeThruo",
+      category: "Web App",
+      desc: "A minimal, distraction-filtering writing environment that helps users think clearly and produce better ideas.",
+      stack: ["Next.js", "React", "Tailwind", "Vercel Edge"],
+      link: "https://seethruo-engine.vercel.app/",
+      icon: Zap
+    },
+    {
+      title: "Personal Portfolio",
+      category: "Website",
+      desc: "My personal portfolio showcasing my skills, process, and approach to fast digital builds.",
+      stack: ["React", "TypeScript", "Tailwind", "Framer Motion"],
+      link: "#",
+      icon: Layers
+    }
+  ];
 
   return (
-    <div className="min-h-screen bg-slate-50 relative overflow-hidden">
-      
-      {/* BACKGROUND ACCENTS (Animated) */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-200/30 rounded-full blur-[100px] animate-blob" />
-        <div className="absolute top-[20%] right-[-5%] w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-[100px] animate-blob animation-delay-2000" />
-        <div className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-indigo-100/40 rounded-full blur-[100px] animate-blob animation-delay-4000" />
+    <section id="work" className="py-24 bg-white">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+          <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.map((p, i) => (
+            <motion.div 
+              key={i}
+              whileHover={{ y: -5 }}
+              className="group bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div className="p-3 bg-blue-50 rounded-xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <p.icon size={24} />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider text-gray-400 border border-gray-100 px-3 py-1 rounded-full">{p.category}</span>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">{p.title}</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed text-sm">{p.desc}</p>
+              
+              <div className="flex flex-wrap gap-2 mb-8">
+                {p.stack.map(s => (
+                  <span key={s} className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-md">
+                    {s}
+                  </span>
+                ))}
+              </div>
+              
+              <a href={p.link} target="_blank" rel="noreferrer" className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
+                View Live Project <ExternalLink size={16} className="ml-2" />
+              </a>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Skills = () => (
+  <section id="skills" className="py-24 bg-gray-50">
+    <div className="max-w-4xl mx-auto px-6">
+      <div className="mb-12">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">Skills & Tools</h2>
+        <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
       </div>
 
-      {/* NAVIGATION */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-200/50' : 'bg-transparent'}`}>
-        <div className="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
-          <span className="font-bold text-xl tracking-tight text-slate-900">OM.</span>
-          <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
-            <a href="#about" className="hover:text-blue-600 transition-colors">About</a>
-            <a href="#projects" className="hover:text-blue-600 transition-colors">Work</a>
-            <a href="#skills" className="hover:text-blue-600 transition-colors">Skills</a>
-          </div>
-          <a href="#contact" className="px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-all shadow-md hover:shadow-lg">
-            Let's Talk
-          </a>
-        </div>
-      </nav>
-
-      {/* HERO SECTION */}
-      <section className="relative pt-40 pb-20 md:pt-48 md:pb-32 px-6">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-          <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-semibold tracking-wide uppercase">
-            Frontend Engineer
-          </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-8">
-            Building fast, modern, <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-              reliable web experiences.
-            </span>
-          </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed mb-10">
-            I turn complex ideas into clean, functional digital products. 
-            Focused on performance, scalability, and pixel-perfect design.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="#projects" className="group flex items-center px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/25">
-              View Selected Work <ArrowRight />
-            </a>
-            <a href="#contact" className="px-8 py-4 text-slate-700 font-semibold hover:text-slate-900 transition-colors">
-              Contact Me
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* PROJECTS SECTION */}
-      <section id="projects" className="section-padding px-6 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">Selected Projects</h2>
-              <p className="text-slate-500">Recent commercial and personal work.</p>
+      <div className="grid md:grid-cols-3 gap-6">
+        {[
+          { title: "Frontend", skills: ["React", "Next.js", "Tailwind CSS"], icon: Code },
+          { title: "Backend & Tools", skills: ["Node.js", "APIs", "Git", "VS Code", "Gemini"], icon: Cpu },
+          { title: "Strengths", skills: ["Clean UI", "Speed-Focused Builds", "Rapid Prototyping"], icon: Zap },
+        ].map((cat, i) => (
+          <div key={i} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <cat.icon className="text-blue-600" size={20} />
+              <h3 className="font-bold text-gray-900">{cat.title}</h3>
             </div>
-            <a href="https://github.com/kaziomeir" className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center">
-              View GitHub <ExternalLink />
-            </a>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Project 1 */}
-            <div className="group bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-500/30 transition-all duration-300 relative overflow-hidden">
-              <div className="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
-                <LayoutIcon />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">SeeThruo</h3>
-              <p className="text-slate-600 mb-6 leading-relaxed">
-                A minimal, distraction-filtering writing environment. Built to help users focus on content creation without UI clutter.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {['Next.js', 'React', 'Tailwind', 'Vercel'].map(tag => (
-                  <span key={tag} className="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-medium rounded-md border border-slate-100">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <a href="https://seethruo-engine.vercel.app" className="inline-flex items-center text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors">
-                View Live App <ExternalLink />
-              </a>
-            </div>
-
-            {/* Project 2 */}
-            <div className="group bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-500/30 transition-all duration-300 relative overflow-hidden">
-              <div className="h-12 w-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6 text-indigo-600">
-                <CodeIcon />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">Personal Portfolio</h3>
-              <p className="text-slate-600 mb-6 leading-relaxed">
-                High-performance portfolio site. Engineered for speed using Vite and React, featuring custom animations and responsive layouts.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {['React', 'Vite', 'TypeScript', 'Tailwind'].map(tag => (
-                  <span key={tag} className="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-medium rounded-md border border-slate-100">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <span className="inline-flex items-center text-sm font-bold text-slate-400 cursor-not-allowed">
-                Currently Viewing
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SKILLS SECTION */}
-      <section id="skills" className="py-24 bg-slate-900 text-white px-6 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Technical Expertise</h2>
-              <p className="text-slate-400 text-lg leading-relaxed mb-8">
-                I don't just write code; I build sustainable systems. 
-                My workflow combines modern AI tools for speed with manual refinement for stability and performance.
-              </p>
-              <div className="flex gap-4">
-                <div className="p-4 bg-slate-800 rounded-lg border border-slate-700">
-                  <span className="block text-2xl font-bold text-blue-400">100%</span>
-                  <span className="text-sm text-slate-400">Modern Stack</span>
-                </div>
-                <div className="p-4 bg-slate-800 rounded-lg border border-slate-700">
-                  <span className="block text-2xl font-bold text-blue-400">Fast</span>
-                  <span className="text-sm text-slate-400">Turnaround</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { cat: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "TypeScript"] },
-                { cat: "Backend", items: ["Node.js", "REST APIs", "Database Basics"] },
-                { cat: "Tools", items: ["Git / GitHub", "VS Code", "Gemini AI", "Vite"] },
-                { cat: "Design", items: ["Figma Basics", "Responsive UI", "Prototyping"] }
-              ].map((group) => (
-                <div key={group.cat} className="p-6 bg-slate-800/50 rounded-xl border border-slate-700/50">
-                  <h4 className="font-bold text-white mb-4">{group.cat}</h4>
-                  <ul className="space-y-2">
-                    {group.items.map(item => (
-                      <li key={item} className="text-slate-400 text-sm flex items-center">
-                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <ul className="space-y-2">
+              {cat.skills.map(s => (
+                <li key={s} className="text-gray-600 text-sm flex items-center">
+                  <span className="w-1.5 h-1.5 bg-gray-300 rounded-full mr-3"></span>
+                  {s}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
-      {/* CONTACT SECTION */}
-      <section id="contact" className="py-32 px-6 bg-white relative z-10">
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
-            Ready to build something <span className="text-blue-600">great?</span>
-          </h2>
-          <p className="text-xl text-slate-600 mb-10">
-            I’m currently available for freelance projects and collaborations.
-          </p>
-          <a 
-            href="mailto:kaziomeirmustafa@gmail.com" 
-            className="inline-block px-12 py-5 bg-slate-900 text-white text-lg font-bold rounded-full hover:bg-blue-600 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1"
-          >
-            Start a Conversation
-          </a>
-        </div>
-        {/* Decorative background element for footer */}
-        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-slate-50 to-transparent -z-0" />
-      </section>
-
-      <footer className="py-8 bg-white border-t border-slate-100 text-center relative z-10">
-        <p className="text-slate-400 text-sm font-medium">© {new Date().getFullYear()} Omeir Mustafa. Crafted with precision.</p>
+const Contact = () => (
+  <section id="contact" className="py-32 bg-white text-center">
+    <div className="max-w-2xl mx-auto px-6">
+      <h2 className="text-4xl font-bold text-gray-900 mb-6">Have a project in mind?</h2>
+      <p className="text-xl text-gray-600 mb-10">
+        I’d love to help you build it. Let's create something reliable and fast.
+      </p>
+      
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="mailto:kaziomeirmustafa@gmail.com" 
+          className="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all shadow-lg flex items-center justify-center gap-2"
+        >
+          <Mail size={20} /> Send Me a Message
+        </a>
+        <a 
+          href="https://www.linkedin.com/in/omeir-mustafa-uddin/" 
+          target="_blank" 
+          className="px-8 py-4 bg-white text-gray-900 border border-gray-200 font-bold rounded-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+        >
+          <Linkedin size={20} /> LinkedIn
+        </a>
+      </div>
+      
+      <footer className="mt-24 pt-8 border-t border-gray-100 text-gray-400 text-sm">
+        <p>&copy; {new Date().getFullYear()} Omeir Mustafa. All rights reserved.</p>
       </footer>
     </div>
+  </section>
+);
+
+const App = () => {
+  return (
+    <div className="bg-white min-h-screen font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900">
+      <Navbar />
+      <Hero />
+      <About />
+      <Projects />
+      <Skills />
+      <Contact />
+    </div>
   );
-}
+};
 
 export default App;
