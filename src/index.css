@@ -2,36 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes neon-glow-border {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(6, 182, 212, 0.4), 0 0 15px rgba(6, 182, 212, 0.4);
-    border-color: rgba(6, 182, 212, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 8px rgba(6, 182, 212, 0.6), 0 0 25px rgba(6, 182, 212, 0.6);
-    border-color: rgba(6, 182, 212, 0.6);
-  }
+/* Base styles for the Stone Theme */
+body {
+    background-color: #F5F5F4; /* Pebble 100 */
+    color: #1C1917; /* Pebble 900 */
 }
 
-.neon-border-glow {
-  animation: neon-glow-border 4s ease-in-out infinite alternate;
+/* Custom Class for the Day-Glow Animation */
+.day-glow {
+  animation: soft-pulse 4s ease-in-out infinite alternate;
 }
 
+/* Premium Scrollbar (Dark Grey on Light) */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2); 
+    background: #E7E5E4; 
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1); 
+    background: #A8A29E; 
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2); 
-}
-
-body {
-    background-color: #0f172a;
+    background: #78716C; 
 }
