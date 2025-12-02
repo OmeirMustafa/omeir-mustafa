@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// --- ICONS (Inline to avoid installations) ---
+// --- ICONS ---
 const ArrowRight = () => (
   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
 );
@@ -27,10 +27,11 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-50 relative overflow-hidden">
       
-      {/* BACKGROUND ACCENTS (The subtle pro glow) */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-200/30 rounded-full blur-[100px]" />
-        <div className="absolute top-[20%] right-[-5%] w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-[100px]" />
+      {/* BACKGROUND ACCENTS (Animated) */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-200/30 rounded-full blur-[100px] animate-blob" />
+        <div className="absolute top-[20%] right-[-5%] w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-[100px] animate-blob animation-delay-2000" />
+        <div className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] bg-indigo-100/40 rounded-full blur-[100px] animate-blob animation-delay-4000" />
       </div>
 
       {/* NAVIGATION */}
@@ -76,7 +77,7 @@ function App() {
       </section>
 
       {/* PROJECTS SECTION */}
-      <section id="projects" className="section-padding px-6">
+      <section id="projects" className="section-padding px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
             <div>
@@ -90,7 +91,7 @@ function App() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Project 1 */}
-            <div className="group bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div className="group bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-500/30 transition-all duration-300 relative overflow-hidden">
               <div className="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
                 <LayoutIcon />
               </div>
@@ -111,7 +112,7 @@ function App() {
             </div>
 
             {/* Project 2 */}
-            <div className="group bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div className="group bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-500/30 transition-all duration-300 relative overflow-hidden">
               <div className="h-12 w-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6 text-indigo-600">
                 <CodeIcon />
               </div>
@@ -135,7 +136,7 @@ function App() {
       </section>
 
       {/* SKILLS SECTION */}
-      <section id="skills" className="py-24 bg-slate-900 text-white px-6">
+      <section id="skills" className="py-24 bg-slate-900 text-white px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -181,7 +182,7 @@ function App() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="py-32 px-6 bg-white relative">
+      <section id="contact" className="py-32 px-6 bg-white relative z-10">
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
             Ready to build something <span className="text-blue-600">great?</span>
@@ -190,7 +191,7 @@ function App() {
             I’m currently available for freelance projects and collaborations.
           </p>
           <a 
-            href="mailto:your-email@example.com" 
+            href="mailto:kaziomeirmustafa@gmail.com" 
             className="inline-block px-12 py-5 bg-slate-900 text-white text-lg font-bold rounded-full hover:bg-blue-600 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1"
           >
             Start a Conversation
@@ -200,7 +201,7 @@ function App() {
         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-slate-50 to-transparent -z-0" />
       </section>
 
-      <footer className="py-8 bg-white border-t border-slate-100 text-center">
+      <footer className="py-8 bg-white border-t border-slate-100 text-center relative z-10">
         <p className="text-slate-400 text-sm font-medium">© {new Date().getFullYear()} Omeir Mustafa. Crafted with precision.</p>
       </footer>
     </div>
