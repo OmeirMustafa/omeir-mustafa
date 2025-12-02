@@ -1,25 +1,99 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Code, Cpu, Layers, Zap } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Sparkles, ShieldAlert, Layout, ChevronDown, Cpu, Globe, Zap, ScanEye } from 'lucide-react';
 
-// --- COMPONENTS ---
+// --- ANIMATION VARIANTS ---
+
+const continuousFloat = {
+  animate: {
+    y: [0, -5, 0],
+    transition: {
+      duration: 5,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const cardGlowHover = {
+  hover: {
+    scale: 1.02,
+    boxShadow: "0 0 25px rgba(6, 182, 212, 0.3)",
+    borderColor: "rgba(6, 182, 212, 0.5)",
+    transition: { duration: 0.3 }
+  }
+};
+
+const pulse = {
+  animate: {
+    scale: [1, 1.1, 1],
+    opacity: [0.8, 1, 0.8],
+    transition: {
+      duration: 1.5,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+// --- REUSABLE COMPONENTS ---
+
+const AnimatedDivider = () => (
+  <div className="relative h-px w-full my-20 opacity-50">
+    <div className="absolute inset-0 bg-cyan-900/30"></div>
+    <motion.div
+      className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+      initial={{ x: '-100%' }}
+      animate={{ x: '100%' }}
+      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+      style={{ width: '200%', boxShadow: '0 0 10px rgba(34, 211, 238, 0.5)' }}
+    />
+  </div>
+);
+
+// --- MAIN COMPONENTS ---
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 py-4">
-      <div className="max-w-4xl mx-auto px-6 flex items-center justify-between">
-        <div className="font-bold text-xl tracking-tight text-gray-900">
-          Omeir<span className="text-blue-600">.</span>
-        </div>
-        <div className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
-          {['About', 'Work', 'Skills', 'Contact'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-blue-600 transition-colors">
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-slate-950/90 backdrop-blur-xl border-b border-cyan-500/20 py-4 shadow-[0_0_20px_rgba(6,182,212,0.1)]' : 'bg-transparent py-6'}`}>
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="font-bold text-xl tracking-wider text-white group cursor-pointer"
+        >
+          <span className="text-2xl font-extrabold tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">Omeir Mustafa</span>
+          <motion.span variants={pulse} animate="animate" className="inline-block w-1 h-1 rounded-full bg-cyan-500 ml-1">.</motion.span>
+        </motion.div>
+
+        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
+          {['About', 'Work', 'Stack', 'Contact'].map((item) => (
+            <motion.a 
+              key={item} 
+              href={`#${item.toLowerCase()}`} 
+              whileHover={{ 
+                y: -3, 
+                textShadow: '0 0 10px #06b6d4', 
+                color: '#22d3ee' 
+              }}
+              className="relative group transition-colors duration-300"
+            >
               {item}
-            </a>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300 shadow-[0_0_10px_#06b6d4]"></span>
+            </motion.a>
           ))}
         </div>
-        <a href="#contact" className="px-5 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all shadow-sm">
-          Let's Connect
+        
+        <a href="#contact" className="relative px-6 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/50 text-cyan-300 text-sm font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)]">
+          Let's Talk
         </a>
       </div>
     </nav>
@@ -28,29 +102,243 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-white pt-20">
-      <div className="max-w-3xl mx-auto px-6 text-center">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950"></div>
+        
+        <motion.div 
+          animate={{ x: [0, 100, 0], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-purple-600/30 rounded-full blur-[128px]"
+        />
+        <motion.div 
+          animate={{ x: [0, -100, 0], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/30 rounded-full blur-[128px]"
+        />
+      </div>
+
+      <div className="max-w-5xl mx-auto px-6 text-center z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-cyan-500/30 text-xs font-bold text-cyan-300 mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.2)]"
         >
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-8 leading-tight">
-            Building fast, modern, <br/>
-            <span className="text-blue-600">reliable web experiences.</span>
-          </h1>
-          
-          <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto">
-            I turn ideas into clean, functional digital products — prototypes, websites, and apps.
-          </p>
+          <motion.span variants={pulse} animate="animate" className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+          </motion.span>
+          SHIPPING SEETHRUO v2.0
+        </motion.div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#work" className="px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center justify-center gap-2 shadow-lg">
-              View My Work <ArrowRight size={18} />
-            </a>
-            <a href="#contact" className="px-8 py-4 bg-white text-gray-900 border border-gray-200 font-semibold rounded-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
-              Let's Connect
-            </a>
+        <motion.h1 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-5xl md:text-6xl font-black tracking-tighter text-white leading-none mb-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+        >
+          Engineering <br />
+          <motion.span
+            initial={{ filter: "blur(10px)", opacity: 0.2 }}
+            animate={{ filter: "blur(0px)", opacity: 1 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+            className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 drop-shadow-[0_0_20px_rgba(6,182,212,0.8)]"
+          >
+            Intelligent
+          </motion.span> <br />
+          Interfaces.
+        </motion.h1>
+
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light"
+        >
+          I orchestrate systems. I build full-stack AI products 
+          that merge <strong className="text-cyan-200 font-medium glow-text">LLMs</strong> with <strong className="text-cyan-200 font-medium glow-text">forensic UX</strong>. 
+        </motion.p>
+
+        <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <motion.a 
+            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,255,255,0.3)" }}
+            href="#work" 
+            className="px-8 py-4 bg-white text-black font-bold rounded-full flex items-center justify-center gap-2"
+          >
+            Explore Work <ArrowRight size={20} />
+          </motion.a>
+          <motion.a 
+            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(6,182,212,0.3)", borderColor: "#22d3ee" }}
+            href="https://seethruo-engine.vercel.app/" 
+            target="_blank" 
+            className="px-8 py-4 bg-slate-900/50 text-white font-bold rounded-full border border-white/10 backdrop-blur-md flex items-center justify-center gap-2"
+          >
+            Launch SeeThruo <ExternalLink size={20} className="text-cyan-400" />
+          </motion.a>
+        </div>
+      </div>
+      
+      <motion.div 
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-cyan-500/50"
+      >
+        <ChevronDown size={32} />
+      </motion.div>
+    </section>
+  );
+};
+
+const About = () => (
+  <section id="about" className="py-32 relative">
+    <div className="max-w-5xl mx-auto px-6">
+      <div className="text-center mb-20">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+          The Builder's Protocol
+        </h2>
+        <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          Code is useless if it doesn't ship. My process is ruthless prioritization of functionality, security, and user experience.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          { icon: Zap, title: "Rapid Iteration", desc: "We prioritize rapid iteration. The fastest path to a market-fit product is through continuous deployment and empirical learning, not theoretical perfection.", color: "text-yellow-400" },
+          { icon: ShieldAlert, title: "Security First", desc: "Security is architectural. I implement server-side environment segregation to eliminate key leakage and mitigate deployment risk.", color: "text-red-400" },
+          { icon: Layout, title: "Forensic UX", desc: "Interface design must build trust. I focus on information architecture and micro-interactions that lead to high clarity and user conversion.", color: "text-cyan-400" },
+        ].map((item, i) => (
+          <motion.div 
+            key={i}
+            animate={continuousFloat.animate}
+            whileHover={cardGlowHover.hover}
+            className="p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-lg"
+          >
+            <div className={`w-14 h-14 rounded-2xl bg-slate-800/50 border border-white/10 flex items-center justify-center mb-6 shadow-inner`}>
+              <item.icon className={`w-7 h-7 ${item.color}`} />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
+            <p className="text-slate-400 leading-relaxed text-base">{item.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const FeaturedProject = () => {
+  const [currentImage, setCurrentImage] = useState('/dashboard.png'); 
+  const continuousFloatAndRotate = {
+    animate: { y: [0, -10, 0], rotateY: [0, 2, -2, 0] }, 
+    transition: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+  };
+
+  useEffect(() => {
+    const images = ['/dashboard.png', '/dashboard2.png']; 
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      setCurrentImage(images[currentIndex]);
+    }, 5000); 
+    return () => clearInterval(interval); 
+  }, []);
+
+  return (
+    <section id="work" className="py-20 relative"> 
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <div className="flex items-center gap-4 mb-8 opacity-70">
+          <div className="h-px flex-grow relative overflow-hidden">
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/80 to-transparent"
+              initial={{ x: '-100%' }}
+              animate={{ x: '100%' }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              style={{ width: '200%' }} 
+            />
+             <div className="h-px bg-cyan-500/20 w-full absolute top-0 left-0"></div> 
+          </div>
+          <motion.span 
+            initial={{ opacity: 0.5, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", repeatType: "mirror" }}
+            className="text-xs font-mono text-cyan-400 tracking-[0.3em] uppercase drop-shadow-[0_0_5px_#06b6d4]"
+          >
+            Flagship Project
+          </motion.span>
+          <div className="h-px flex-grow relative overflow-hidden">
+             <motion.div 
+              className="absolute inset-0 bg-gradient-to-l from-transparent via-cyan-500/80 to-transparent" 
+              initial={{ x: '100%' }}
+              animate={{ x: '-100%' }} 
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              style={{ width: '200%' }}
+            />
+            <div className="h-px bg-cyan-500/20 w-full absolute top-0 left-0"></div> 
+          </div>
+        </div>
+
+        <motion.div 
+          whileHover={{ scale: 1.005 }}
+          className="glass-panel rounded-[2.5rem] overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur-xl shadow-2xl shadow-black/50 neon-border-glow"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="p-8 md:p-14 flex flex-col justify-center relative"> 
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/5 to-transparent opacity-20"></div>
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+                  <ScanEye className="w-8 h-8 text-cyan-400" />
+                </div>
+                <h3 className="text-4xl font-bold text-white mb-3 tracking-tight">SeeThruo</h3>
+                <p className="text-lg text-cyan-300/80 mb-6 font-mono">Decision Intelligence Engine</p> 
+                <p className="text-slate-400 mb-8 leading-relaxed text-md">
+                  A proprietary AI system that decodes corporate comms, media bias, and hidden intent. 
+                  Built with a forensic "Glass & Glow" interface for rapid information processing.
+                </p>
+                
+                <div className="flex flex-wrap gap-3 mb-8">
+                  {['Gemini 2.0 Flash', 'React 18', 'Vercel Edge', 'Tailwind'].map((tag) => (
+                    <span key={tag} className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-cyan-100 font-mono">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex gap-4">
+                  <a href="https://seethruo-engine.vercel.app/" target="_blank" className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-cyan-900/20">
+                    Live System <ExternalLink size={16} />
+                  </a>
+                  <a href="https://github.com/OmeirMustafa/seethruo" target="_blank" className="px-6 py-3 border border-white/10 hover:bg-white/5 text-white font-medium rounded-xl transition-colors flex items-center gap-2">
+                    <Github size={16} /> Code
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-black/50 p-6 flex items-center justify-center relative overflow-hidden min-h-[350px] border-l border-white/5">
+              <motion.div 
+                animate={continuousFloatAndRotate.animate}
+                transition={continuousFloatAndRotate.transition}
+                className="relative w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl border border-white/20 group cursor-pointer"
+              >
+                <motion.img 
+                  key={currentImage} 
+                  initial={{ opacity: 0, scale: 0.98 }} 
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  src={currentImage} 
+                  alt="SeeThruo Dashboard" 
+                  className="w-full h-full object-cover bg-slate-800"
+                />
+                
+                <div className="absolute -right-6 top-12 bg-black/80 backdrop-blur-md p-4 rounded-xl border border-green-500/30 shadow-[0_0_30px_rgba(34,197,94,0.2)] transform translate-x-4">
+                   <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-green-500 animate-[ping_1.5s_ease-in-out_infinite]"></div>
+                      <span className="text-sm font-mono text-green-400 font-bold">System Online</span>
+                   </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -58,153 +346,80 @@ const Hero = () => {
   );
 };
 
-const About = () => (
-  <section id="about" className="py-24 bg-gray-50">
-    <div className="max-w-4xl mx-auto px-6">
-      <div className="mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">About Me</h2>
-        <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
-      </div>
-      
-      <div className="prose prose-lg text-gray-600 leading-relaxed">
-        <p className="mb-6">
-          I’m a self-taught developer who builds clean, modern digital experiences.
-        </p>
-        <p className="mb-6">
-          I specialize in fast web apps, intuitive interfaces, and simple systems that help businesses grow.
-          I use AI tools like Gemini for rapid prototyping, then refine everything manually in VS Code to produce stable, scalable, customized solutions.
-        </p>
-        <p>
-          My goal is to work with clients worldwide — creating websites, tools, and apps that are fast, functional, and easy to use.
-        </p>
-      </div>
-    </div>
-  </section>
-);
-
-const Projects = () => {
-  const projects = [
-    {
-      title: "SeeThruo",
-      category: "Web App",
-      desc: "A minimal, distraction-filtering writing environment that helps users think clearly and produce better ideas.",
-      stack: ["Next.js", "React", "Tailwind", "Vercel Edge"],
-      link: "https://seethruo-engine.vercel.app/",
-      icon: Zap
-    },
-    {
-      title: "Personal Portfolio",
-      category: "Website",
-      desc: "My personal portfolio showcasing my skills, process, and approach to fast digital builds.",
-      stack: ["React", "TypeScript", "Tailwind", "Framer Motion"],
-      link: "#",
-      icon: Layers
-    }
-  ];
-
-  return (
-    <section id="work" className="py-24 bg-white">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-          <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((p, i) => (
-            <motion.div 
-              key={i}
-              whileHover={{ y: -5 }}
-              className="group bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-all duration-300"
-            >
-              <div className="flex items-center justify-between mb-6">
-                <div className="p-3 bg-blue-50 rounded-xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                  <p.icon size={24} />
-                </div>
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-400 border border-gray-100 px-3 py-1 rounded-full">{p.category}</span>
-              </div>
-              
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">{p.title}</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed text-sm">{p.desc}</p>
-              
-              <div className="flex flex-wrap gap-2 mb-8">
-                {p.stack.map(s => (
-                  <span key={s} className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-md">
-                    {s}
-                  </span>
-                ))}
-              </div>
-              
-              <a href={p.link} target="_blank" rel="noreferrer" className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
-                View Live Project <ExternalLink size={16} className="ml-2" />
-              </a>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const Skills = () => (
-  <section id="skills" className="py-24 bg-gray-50">
-    <div className="max-w-4xl mx-auto px-6">
-      <div className="mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Skills & Tools</h2>
-        <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
+  <section id="stack" className="py-32 relative">
+    <div className="max-w-6xl mx-auto px-6">
+      <div className="text-center mb-20">
+         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+           Production Stack
+         </h2>
+         <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+           I don't chase trends. I use the stack that delivers <span className="text-cyan-400 font-bold">speed</span>, <span className="text-purple-400 font-bold">security</span>, and <span className="text-white font-bold">scale</span>.
+         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {[
-          { title: "Frontend", skills: ["React", "Next.js", "Tailwind CSS"], icon: Code },
-          { title: "Backend & Tools", skills: ["Node.js", "APIs", "Git", "VS Code", "Gemini"], icon: Cpu },
-          { title: "Strengths", skills: ["Clean UI", "Speed-Focused Builds", "Rapid Prototyping"], icon: Zap },
-        ].map((cat, i) => (
-          <div key={i} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <cat.icon className="text-blue-600" size={20} />
-              <h3 className="font-bold text-gray-900">{cat.title}</h3>
-            </div>
-            <ul className="space-y-2">
-              {cat.skills.map(s => (
-                <li key={s} className="text-gray-600 text-sm flex items-center">
-                  <span className="w-1.5 h-1.5 bg-gray-300 rounded-full mr-3"></span>
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+         {[
+           { title: "Frontend", icon: Layout, color: "text-cyan-400", border: "group-hover:border-cyan-500/50", skills: ["React 18", "TypeScript", "Tailwind", "Framer Motion"] },
+           { title: "Backend & AI", icon: Cpu, color: "text-purple-400", border: "group-hover:border-purple-500/50", skills: ["Node.js", "Vercel Edge", "Gemini 2.0", "PostgreSQL"] },
+           { title: "DevOps", icon: Globe, color: "text-green-400", border: "group-hover:border-green-500/50", skills: ["Git/GitHub", "CI/CD", "Security", "Analytics"] }
+         ].map((stack, i) => (
+           <motion.div 
+             key={i}
+             animate={continuousFloat.animate}
+             whileHover={cardGlowHover.hover}
+             className={`p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-lg transition-colors ${stack.border} group`}
+           >
+              <div className="flex items-center gap-3 mb-6">
+                 <stack.icon className={`w-6 h-6 ${stack.color}`} />
+                 <h3 className="text-sm font-mono text-white uppercase tracking-widest">{stack.title}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                 {stack.skills.map(s => (
+                    <span key={s} className="px-3 py-1.5 rounded-md bg-white/5 border border-white/5 text-slate-300 text-xs font-medium">{s}</span>
+                 ))}
+              </div>
+           </motion.div>
+         ))}
       </div>
     </div>
   </section>
 );
 
 const Contact = () => (
-  <section id="contact" className="py-32 bg-white text-center">
-    <div className="max-w-2xl mx-auto px-6">
-      <h2 className="text-4xl font-bold text-gray-900 mb-6">Have a project in mind?</h2>
-      <p className="text-xl text-gray-600 mb-10">
-        I’d love to help you build it. Let's create something reliable and fast.
+  <section id="contact" className="py-32 text-center relative overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-900/10 pointer-events-none"></div>
+    
+    <div className="max-w-3xl mx-auto px-6 relative z-10">
+      <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+        Let's Build.
+      </h2>
+      
+      <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+        I’m open to freelance and full-time opportunities. If you need an engineer who understands product strategy as well as code, let’s talk.
       </p>
       
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <a 
-          href="mailto:kaziomeirmustafa@gmail.com" 
-          className="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all shadow-lg flex items-center justify-center gap-2"
+      <div className="flex flex-col sm:flex-row gap-6 justify-center">
+        <motion.a 
+          whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,255,255,0.2)" }}
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=kaziomeirmustafa@gmail.com&su=Portfolio%20Inquiry" 
+          target="_blank" 
+          className="px-10 py-5 bg-white text-black font-bold rounded-2xl flex items-center justify-center gap-3 shadow-lg shadow-white/10"
         >
-          <Mail size={20} /> Send Me a Message
-        </a>
-        <a 
+          <Mail size={20} /> Email Me
+        </motion.a>
+        
+        <motion.a 
+          whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(6,182,212,0.2)", borderColor: "#22d3ee" }}
           href="https://www.linkedin.com/in/omeir-mustafa-uddin/" 
           target="_blank" 
-          className="px-8 py-4 bg-white text-gray-900 border border-gray-200 font-bold rounded-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+          className="px-10 py-5 bg-slate-900/50 text-white font-bold rounded-2xl border border-white/10 backdrop-blur-md flex items-center justify-center gap-3"
         >
           <Linkedin size={20} /> LinkedIn
-        </a>
+        </motion.a>
       </div>
       
-      <footer className="mt-24 pt-8 border-t border-gray-100 text-gray-400 text-sm">
+      <footer className="py-12 text-center text-slate-600 text-xs uppercase tracking-widest mt-20 border-t border-white/5">
         <p>&copy; {new Date().getFullYear()} Omeir Mustafa. All rights reserved.</p>
       </footer>
     </div>
@@ -213,12 +428,16 @@ const Contact = () => (
 
 const App = () => {
   return (
-    <div className="bg-white min-h-screen font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900">
+    <div className="bg-slate-950 min-h-screen text-slate-300 selection:bg-cyan-500/30 selection:text-cyan-200 font-sans overflow-x-hidden">
       <Navbar />
       <Hero />
+      <AnimatedDivider />
       <About />
-      <Projects />
+      <AnimatedDivider />
+      <FeaturedProject />
+      <AnimatedDivider />
       <Skills />
+      <AnimatedDivider />
       <Contact />
     </div>
   );
