@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Sparkles, ShieldAlert, Layout, ChevronDown, Cpu, Globe, Zap, ScanEye, Code2 } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Sparkles, ShieldAlert, Layout, ChevronDown, Cpu, Globe, Zap, ScanEye } from 'lucide-react';
 
 // --- ANIMATION VARIANTS ---
 
-// Continuous subtle floating for cards (About & Skills)
 const continuousFloat = {
   animate: {
     y: [0, -5, 0],
@@ -16,13 +15,11 @@ const continuousFloat = {
   }
 };
 
-// Continuous floating/rotating for the main project image
 const continuousFloatAndRotate = {
   animate: { y: [0, -20, 0], rotateY: [0, 4, -4, 0] },
   transition: { duration: 7, repeat: Infinity, ease: "easeInOut" }
 };
 
-// Glow on hover for cards
 const cardGlowHover = {
   hover: {
     scale: 1.02,
@@ -32,7 +29,6 @@ const cardGlowHover = {
   }
 };
 
-// Pulsing animation for elements like the logo dot or status indicator
 const pulse = {
   animate: {
     scale: [1, 1.1, 1],
@@ -47,12 +43,9 @@ const pulse = {
 
 // --- REUSABLE COMPONENTS ---
 
-// NEW: Reusable Animated Divider for between sections
 const AnimatedDivider = () => (
   <div className="relative h-px w-full my-20 opacity-50">
-     {/* Base faint line */}
     <div className="absolute inset-0 bg-cyan-900/30"></div>
-     {/* Moving light scanner */}
     <motion.div
       className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
       initial={{ x: '-100%' }}
@@ -82,7 +75,6 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           className="font-bold text-xl tracking-wider text-white group cursor-pointer"
         >
-          {/* LOGO FIX: Omeir Mustafa with prominent white glow */}
           <span className="text-2xl font-extrabold tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">Omeir Mustafa</span>
           <motion.span variants={pulse} animate="animate" className="inline-block w-1 h-1 rounded-full bg-cyan-500 ml-1">.</motion.span>
         </motion.div>
@@ -93,9 +85,9 @@ const Navbar = () => {
               key={item} 
               href={`#${item.toLowerCase()}`} 
               whileHover={{ 
-                y: -3, // Floating effect on hover
-                textShadow: '0 0 10px #06b6d4', // Neon shadow effect
-                color: '#22d3ee' // Cyan color on hover
+                y: -3, 
+                textShadow: '0 0 10px #06b6d4', 
+                color: '#22d3ee' 
               }}
               className="relative group transition-colors duration-300"
             >
@@ -116,13 +108,10 @@ const Navbar = () => {
 const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      
-      {/* Cybernetic Grid & Glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950"></div>
         
-        {/* Moving Orbs */}
         <motion.div 
           animate={{ x: [0, 100, 0], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
@@ -136,7 +125,6 @@ const Hero = () => {
       </div>
 
       <div className="max-w-5xl mx-auto px-6 text-center z-10">
-        {/* Status Badge */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,7 +137,6 @@ const Hero = () => {
           SHIPPING SEETHRUO v2.0
         </motion.div>
 
-        {/* NEON HEADLINE - Size reduced and animation added for readability */}
         <motion.h1 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -157,7 +144,6 @@ const Hero = () => {
           className="text-5xl md:text-6xl font-black tracking-tighter text-white leading-none mb-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
         >
           Engineering <br />
-          {/* FIX: COOL ANIMATION FOR INTELLIGENT */}
           <motion.span
             initial={{ filter: "blur(10px)", opacity: 0.2 }}
             animate={{ filter: "blur(0px)", opacity: 1 }}
@@ -169,7 +155,6 @@ const Hero = () => {
           Interfaces.
         </motion.h1>
 
-        {/* Subhead */}
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -249,32 +234,21 @@ const About = () => (
 const FeaturedProject = () => {
   const [currentImage, setCurrentImage] = useState('/dashboard.png'); 
 
-  // Continuous floating animation for the project image
-  const continuousFloatAndRotate = {
-    animate: { y: [0, -20, 0], rotateY: [0, 4, -4, 0] }, 
-    transition: { duration: 7, repeat: Infinity, ease: "easeInOut" }
-  };
-
   useEffect(() => {
     const images = ['/dashboard.png', '/dashboard2.png']; 
     let currentIndex = 0;
-
     const interval = setInterval(() => {
       currentIndex = (currentIndex + 1) % images.length;
       setCurrentImage(images[currentIndex]);
-    }, 5000); // Change image every 5 seconds
-
+    }, 5000); 
     return () => clearInterval(interval); 
   }, []);
 
-
   return (
-    // FINAL SIZING: Reduced vertical padding to fit in one window
     <section id="work" className="py-20 relative"> 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
-        {/* HEADER LINE (Moving Light Effect - Brighter now) */}
-        <div className="flex items-center gap-4 mb-8 opacity-80">
+        <div className="flex items-center gap-4 mb-8 opacity-70">
           <div className="h-px flex-grow relative overflow-hidden">
             <motion.div 
               className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
@@ -307,14 +281,12 @@ const FeaturedProject = () => {
           </div>
         </div>
 
-        {/* MAIN CARD CONTAINER */}
         <motion.div 
           whileHover={{ scale: 1.005 }}
           className="glass-panel rounded-[2.5rem] overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur-xl shadow-2xl shadow-black/50 neon-border-glow"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2">
-            {/* TEXT CONTENT */}
-            <div className="p-8 md:p-14 flex flex-col justify-center relative"> {/* Reduced from p-16 */}
+            <div className="p-8 md:p-14 flex flex-col justify-center relative"> 
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/5 to-transparent opacity-20"></div>
               
               <div className="relative z-10">
@@ -323,14 +295,14 @@ const FeaturedProject = () => {
                 </div>
                 <h3 className="text-4xl font-bold text-white mb-3 tracking-tight">SeeThruo</h3>
                 <p className="text-lg text-cyan-300/80 mb-6 font-mono">Decision Intelligence Engine</p> 
-                <p className="text-slate-400 mb-8 leading-relaxed text-md"> 
+                <p className="text-slate-400 mb-8 leading-relaxed text-md">
                   A proprietary AI system that decodes corporate comms, media bias, and hidden intent. 
                   Built with a forensic "Glass & Glow" interface for rapid information processing.
                 </p>
                 
                 <div className="flex flex-wrap gap-3 mb-8">
                   {['Gemini 2.0 Flash', 'React 18', 'Vercel Edge', 'Tailwind'].map((tag) => (
-                    <span key={tag} className="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-xs text-cyan-100 font-mono">
+                    <span key={tag} className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-cyan-100 font-mono">
                       {tag}
                     </span>
                   ))}
@@ -347,9 +319,7 @@ const FeaturedProject = () => {
               </div>
             </div>
 
-            {/* VISUAL MOCKUP */}
             <div className="bg-black/50 p-6 flex items-center justify-center relative overflow-hidden min-h-[350px] border-l border-white/5">
-              
               <motion.div 
                 animate={continuousFloatAndRotate.animate}
                 transition={continuousFloatAndRotate.transition}
@@ -363,17 +333,8 @@ const FeaturedProject = () => {
                   src={currentImage} 
                   alt="SeeThruo Dashboard" 
                   className="w-full h-full object-cover bg-slate-800"
-                  onError={(e) => {
-                     const parent = e.currentTarget.parentElement;
-                     if(parent) {
-                       e.currentTarget.style.display = 'none';
-                       parent.classList.add('bg-gradient-to-br', 'from-slate-800', 'to-black');
-                       parent.innerHTML = '<div class="h-80 flex items-center justify-center text-slate-500 font-mono">System Preview</div>';
-                     }
-                  }}
                 />
                 
-                {/* Floating Badge */}
                 <div className="absolute -right-6 top-12 bg-black/80 backdrop-blur-md p-4 rounded-xl border border-green-500/30 shadow-[0_0_30px_rgba(34,197,94,0.2)] transform translate-x-4">
                    <div className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-green-500 animate-[ping_1.5s_ease-in-out_infinite]"></div>
@@ -388,6 +349,7 @@ const FeaturedProject = () => {
     </section>
   );
 };
+
 const Skills = () => (
   <section id="stack" className="py-32 relative">
     <div className="max-w-6xl mx-auto px-6">
