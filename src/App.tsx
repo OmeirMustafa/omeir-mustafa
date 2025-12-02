@@ -133,4 +133,268 @@ const Hero = () => {
             Explore Work <ArrowRight size={20} />
           </motion.a>
           <motion.a 
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(6,182,212,0.3)", borderColor:
+            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(6,182,212,0.3)", borderColor: "#22d3ee" }}
+            href="https://seethruo-engine.vercel.app/" 
+            target="_blank" 
+            className="px-8 py-4 bg-slate-900/50 text-white font-bold rounded-full border border-white/10 backdrop-blur-md flex items-center justify-center gap-2"
+          >
+            Launch SeeThruo <ExternalLink size={20} className="text-cyan-400" />
+          </motion.a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const About = () => (
+  <section id="about" className="py-32 relative">
+    <div className="max-w-5xl mx-auto px-6">
+      <div className="text-center mb-20">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+          The Builder's Protocol
+        </h2>
+        <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          Code is useless if it doesn't ship. My process is ruthless prioritization of functionality, security, and user experience.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          { icon: Zap, title: "Rapid Iteration", desc: "We prioritize rapid iteration. The fastest path to a market-fit product is through continuous deployment and empirical learning, not theoretical perfection.", color: "text-yellow-400" },
+          { icon: ShieldAlert, title: "Security First", desc: "Security is architectural. I implement server-side environment segregation to eliminate key leakage and mitigate deployment risk.", color: "text-red-400" },
+          { icon: Layout, title: "Forensic UX", desc: "Interface design must build trust. I focus on information architecture and micro-interactions that lead to high clarity and user conversion.", color: "text-cyan-400" },
+        ].map((item, i) => (
+          <motion.div 
+            key={i}
+            animate={float.animate}
+            whileHover={glowHover.hover}
+            className="p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-lg"
+          >
+            <div className={`w-14 h-14 rounded-2xl bg-slate-800/50 border border-white/10 flex items-center justify-center mb-6 shadow-inner`}>
+              <item.icon className={`w-7 h-7 ${item.color}`} />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
+            <p className="text-slate-400 leading-relaxed text-base">{item.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const FeaturedProject = () => {
+  const [currentImage, setCurrentImage] = useState('/dashboard.png'); 
+  
+  const continuousFloatAndRotate = {
+    animate: { y: [0, -10, 0], rotateY: [0, 2, -2, 0] }, 
+    transition: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+  };
+
+  useEffect(() => {
+    const images = ['/dashboard.png', '/dashboard2.png']; 
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      setCurrentImage(images[currentIndex]);
+    }, 5000); 
+    return () => clearInterval(interval); 
+  }, []);
+
+  return (
+    <section id="work" className="py-20 relative"> 
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <div className="flex items-center gap-4 mb-10 opacity-70">
+          <div className="h-px flex-grow relative overflow-hidden">
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/80 to-transparent"
+              initial={{ x: '-100%' }}
+              animate={{ x: '100%' }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              style={{ width: '200%' }} 
+            />
+             <div className="h-px bg-cyan-500/20 w-full absolute top-0 left-0"></div> 
+          </div>
+
+          <motion.span 
+            initial={{ opacity: 0.5, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", repeatType: "mirror" }}
+            className="text-xs font-mono text-cyan-400 tracking-[0.3em] uppercase drop-shadow-[0_0_5px_#06b6d4]"
+          >
+            Flagship Project
+          </motion.span>
+          
+          <div className="h-px flex-grow relative overflow-hidden">
+             <motion.div 
+              className="absolute inset-0 bg-gradient-to-l from-transparent via-cyan-500/80 to-transparent" 
+              initial={{ x: '100%' }}
+              animate={{ x: '-100%' }} 
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              style={{ width: '200%' }}
+            />
+            <div className="h-px bg-cyan-500/20 w-full absolute top-0 left-0"></div> 
+          </div>
+        </div>
+
+        <motion.div 
+          whileHover={{ scale: 1.005 }}
+          className="glass-panel rounded-[2.5rem] overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur-xl shadow-2xl shadow-black/50 neon-border-glow"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="p-8 md:p-14 flex flex-col justify-center relative"> 
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/5 to-transparent opacity-20"></div>
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+                  <ScanEye className="w-8 h-8 text-cyan-400" />
+                </div>
+                <h3 className="text-4xl font-bold text-white mb-3 tracking-tight">SeeThruo</h3>
+                <p className="text-lg text-cyan-300/80 mb-6 font-mono">Decision Intelligence Engine</p> 
+                <p className="text-slate-400 mb-8 leading-relaxed text-md">
+                  A proprietary AI system that decodes corporate comms, media bias, and hidden intent. 
+                  Built with a forensic "Glass & Glow" interface for rapid information processing.
+                </p>
+                
+                <div className="flex flex-wrap gap-3 mb-8">
+                  {['Gemini 2.0 Flash', 'React 18', 'Vercel Edge', 'Tailwind'].map((tag) => (
+                    <span key={tag} className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-cyan-100 font-mono">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex gap-4">
+                  <a href="https://seethruo-engine.vercel.app/" target="_blank" className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-cyan-900/20">
+                    Live System <ExternalLink size={16} />
+                  </a>
+                  <a href="https://github.com/OmeirMustafa/seethruo" target="_blank" className="px-6 py-3 border border-white/10 hover:bg-white/5 text-white font-medium rounded-xl transition-colors flex items-center gap-2">
+                    <Github size={16} /> Code
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-black/50 p-6 flex items-center justify-center relative overflow-hidden min-h-[350px] border-l border-white/5">
+              <motion.div 
+                animate={continuousFloatAndRotate.animate}
+                transition={continuousFloatAndRotate.transition}
+                className="relative w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl border border-white/20 group cursor-pointer"
+              >
+                <motion.img 
+                  key={currentImage} 
+                  initial={{ opacity: 0, scale: 0.98 }} 
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  src={currentImage} 
+                  alt="SeeThruo Dashboard" 
+                  className="w-full h-full object-cover bg-slate-800"
+                />
+                
+                <div className="absolute -right-6 top-12 bg-black/80 backdrop-blur-md p-4 rounded-xl border border-green-500/30 shadow-[0_0_30px_rgba(34,197,94,0.2)] transform translate-x-4">
+                   <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-green-500 animate-[ping_1.5s_ease-in-out_infinite]"></div>
+                      <span className="text-sm font-mono text-green-400 font-bold">System Online</span>
+                   </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const Skills = () => (
+  <section id="stack" className="py-32 relative">
+    <div className="max-w-6xl mx-auto px-6">
+      <div className="text-center mb-20">
+         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+           Production Stack
+         </h2>
+         <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+           I don't chase trends. I use the stack that delivers <span className="text-cyan-400 font-bold">speed</span>, <span className="text-purple-400 font-bold">security</span>, and <span className="text-white font-bold">scale</span>.
+         </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+         {[
+           { title: "Frontend", icon: Layout, color: "text-cyan-400", border: "group-hover:border-cyan-500/50", skills: ["React 18", "TypeScript", "Tailwind", "Framer Motion"] },
+           { title: "Backend & AI", icon: Cpu, color: "text-purple-400", border: "group-hover:border-purple-500/50", skills: ["Node.js", "Vercel Edge", "Gemini 2.0", "PostgreSQL"] },
+           { title: "DevOps", icon: Globe, color: "text-green-400", border: "group-hover:border-green-500/50", skills: ["Git/GitHub", "CI/CD", "Security", "Analytics"] }
+         ].map((stack, i) => (
+           <motion.div 
+             key={i}
+             animate={float.animate}
+             whileHover={cardGlowHover.hover}
+             className={`p-8 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-lg transition-colors ${stack.border} group`}
+           >
+              <div className="flex items-center gap-3 mb-6">
+                 <stack.icon className={`w-6 h-6 ${stack.color}`} />
+                 <h3 className="text-sm font-mono text-white uppercase tracking-widest">{stack.title}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                 {stack.skills.map(s => (
+                    <span key={s} className="px-3 py-1.5 rounded-md bg-white/5 border border-white/5 text-slate-300 text-xs font-medium">{s}</span>
+                 ))}
+              </div>
+           </motion.div>
+         ))}
+      </div>
+    </div>
+  </section>
+);
+
+const Contact = () => (
+  <section id="contact" className="py-32 text-center relative overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cyan-900/10 pointer-events-none"></div>
+    
+    <div className="max-w-3xl mx-auto px-6 relative z-10">
+      <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+        Let's Build.
+      </h2>
+      <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+        I’m open to freelance and full-time opportunities. If you need an engineer who understands product strategy as well as code, let’s talk.
+      </p>
+      
+      <div className="flex flex-col sm:flex-row gap-6 justify-center">
+        <motion.a 
+          whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,255,255,0.2)" }}
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=kaziomeirmustafa@gmail.com&su=Portfolio%20Inquiry" 
+          target="_blank" 
+          className="px-10 py-5 bg-white text-black font-bold rounded-2xl flex items-center justify-center gap-3 shadow-lg shadow-white/10"
+        >
+          <Mail size={20} /> Email Me
+        </motion.a>
+        
+        <motion.a 
+          whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(6,182,212,0.2)", borderColor: "#22d3ee" }}
+          href="https://www.linkedin.com/in/omeir-mustafa-uddin/" 
+          target="_blank" 
+          className="px-10 py-5 bg-slate-900/50 text-white font-bold rounded-2xl border border-white/10 backdrop-blur-md flex items-center justify-center gap-3"
+        >
+          <Linkedin size={20} /> LinkedIn
+        </motion.a>
+      </div>
+      
+      <footer className="py-12 text-center text-slate-600 text-xs uppercase tracking-widest mt-20 border-t border-white/5">
+        <p>&copy; {new Date().getFullYear()} Omeir Mustafa. All rights reserved.</p>
+      </footer>
+    </div>
+  </section>
+);
+
+const App = () => {
+  return (
+    <div className="bg-slate-950 min-h-screen text-slate-300 selection:bg-cyan-500/30 selection:text-cyan-200 font-sans overflow-x-hidden">
+      <Navbar />
+      <Hero />
+      <About />
+      <FeaturedProject />
+      <Skills />
+      <Contact />
+    </div>
+  );
+};
+
+export default App;
