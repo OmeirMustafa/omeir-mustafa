@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Sparkles, ShieldAlert, Layout, ChevronDown, Cpu, Globe, Zap, ScanEye, Brain, GitBranch } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Sparkles, ShieldAlert, Layout, ChevronDown, Cpu, Globe, Zap, ScanEye, Brain, GitBranch, Terminal, Database, Palette, MessageSquare } from 'lucide-react';
 
-// --- ANIMATION UTILS ---
+// --- TYPES ---
+interface TiltCardProps {
+  children: React.ReactNode;
+  className?: string;
+}
 
-const TiltCard = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
+// --- PHYSICS & ANIMATION UTILS ---
+
+const TiltCard: React.FC<TiltCardProps> = ({ children, className = "" }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-100, 100], [5, -5]); 
@@ -51,7 +57,7 @@ const AuroraBackground = () => (
 );
 
 const AnimatedDivider = () => (
-  <div className="relative h-px w-full my-16 opacity-30">
+  <div className="relative h-px w-full my-20 opacity-30">
     <div className="absolute inset-0 bg-quantum-blue/20"></div>
     <motion.div
       className="absolute inset-0 bg-gradient-to-r from-transparent via-quantum-cyan to-transparent blur-[1px]"
@@ -61,6 +67,23 @@ const AnimatedDivider = () => (
       style={{ width: '100%' }}
     />
   </div>
+);
+
+const AskAI = () => (
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 2 }}
+    className="fixed bottom-8 right-8 z-50"
+  >
+    <button className="relative group">
+      <div className="absolute -inset-1 bg-gradient-to-r from-quantum-cyan to-quantum-purple rounded-full blur opacity-40 group-hover:opacity-75 transition duration-200 animate-pulse"></div>
+      <div className="relative px-6 py-3 bg-void-900 rounded-full border border-white/10 flex items-center gap-2 text-white font-bold shadow-2xl">
+        <Sparkles className="w-4 h-4 text-quantum-cyan" />
+        <span>Ask AI</span>
+      </div>
+    </button>
+  </motion.div>
 );
 
 // --- SECTIONS ---
@@ -79,13 +102,17 @@ const Navbar = () => {
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="font-heading font-bold text-xl tracking-wider text-white flex items-center gap-1 flex-shrink-0">
           Omeir <span className="text-quantum-cyan">Mustafa</span>
         </motion.div>
-        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
-          {['About', 'Work', 'Stack', 'Contact'].map((item) => (
+        
+        {/* Updated Navigation Items */}
+        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
+          {['About', 'Services', 'Work'].map((item) => (
             <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-quantum-cyan transition-colors">{item}</a>
           ))}
         </div>
+        
+        {/* Updated Contact Button Label */}
         <a href="#contact" className="px-5 py-2 rounded-lg border border-white/10 text-xs font-bold hover:bg-white/5 hover:text-white transition-all text-slate-300">
-          Let's Talk
+          Contact
         </a>
       </div>
     </nav>
@@ -102,22 +129,22 @@ const Hero = () => {
           AVAILABLE FOR NEW PROJECTS
         </div>
 
+        {/* NEW HEADLINE */}
         <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[1.1] mb-6">
-          Architecting <br/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-quantum-cyan to-quantum-purple">Cognitive</span><br/>
-          Infrastructure.
+          Building Digital Experiences <br/>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-quantum-cyan to-quantum-purple">That Drive Growth.</span>
         </h1>
 
-        <p className="text-lg text-slate-400 max-w-lg mx-auto mb-10 leading-relaxed">
-          Synthesizing human intent with machine velocity. I build full-stack intelligence systems that merge 
-          <strong className="text-white mx-1">LLMs</strong> with <strong className="text-white mx-1">forensic interfaces</strong>.
+        {/* NEW SUBTEXT */}
+        <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          I bridge the gap between complex engineering and intuitive design—helping forward-thinking brands scale through high-performance web solutions.
         </p>
 
         <div className="flex justify-center gap-4">
-          <a href="#work" className="px-6 py-2.5 bg-white text-void-900 font-bold rounded-lg hover:bg-quantum-cyan transition-colors text-sm flex items-center gap-2">
-             View Work <ArrowRight size={16} />
+          <a href="#work" className="px-6 py-3 bg-white text-void-900 font-bold rounded-lg hover:bg-quantum-cyan transition-colors text-sm flex items-center gap-2">
+             View Selected Work <ArrowRight size={16} />
           </a>
-          <a href="https://seethruo-engine.vercel.app/" target="_blank" className="px-6 py-2.5 text-white font-bold rounded-lg border border-white/10 hover:bg-white/5 transition-all text-sm">
+          <a href="https://seethruo-engine.vercel.app/" target="_blank" className="px-6 py-3 text-white font-bold rounded-lg border border-white/10 hover:bg-white/5 transition-all text-sm">
             Launch App
           </a>
         </div>
@@ -128,24 +155,78 @@ const Hero = () => {
 
 const About = () => (
   <section id="about" className="py-20 relative z-10">
-    <div className="max-w-5xl mx-auto px-6">
-      <div className="text-center mb-12">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">The Builder's Protocol</h2>
-        <p className="text-sm text-slate-400 max-w-2xl mx-auto">Ruthless prioritization of functionality, security, and user experience.</p>
+    <div className="max-w-6xl mx-auto px-6">
+      {/* NEW ABOUT CONTENT */}
+      <div className="text-center mb-16">
+        <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6">Behind the Code</h2>
+        <p className="text-base text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          I am not just a developer; I am a digital architect focused on business outcomes. With a background in modern frontend frameworks and a keen eye for user experience, I help clients transition from ideas to scalable products. My approach combines technical precision with design thinking, ensuring that every line of code serves a user need.
+        </p>
+      </div>
+
+      {/* NEW TECH STACK GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Frontend Core */}
+        <TiltCard className="p-8 rounded-xl bg-void-800/40 border border-white/5 hover:border-white/10 transition-colors backdrop-blur-sm">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 rounded-lg bg-blue-500/10"><Layout className="w-5 h-5 text-blue-400" /></div>
+            <h3 className="font-heading text-lg font-bold text-white">Frontend Core</h3>
+          </div>
+          <div className="flex flex-wrap gap-2">
+             {["React 18+", "TypeScript", "Next.js", "HTML5 / CSS3"].map(s => (
+                <span key={s} className="px-3 py-1.5 rounded-md bg-white/5 text-slate-300 text-xs border border-white/5">{s}</span>
+             ))}
+          </div>
+        </TiltCard>
+
+        {/* Styling & UI */}
+        <TiltCard className="p-8 rounded-xl bg-void-800/40 border border-white/5 hover:border-white/10 transition-colors backdrop-blur-sm">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 rounded-lg bg-purple-500/10"><Palette className="w-5 h-5 text-purple-400" /></div>
+            <h3 className="font-heading text-lg font-bold text-white">Styling & UI</h3>
+          </div>
+          <div className="flex flex-wrap gap-2">
+             {["Tailwind CSS", "Framer Motion", "Shadcn/UI", "Figma"].map(s => (
+                <span key={s} className="px-3 py-1.5 rounded-md bg-white/5 text-slate-300 text-xs border border-white/5">{s}</span>
+             ))}
+          </div>
+        </TiltCard>
+
+        {/* Backend & Tools */}
+        <TiltCard className="p-8 rounded-xl bg-void-800/40 border border-white/5 hover:border-white/10 transition-colors backdrop-blur-sm">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 rounded-lg bg-green-500/10"><Terminal className="w-5 h-5 text-green-400" /></div>
+            <h3 className="font-heading text-lg font-bold text-white">Backend & Tools</h3>
+          </div>
+          <div className="flex flex-wrap gap-2">
+             {["Node.js", "PostgreSQL", "Git / CI/CD", "Vercel"].map(s => (
+                <span key={s} className="px-3 py-1.5 rounded-md bg-white/5 text-slate-300 text-xs border border-white/5">{s}</span>
+             ))}
+          </div>
+        </TiltCard>
+      </div>
+    </div>
+  </section>
+);
+
+const Services = () => (
+  <section id="services" className="py-20 relative z-10">
+    <div className="max-w-6xl mx-auto px-6">
+      <div className="text-center mb-16">
+        <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">Services</h2>
+        <p className="text-sm text-slate-400 uppercase tracking-widest">Strategic Implementation</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
-          { icon: Zap, title: "Speed", desc: "Rapid prototyping to find market fit faster.", color: "text-yellow-400" },
-          { icon: ShieldAlert, title: "Security", desc: "Zero-trust architecture. No leaked keys.", color: "text-red-400" },
-          { icon: Brain, title: "Intelligence", desc: "Interfaces designed for clarity and trust.", color: "text-quantum-cyan" },
+          { icon: Globe, title: "Strategic Web Development", desc: "Building scalable, SEO-optimized, lightning-fast applications using React, TypeScript, and Next.js. I prioritize maintainability and performance.", color: "text-quantum-cyan" },
+          { icon: Layout, title: "UI/UX Engineering", desc: "Translating brand identity into pixel-perfect, accessible interfaces. I focus on micro-interactions and fluidity that elevate your brand’s perception.", color: "text-quantum-purple" },
+          { icon: Zap, title: "Performance Optimization", desc: "Auditing and refactoring existing codebases to improve Core Web Vitals, reduce load times, and increase conversion rates.", color: "text-yellow-400" },
         ].map((item, i) => (
-          <TiltCard key={i} className="p-6 rounded-xl bg-void-800/40 border border-white/5 hover:border-white/10 transition-colors backdrop-blur-sm">
-            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-4">
-              <item.icon className={`w-5 h-5 ${item.color}`} />
-            </div>
-            <h3 className="font-heading text-lg font-bold text-white mb-2">{item.title}</h3>
-            <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+          <TiltCard key={i} className="p-8 rounded-2xl bg-void-800/30 border border-white/5 hover:border-quantum-cyan/30 transition-colors">
+            <item.icon className={`w-8 h-8 ${item.color} mb-4`} />
+            <h3 className="font-heading text-xl font-bold text-white mb-3">{item.title}</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
           </TiltCard>
         ))}
       </div>
@@ -157,7 +238,7 @@ const FeaturedProject = () => {
   const [currentImage, setCurrentImage] = useState('/dashboard.png'); 
   const ref = useRef<HTMLElement>(null); 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ['10%', '-10%']);
+  const imgY = useTransform(scrollYProgress, [0, 1], ['10%', '-10%']); 
 
   useEffect(() => {
     const images = ['/dashboard.png', '/dashboard2.png']; 
@@ -170,8 +251,8 @@ const FeaturedProject = () => {
   }, []);
 
   return (
-    <section id="work" className="py-20 relative z-10" ref={ref as any}> 
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="work" className="py-20 relative z-10" ref={ref}> 
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center gap-4 mb-8 opacity-50">
           <div className="h-px flex-grow bg-white/10"></div>
           <span className="font-mono text-quantum-cyan text-[10px] tracking-widest uppercase">Flagship Project</span>
@@ -179,7 +260,7 @@ const FeaturedProject = () => {
         </div>
 
         <TiltCard className="rounded-2xl border border-white/10 bg-void-800/40 backdrop-blur-xl overflow-hidden neon-border-glow">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 relative z-10">
             <div className="p-8 md:p-12 flex flex-col justify-center"> 
               <div className="flex items-center gap-3 mb-6">
                  <ScanEye className="w-8 h-8 text-quantum-cyan" />
@@ -200,7 +281,6 @@ const FeaturedProject = () => {
                 </a>
               </div>
             </div>
-
             <div className="bg-black/20 p-6 flex items-center justify-center border-l border-white/5 min-h-[300px]">
               <motion.div 
                 style={{ y: imgY, rotateX: 10, rotateY: -10 }}
@@ -215,14 +295,6 @@ const FeaturedProject = () => {
                   alt="SeeThruo Dashboard" 
                   className="w-full h-full object-cover bg-void-900"
                 />
-                
-                <div className="absolute top-6 right-6 bg-void-900/90 backdrop-blur-md pl-3 pr-4 py-2 rounded-full border border-green-500/30 shadow-lg flex items-center gap-3 z-30">
-                   <span className="relative flex h-3 w-3">
-                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                     <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                   </span>
-                   <span className="text-xs font-bold text-green-400 uppercase tracking-wider">System Active</span>
-                </div>
               </motion.div>
             </div>
           </div>
@@ -232,52 +304,26 @@ const FeaturedProject = () => {
   );
 };
 
-const Skills = () => (
-  <section id="stack" className="py-20 relative z-10">
-    <div className="max-w-5xl mx-auto px-6">
-      <div className="text-center mb-12">
-         <h2 className="font-heading text-2xl font-bold text-white mb-4">Tech Stack</h2>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-         {[
-           { title: "Frontend", icon: Layout, skills: ["React 18", "TypeScript", "Tailwind"] },
-           { title: "Backend", icon: Brain, skills: ["Node.js", "Edge Functions", "Gemini Pro"] },
-           { title: "DevOps", icon: GitBranch, skills: ["GitOps", "CI/CD", "Security"] }
-         ].map((stack, i) => (
-           <div key={i} className="p-5 rounded-xl bg-void-800/30 border border-white/5 hover:border-white/10 transition-colors">
-              <div className="flex items-center gap-2 mb-3">
-                 <stack.icon className="w-4 h-4 text-quantum-cyan" />
-                 <h3 className="font-heading text-sm font-bold text-white uppercase tracking-wider">{stack.title}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                 {stack.skills.map(s => (
-                    <span key={s} className="px-2 py-1 rounded bg-white/5 text-slate-400 text-[10px] border border-white/5">{s}</span>
-                 ))}
-              </div>
-           </div>
-         ))}
-      </div>
-    </div>
-  </section>
-);
-
 const Contact = () => (
-  <section id="contact" className="py-24 text-center relative overflow-hidden z-10">
+  <section id="contact" className="py-32 text-center relative overflow-hidden z-10">
     <div className="max-w-3xl mx-auto px-6 relative z-10">
-      <h2 className="font-heading text-4xl font-bold text-white mb-6">Let's Architect The Future.</h2>
-      <p className="text-sm text-slate-400 max-w-lg mx-auto mb-10">
-        Open for high-impact freelance engagements.
+      <h2 className="font-heading text-4xl font-bold text-white mb-6">Ready to elevate your digital presence?</h2>
+      <p className="text-sm text-slate-400 max-w-lg mx-auto mb-12">
+        I am currently accepting new projects. Tell me about your goals, and let's determine if we are a good fit.
       </p>
-      <div className="flex justify-center gap-4">
-        <a href="mailto:kaziomeirmustafa@gmail.com" className="px-6 py-2.5 bg-white text-void-900 font-bold rounded-lg hover:bg-quantum-cyan transition-colors text-sm">
-          Email Me
-        </a>
-        <a href="https://www.linkedin.com/in/omeir-mustafa-uddin/" target="_blank" className="px-6 py-2.5 bg-void-800 text-white font-bold rounded-lg border border-white/10 hover:border-quantum-cyan transition-colors text-sm">
-          LinkedIn
+      <div className="flex justify-center">
+        {/* NEW SINGLE BUTTON */}
+        <a 
+          href="mailto:omeirmustafa.work@gmail.com" 
+          className="px-8 py-4 bg-white text-void-900 font-bold rounded-full hover:bg-quantum-cyan hover:scale-105 transition-all flex items-center gap-2 text-sm shadow-xl shadow-white/10"
+        >
+          <MessageSquare size={18} /> Start a Conversation
         </a>
       </div>
-      <footer className="mt-20 text-slate-600 text-[10px] uppercase tracking-widest font-mono pt-8 border-t border-white/5">
-        <p>&copy; {new Date().getFullYear()} Omeir Mustafa. Systems Active.</p>
+      
+      {/* NEW FOOTER */}
+      <footer className="mt-32 text-slate-600 text-[10px] uppercase tracking-widest font-mono pt-8 border-t border-white/5">
+        <p>&copy; {new Date().getFullYear()} Omeir Mustafa. Systems Active. All rights reserved.</p>
       </footer>
     </div>
   </section>
@@ -291,11 +337,12 @@ const App = () => {
       <AnimatedDivider />
       <About />
       <AnimatedDivider />
+      <Services />
+      <AnimatedDivider />
       <FeaturedProject />
       <AnimatedDivider />
-      <Skills />
-      <AnimatedDivider />
       <Contact />
+      <AskAI />
     </div>
   );
 };
