@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Sparkles, ShieldAlert, Layout, ChevronDown, Cpu, Globe, Zap, ScanEye, Brain, GitBranch, Terminal, Database, Palette, MessageSquare, X, Send } from 'lucide-react';
+import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue, AnimatePresence, HTMLMotionProps } from 'framer-motion';
+import { Github, Linkedin, Mail, ExternalLink, ArrowRight, Sparkles, ShieldAlert, Layout, ChevronDown, Cpu, Globe, Zap, ScanEye, Brain, GitBranch, Terminal, Palette, MessageSquare, X, Send, Database } from 'lucide-react';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // --- TYPES ---
-interface TiltCardProps {
+interface TiltCardProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
   className?: string;
 }
 
 // --- PHYSICS & ANIMATION UTILS ---
 
-const TiltCard: React.FC<TiltCardProps> = ({ children, className = "" }) => {
+const TiltCard: React.FC<TiltCardProps> = ({ children, className = "", ...props }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-100, 100], [5, -5]); 
@@ -34,6 +35,7 @@ const TiltCard: React.FC<TiltCardProps> = ({ children, className = "" }) => {
       onMouseLeave={() => { x.set(0); y.set(0); }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       className={`relative group transition-all duration-500 ${className}`}
+      {...props}
     >
       <div style={{ transform: "translateZ(10px)" }}>{children}</div>
       <motion.div
@@ -79,12 +81,19 @@ const KNOWLEDGE_BASE: Record<string, string> = {
   "availability": "Omeir is currently open for freelance and full-time opportunities."
 };
 
+const SYSTEM_PROMPT = `
+You are the AI Assistant for Omeir Mustafa's portfolio. 
+Your goal is to answer questions about Omeir based ONLY on the context below.
+Keep answers concise (under 3 sentences), professional, and slightly futuristic/tech-focused.
+`;
+
 const AskAI = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState('');
   const [messages, setMessages] = useState<{ role: 'user' | 'ai'; text: string }[]>([
     { role: 'ai', text: "Hi! I'm Omeir's Portfolio Assistant. Ask me about his skills, projects, or contact info." }
   ]);
-  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -93,27 +102,52 @@ const AskAI = () => {
 
   useEffect(scrollToBottom, [messages]);
 
-  const handleSend = (textOverride?: string) => {
-    const userText = textOverride || input;
-    if (!userText.trim()) return;
-
-    setMessages(prev => [...prev, { role: 'user', text: userText }]);
+  const handleSend = async (textOverride?: string) => {
+    const userMsg = textOverride || input;
+    if (!userMsg.trim()) return;
+    
+    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
     setInput('');
 
-    // Simple Keyword Matching Logic (Local "AI")
-    let response = "I'm focused on Omeir's professional work. Please email him for specific details!";
-    const lowerText = userText.toLowerCase();
+    // 1. Local Check (Instant Response)
+    let localResponse = null;
+    const lowerText = userMsg.toLowerCase();
+    if (lowerText.includes('email') || lowerText.includes('contact')) localResponse = KNOWLEDGE_BASE['email'];
+    else if (lowerText.includes('stack') || lowerText.includes('tech')) localResponse = KNOWLEDGE_BASE['stack'];
+    else if (lowerText.includes('service') || lowerText.includes('offer')) localResponse = KNOWLEDGE_BASE['services'];
+    else if (lowerText.includes('project') || lowerText.includes('work')) localResponse = KNOWLEDGE_BASE['project'];
 
-    if (lowerText.includes('email') || lowerText.includes('contact') || lowerText.includes('reach')) response = KNOWLEDGE_BASE['email'];
-    else if (lowerText.includes('stack') || lowerText.includes('tech') || lowerText.includes('skill')) response = KNOWLEDGE_BASE['stack'];
-    else if (lowerText.includes('service') || lowerText.includes('offer') || lowerText.includes('help')) response = KNOWLEDGE_BASE['services'];
-    else if (lowerText.includes('project') || lowerText.includes('seethruo') || lowerText.includes('work')) response = KNOWLEDGE_BASE['project'];
-    else if (lowerText.includes('experience') || lowerText.includes('background') || lowerText.includes('who')) response = KNOWLEDGE_BASE['experience'];
-    else if (lowerText.includes('available') || lowerText.includes('hiring') || lowerText.includes('job')) response = KNOWLEDGE_BASE['availability'];
+    if (localResponse) {
+      setTimeout(() => {
+        setMessages(prev => [...prev, { role: 'ai', text: localResponse! }]);
+      }, 600);
+      return;
+    }
+    
+    // 2. API Fallback
+    setIsLoading(true);
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      if (!apiKey) {
+         setTimeout(() => {
+            setMessages(prev => [...prev, { role: 'ai', text: "My neural link is currently offline (API Key missing). Please contact Omeir directly via email." }]);
+            setIsLoading(false);
+         }, 1000);
+         return;
+      }
 
-    setTimeout(() => {
-      setMessages(prev => [...prev, { role: 'ai', text: response }]);
-    }, 600);
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      const chat = model.startChat({
+        history: [{ role: "user", parts: [{ text: SYSTEM_PROMPT }] }, { role: "model", parts: [{ text: "Ready." }] }],
+      });
+      const result = await chat.sendMessage(userMsg);
+      setMessages(prev => [...prev, { role: 'ai', text: result.response.text() }]);
+    } catch (error) {
+      setMessages(prev => [...prev, { role: 'ai', text: "Connection interrupted. Please email Omeir directly." }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -123,13 +157,15 @@ const AskAI = () => {
         animate={{ opacity: 1, scale: 1 }}
         className="fixed bottom-6 right-6 z-50"
       >
-        <button 
+        <motion.button 
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(!isOpen)}
           className="group relative flex items-center justify-center w-14 h-14 bg-void-900 border border-quantum-cyan/50 rounded-full shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.6)] transition-all"
         >
           <div className="absolute inset-0 bg-quantum-cyan/20 rounded-full blur-md group-hover:animate-pulse"></div>
           {isOpen ? <X className="text-white w-6 h-6" /> : <Sparkles className="text-quantum-cyan w-6 h-6" />}
-        </button>
+        </motion.button>
       </motion.div>
 
       <AnimatePresence>
@@ -138,7 +174,7 @@ const AskAI = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-[350px] h-[450px] bg-void-900/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden neon-border-glow"
+            className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-[350px] h-[500px] bg-void-900/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden neon-border-glow"
           >
             <div className="p-4 border-b border-white/10 bg-white/5 flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
@@ -157,15 +193,18 @@ const AskAI = () => {
                   </div>
                 </div>
               ))}
+              {isLoading && <div className="text-xs text-slate-500 animate-pulse">Thinking...</div>}
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Preset Questions */}
             <div className="px-4 pb-2 flex gap-2 overflow-x-auto scrollbar-hide">
                {["What is your stack?", "Contact info?", "Services?"].map(q => (
-                 <button key={q} onClick={() => handleSend(q)} className="whitespace-nowrap px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-quantum-cyan hover:bg-white/10 transition-colors">
+                 <motion.button 
+                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                   whileTap={{ scale: 0.95 }}
+                   key={q} onClick={() => handleSend(q)} className="whitespace-nowrap px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-quantum-cyan hover:bg-white/10 transition-colors">
                    {q}
-                 </button>
+                 </motion.button>
                ))}
             </div>
 
@@ -179,13 +218,15 @@ const AskAI = () => {
                   placeholder="Ask anything..."
                   className="w-full bg-void-900 border border-white/10 rounded-full py-3 pl-4 pr-10 text-xs text-white focus:outline-none focus:border-quantum-cyan/50 transition-colors"
                 />
-                <button 
+                <motion.button 
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={() => handleSend()}
-                  disabled={!input.trim()}
-                  className="absolute right-2 p-1.5 rounded-full bg-quantum-cyan text-black hover:scale-105 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isLoading || !input.trim()}
+                  className="absolute right-2 p-1.5 rounded-full bg-quantum-cyan text-black disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send size={14} />
-                </button>
+                </motion.button>
               </div>
             </div>
           </motion.div>
@@ -208,21 +249,32 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-void-900/80 backdrop-blur-lg border-b border-white/5 py-3' : 'bg-transparent py-5'}`}>
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="font-heading font-bold text-xl tracking-wider text-white flex items-center gap-1 flex-shrink-0">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }} 
+          animate={{ opacity: 1, x: 0 }} 
+          whileHover={{ scale: 1.05 }}
+          className="font-heading font-bold text-xl tracking-wider text-white flex items-center gap-1 flex-shrink-0 cursor-pointer"
+        >
           Omeir <span className="text-quantum-cyan">Mustafa</span>
         </motion.div>
         
-        {/* Updated Navigation Items */}
         <div className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
           {['About', 'Services', 'Work'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-quantum-cyan transition-colors">{item}</a>
+            <a key={item} href={`#${item.toLowerCase()}`} className="relative group hover:text-white transition-colors duration-300">
+              {item}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-quantum-cyan transition-all duration-300 group-hover:w-full"></span>
+            </a>
           ))}
         </div>
         
-        {/* Updated Contact Button Label */}
-        <a href="#contact" className="px-5 py-2 rounded-lg border border-white/10 text-xs font-bold hover:bg-white/5 hover:text-white transition-all text-slate-300">
+        <motion.a 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          href="#contact" 
+          className="px-5 py-2 rounded-lg border border-white/10 text-xs font-bold hover:bg-white/5 hover:text-white transition-all text-slate-300"
+        >
           Contact
-        </a>
+        </motion.a>
       </div>
     </nav>
   );
@@ -238,24 +290,33 @@ const Hero = () => {
           AVAILABLE FOR NEW PROJECTS
         </div>
 
-        {/* NEW HEADLINE */}
         <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[1.1] mb-6">
           Building Digital Experiences <br/>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-quantum-cyan to-quantum-purple">That Drive Growth.</span>
         </h1>
 
-        {/* NEW SUBTEXT */}
         <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
           I bridge the gap between complex engineering and intuitive design—helping forward-thinking brands scale through high-performance web solutions.
         </p>
 
         <div className="flex justify-center gap-4">
-          <a href="#work" className="px-6 py-3 bg-white text-void-900 font-bold rounded-lg hover:bg-quantum-cyan transition-colors text-sm flex items-center gap-2">
+          <motion.a 
+            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(34,211,238,0.4)" }}
+            whileTap={{ scale: 0.95 }}
+            href="#work" 
+            className="px-6 py-3 bg-white text-void-900 font-bold rounded-lg hover:bg-quantum-cyan transition-colors text-sm flex items-center gap-2"
+          >
              View Selected Work <ArrowRight size={16} />
-          </a>
-          <a href="https://seethruo-engine.vercel.app/" target="_blank" className="px-6 py-3 text-white font-bold rounded-lg border border-white/10 hover:bg-white/5 transition-all text-sm">
+          </motion.a>
+          <motion.a 
+            whileHover={{ scale: 1.05, borderColor: "rgba(34,211,238,0.8)" }}
+            whileTap={{ scale: 0.95 }}
+            href="https://seethruo-engine.vercel.app/" 
+            target="_blank" 
+            className="px-6 py-3 text-white font-bold rounded-lg border border-white/10 hover:bg-white/5 transition-all text-sm"
+          >
             Launch App
-          </a>
+          </motion.a>
         </div>
       </div>
     </section>
@@ -265,7 +326,6 @@ const Hero = () => {
 const About = () => (
   <section id="about" className="py-20 relative z-10">
     <div className="max-w-6xl mx-auto px-6">
-      {/* NEW ABOUT CONTENT */}
       <div className="text-center mb-16">
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6">Behind the Code</h2>
         <p className="text-base text-slate-400 max-w-3xl mx-auto leading-relaxed">
@@ -273,9 +333,7 @@ const About = () => (
         </p>
       </div>
 
-      {/* NEW TECH STACK GRID */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Frontend Core */}
         <TiltCard className="p-8 rounded-xl bg-void-800/40 border border-white/5 hover:border-white/10 transition-colors backdrop-blur-sm">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 rounded-lg bg-blue-500/10"><Layout className="w-5 h-5 text-blue-400" /></div>
@@ -288,7 +346,6 @@ const About = () => (
           </div>
         </TiltCard>
 
-        {/* Styling & UI */}
         <TiltCard className="p-8 rounded-xl bg-void-800/40 border border-white/5 hover:border-white/10 transition-colors backdrop-blur-sm">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 rounded-lg bg-purple-500/10"><Palette className="w-5 h-5 text-purple-400" /></div>
@@ -301,7 +358,6 @@ const About = () => (
           </div>
         </TiltCard>
 
-        {/* Backend & Tools */}
         <TiltCard className="p-8 rounded-xl bg-void-800/40 border border-white/5 hover:border-white/10 transition-colors backdrop-blur-sm">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 rounded-lg bg-green-500/10"><Terminal className="w-5 h-5 text-green-400" /></div>
@@ -328,8 +384,8 @@ const Services = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
-          { icon: Globe, title: "Strategic Web Development", desc: "Building scalable, SEO-optimized, lightning-fast applications using React, TypeScript, and Next.js. I prioritize maintainability and performance.", color: "text-quantum-cyan" },
-          { icon: Layout, title: "UI/UX Engineering", desc: "Translating brand identity into pixel-perfect, accessible interfaces. I focus on micro-interactions and fluidity that elevate your brand’s perception.", color: "text-quantum-purple" },
+          { icon: Globe, title: "Strategic Web Development", desc: "Building scalable, SEO-optimized, lightning-fast applications using React, TypeScript, and Next.js.", color: "text-quantum-cyan" },
+          { icon: Layout, title: "UI/UX Engineering", desc: "Translating brand identity into pixel-perfect, accessible interfaces. I focus on micro-interactions and fluidity.", color: "text-quantum-purple" },
           { icon: Zap, title: "Performance Optimization", desc: "Auditing and refactoring existing codebases to improve Core Web Vitals, reduce load times, and increase conversion rates.", color: "text-yellow-400" },
         ].map((item, i) => (
           <TiltCard key={i} className="p-8 rounded-2xl bg-void-800/30 border border-white/5 hover:border-quantum-cyan/30 transition-colors">
@@ -360,7 +416,7 @@ const FeaturedProject = () => {
   }, []);
 
   return (
-    <section id="work" className="py-20 relative z-10" ref={ref}> 
+    <section id="work" className="py-16 relative z-10" ref={ref}> 
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center gap-4 mb-8 opacity-50">
           <div className="h-px flex-grow bg-white/10"></div>
@@ -385,9 +441,12 @@ const FeaturedProject = () => {
                 ))}
               </div>
               <div className="flex gap-4">
-                <a href="https://seethruo-engine.vercel.app/" target="_blank" className="px-5 py-2 bg-quantum-cyan text-void-900 font-bold rounded-lg hover:bg-white transition-colors flex items-center gap-2 text-xs">
+                <motion.a 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="https://seethruo-engine.vercel.app/" target="_blank" className="px-5 py-2 bg-quantum-cyan text-void-900 font-bold rounded-lg hover:bg-white transition-colors flex items-center gap-2 text-xs">
                   Live System <ExternalLink size={14} />
-                </a>
+                </motion.a>
               </div>
             </div>
             <div className="bg-black/20 p-6 flex items-center justify-center border-l border-white/5 min-h-[300px]">
@@ -421,16 +480,15 @@ const Contact = () => (
         I am currently accepting new projects. Tell me about your goals, and let's determine if we are a good fit.
       </p>
       <div className="flex justify-center">
-        {/* NEW SINGLE BUTTON */}
-        <a 
+        <motion.a 
+          whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(34,211,238,0.4)" }}
+          whileTap={{ scale: 0.95 }}
           href="mailto:omeirmustafa.work@gmail.com" 
-          className="px-8 py-4 bg-white text-void-900 font-bold rounded-full hover:bg-quantum-cyan hover:scale-105 transition-all flex items-center gap-2 text-sm shadow-xl shadow-white/10"
+          className="px-8 py-4 bg-white text-void-900 font-bold rounded-full hover:bg-quantum-cyan transition-all flex items-center gap-2 text-sm shadow-xl shadow-white/10"
         >
           <MessageSquare size={18} /> Start a Conversation
-        </a>
+        </motion.a>
       </div>
-      
-      {/* NEW FOOTER */}
       <footer className="mt-32 text-slate-600 text-[10px] uppercase tracking-widest font-mono pt-8 border-t border-white/5">
         <p>&copy; {new Date().getFullYear()} Omeir Mustafa. Systems Active. All rights reserved.</p>
       </footer>

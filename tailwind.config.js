@@ -3,14 +3,13 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Space Grotesk', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        heading: ['"Outfit"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
         void: {
@@ -31,6 +30,7 @@ export default {
         'float': 'float 6s ease-in-out infinite',
         'neon-glow-border': 'neon-glow-border 4s ease-in-out infinite alternate',
         'shimmer': 'shimmer 2s linear infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         float: {
@@ -42,17 +42,17 @@ export default {
           '100%': { backgroundPosition: '200% 0' },
         },
         'neon-glow-border': {
-            '0%, 100%': {
-              'box-shadow': '0 0 5px rgba(34, 211, 238, 0.4), 0 0 15px rgba(34, 211, 238, 0.2)',
-              'border-color': 'rgba(34, 211, 238, 0.4)',
-            },
-            '50%': {
-              'box-shadow': '0 0 15px rgba(34, 211, 238, 0.6), 0 0 30px rgba(34, 211, 238, 0.4)',
-              'border-color': 'rgba(34, 211, 238, 0.8)',
-            },
+          '0%, 100%': {
+            'box-shadow': '0 0 5px rgba(6, 182, 212, 0.4), 0 0 15px rgba(6, 182, 212, 0.4)',
+            'border-color': 'rgba(6, 182, 212, 0.4)',
           },
+          '50%': {
+            'box-shadow': '0 0 15px rgba(6, 182, 212, 0.6), 0 0 30px rgba(6, 182, 212, 0.4)',
+            'border-color': 'rgba(6, 182, 212, 0.8)',
+          },
+        }
       }
     },
   },
-  plugins: [], // No plugins here = No build errors
-} 
+  plugins: [], 
+}
