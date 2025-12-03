@@ -40,12 +40,12 @@ export default {
         },
         'neon-glow-border': {
           '0%, 100%': {
-            'box-shadow': '0 0 5px rgba(34, 211, 238, 0.4), 0 0 15px rgba(34, 211, 238, 0.2)',
-            'border-color': 'rgba(34, 211, 238, 0.4)',
+            'box-shadow': '0 0 5px rgba(6, 182, 212, 0.4), 0 0 15px rgba(6, 182, 212, 0.4)',
+            'border-color': 'rgba(6, 182, 212, 0.4)',
           },
           '50%': {
-            'box-shadow': '0 0 15px rgba(34, 211, 238, 0.6), 0 0 30px rgba(34, 211, 238, 0.4)',
-            'border-color': 'rgba(34, 211, 238, 0.8)',
+            'box-shadow': '0 0 8px rgba(6, 182, 212, 0.6), 0 0 25px rgba(6, 182, 212, 0.6)',
+            'border-color': 'rgba(6, 182, 212, 0.6)',
           },
         }
       }
