@@ -55,4 +55,4 @@ export default {
     },
   },
   plugins: [], // No plugins here = No build errors
-}
+} 
