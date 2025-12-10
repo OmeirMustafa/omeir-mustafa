@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { Check, ArrowRight, Zap } from "lucide-react";
+import { motion, Variants } from "framer-motion";
+import { Check, ArrowRight, Zap, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -66,10 +66,28 @@ const SERVICES = [
     }
 ];
 
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15
+        }
+    }
+};
+
+const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+};
+
 export function ServicesSection() {
     return (
-        <section className="py-24 px-6 bg-[#0c0c0c] border-t border-white/5">
-            <div className="max-w-7xl mx-auto">
+        <section className="py-24 px-6 bg-[#0c0c0c] border-t border-white/5 relative overflow-hidden">
+            {/* Ambient Background for Services */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03),transparent_70%)] pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto relative z-10">
                 <div className="mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-6">
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-voltage-purple">
@@ -81,31 +99,49 @@ export function ServicesSection() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                >
                     {SERVICES.map((service, index) => (
                         <motion.div
                             key={service.id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1, duration: 0.5, ease: "easeInOut" }}
-                            viewport={{ once: true }}
+                            variants={cardVariants}
                             className={cn(
-                                "relative p-6 rounded-2xl border bg-[#0a0a0a] transition-all flex flex-col min-h-[500px] group",
+                                "relative p-6 rounded-2xl border bg-[#0a0a0a]/80 backdrop-blur-sm transition-all flex flex-col min-h-[500px] group hover:z-10",
                                 service.isSpecial
-                                    ? "border-amber-500/50 hover:border-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.1)]"
-                                    : "border-white/5 hover:border-white/10"
+                                    ? "border-amber-500/50 hover:border-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.1)] hover:shadow-[0_0_30px_rgba(245,158,11,0.3)]"
+                                    : "border-white/5 hover:border-neon-cyan/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)]"
                             )}
-                            whileHover={{ y: -5 }}
+                            whileHover={{ y: -8, scale: 1.02 }}
                         >
                             {service.isSpecial && (
-                                <div className="absolute top-0 right-0 px-3 py-1 bg-amber-500 text-black text-[10px] font-bold uppercase rounded-bl-xl rounded-tr-xl flex items-center gap-1">
-                                    <Zap size={12} fill="currentColor" /> Limited Offer
+                                <motion.div
+                                    animate={{ opacity: [0.8, 1, 0.8] }}
+                                    transition={{ duration: 2, repeat: Infinity }}
+                                    className="absolute inset-0 rounded-2xl border border-amber-500/30 pointer-events-none"
+                                />
+                            )}
+
+                            {service.isSpecial && (
+                                <div className="absolute top-0 right-0 px-3 py-1 bg-amber-500 text-black text-[10px] font-bold uppercase rounded-bl-xl rounded-tr-xl flex items-center gap-1 shadow-lg">
+                                    <Zap size={12} fill="currentColor" /> LIMITED
+                                </div>
+                            )}
+
+                            {/* Best Value Badge for Core Product */}
+                            {service.id === "sprint" && (
+                                <div className="absolute top-0 right-0 px-3 py-1 bg-neon-cyan text-black text-[10px] font-bold uppercase rounded-bl-xl rounded-tr-xl flex items-center gap-1 shadow-lg">
+                                    <ShieldCheck size={12} fill="currentColor" /> SCALABLE
                                 </div>
                             )}
 
                             <div className="mb-6">
                                 <span className={cn(
-                                    "text-xs font-mono uppercase tracking-wider mb-2 block",
+                                    "text-xs font-mono uppercase tracking-wider mb-2 block font-bold",
                                     service.isSpecial ? "text-amber-500" : "text-neon-cyan"
                                 )}>
                                     {service.tier}
@@ -118,7 +154,7 @@ export function ServicesSection() {
                                         <div className="text-sm text-white/40 line-through decoration-white/30">{service.originalPrice}</div>
                                     )}
                                 </div>
-                                <div className="text-xs text-white/40 mb-4 h-8">Best for: {service.bestFor}</div>
+                                <div className="text-xs text-white/40 mb-4 h-8 flex items-center">Best for: {service.bestFor}</div>
                             </div>
 
                             <div className="flex-grow space-y-3 mb-6">
@@ -129,7 +165,7 @@ export function ServicesSection() {
                                     </div>
                                 ))}
                                 {service.mainFeatures && (
-                                    <div className="text-[10px] uppercase text-white/30 font-bold tracking-widest mt-2">Includes above</div>
+                                    <div className="text-[10px] uppercase text-white/30 font-bold tracking-widest mt-2 border-t border-white/5 pt-2">Includes above</div>
                                 )}
                             </div>
 
@@ -144,8 +180,9 @@ export function ServicesSection() {
                             <Button
                                 variant="outline"
                                 className={cn(
-                                    "w-full mt-auto h-10 border-white/10 hover:bg-white/5 text-xs uppercase tracking-wide",
-                                    service.isSpecial && "bg-amber-500/10 border-amber-500/50 hover:bg-amber-500/20 text-amber-500"
+                                    "w-full mt-auto h-10 border-white/10 hover:bg-white/5 text-xs uppercase tracking-wide transition-colors",
+                                    service.isSpecial && "bg-amber-500/10 border-amber-500/50 hover:bg-amber-500/20 text-amber-500",
+                                    !service.isSpecial && "group-hover:bg-neon-cyan/10 group-hover:text-neon-cyan group-hover:border-neon-cyan/50"
                                 )}
                             >
                                 {service.isSpecial ? "Claim Audit" : "Select Protocol"} <ArrowRight className="w-3 h-3 ml-2 opacity-50 group-hover:translate-x-1 transition-transform" />
@@ -153,8 +190,9 @@ export function ServicesSection() {
 
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
 }
+
