@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { NeuralTerminal } from "@/components/ui/neural-terminal";
+import { Terminal } from "@/components/Terminal";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { ArrowRight, ChevronRight } from "lucide-react";
 
@@ -34,24 +34,23 @@ export function HeroSection() {
                     </div>
 
                     <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
-                        Digital Asset <br />
+                        Digital Product <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-voltage-purple">
                             Architect
                         </span>
-                        <span className="text-white/40 block text-3xl md:text-5xl mt-2 font-light">for the Invisible Expert.</span>
                     </h1>
 
                     <p className="text-lg text-white/60 max-w-xl leading-relaxed">
-                        Translating high-level consulting expertise into intelligent, AI-integrated digital infrastructure. Stop building websites. Start engineering assets.
+                        I design and architect investor-ready, AI-powered digital products using Next.js, secure SSR, component-driven design systems, and enterprise-grade dark UX.
                     </p>
 
                     <div className="flex flex-wrap gap-4 pt-4">
                         <MagneticButton className="bg-white text-black hover:bg-gray-200 rounded-lg">
-                            View Operations <ArrowRight className="w-4 h-4" />
+                            Book Strategy Call <ArrowRight className="w-4 h-4" />
                         </MagneticButton>
 
                         <MagneticButton className="bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20 rounded-lg backdrop-blur-sm">
-                            Initiate Protocol <ChevronRight className="w-4 h-4 ml-1 opacity-50" />
+                            View Portfolio <ChevronRight className="w-4 h-4 ml-1 opacity-50" />
                         </MagneticButton>
                     </div>
                 </motion.div>
@@ -64,7 +63,7 @@ export function HeroSection() {
                     className="relative"
                 >
                     <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-voltage-purple rounded-xl blur opacity-20" />
-                    <NeuralTerminal />
+                    <Terminal />
                 </motion.div>
             </div>
         </section>
