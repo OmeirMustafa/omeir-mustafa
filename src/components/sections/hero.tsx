@@ -6,7 +6,7 @@ import { motion, Variants } from "framer-motion";
 import { Terminal } from "@/components/Terminal";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { QuantumBackground } from "@/components/ui/QuantumBackground";
-import { ArrowRight, ChevronRight, Zap } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -40,7 +40,7 @@ export function HeroSection() {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="space-y-8"
+                    className="space-y-8 flex flex-col items-center lg:items-start text-center lg:text-left"
                 >
                     <motion.div variants={itemVariants}>
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/5 text-xs font-mono text-neon-cyan/80 backdrop-blur-md">
@@ -65,18 +65,22 @@ export function HeroSection() {
                         I architect investor-ready, AI-native digital ecosystems. transforming abstract vision into high-performance, secure, and scalable reality.
                     </motion.p>
 
-                    <motion.div variants={itemVariants} className="flex flex-wrap gap-6 items-center justify-center lg:justify-start pt-4 relative z-20">
-                        <Link href="#contact" scroll={true} className="relative group">
+                    {/* Button Container: Vertical Stack */}
+                    <motion.div
+                        variants={itemVariants}
+                        className="flex flex-col gap-5 w-full items-center lg:items-start pt-4 relative z-20"
+                    >
+                        <Link href="#contact" scroll={true} className="w-full sm:w-auto relative group">
                             <MagneticButton
-                                className="bg-white text-black border border-transparent hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] hover:border-cyan-400 transition-all duration-300 rounded-lg"
+                                className="w-full sm:w-auto bg-white text-black border border-transparent hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] hover:border-cyan-400 transition-all duration-300 rounded-lg justify-center"
                             >
                                 INITIATE AUDIT PROTOCOL <ArrowRight className="w-4 h-4 ml-2" />
                             </MagneticButton>
                         </Link>
 
-                        <Link href="#portfolio" scroll={true} className="relative group">
+                        <Link href="#portfolio" scroll={true} className="w-full sm:w-auto relative group">
                             <MagneticButton
-                                className="bg-transparent text-white border border-slate-700 hover:bg-slate-900 hover:border-cyan-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all duration-300 rounded-lg backdrop-blur-md"
+                                className="w-full sm:w-auto bg-transparent text-white border border-slate-700 hover:bg-slate-900 hover:border-cyan-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all duration-300 rounded-lg backdrop-blur-md justify-center"
                             >
                                 INSPECT BLUEPRINTS <ChevronRight className="w-4 h-4 ml-1 opacity-50" />
                             </MagneticButton>
