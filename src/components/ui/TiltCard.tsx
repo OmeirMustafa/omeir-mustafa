@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -61,9 +61,9 @@ export function TiltCard({ children, className }: TiltCardProps) {
                     transform: "translateZ(75px)",
                     transformStyle: "preserve-3d",
                 }}
-                className="absolute inset-4 grid place-content-center rounded-xl bg-white shadow-lg"
+                className="absolute inset-4 grid place-content-center rounded-xl bg-transparent opacity-0"
             >
-                {/* Shadow element or depth layer if needed */}
+                {/* Removed white background to fix visibility issue */}
             </div>
             <div style={{ transform: "translateZ(50px)" }} className="h-full w-full">
                 {children}
