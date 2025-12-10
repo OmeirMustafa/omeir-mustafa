@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { Database, Cpu, Eye } from 'lucide-react';
 
@@ -21,7 +19,7 @@ const modules = [
     }
 ];
 
-export function AboutSection() {
+export default function ComponentArchitecture() {
     return (
         <section className="py-24 bg-slate-950">
             <div className="container mx-auto px-6">
