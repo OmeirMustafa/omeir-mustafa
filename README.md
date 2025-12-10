@@ -1,81 +1,36 @@
-# Omeir Mustafa - Portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A cinematic, agency-grade portfolio site for Full-Stack AI Engineer Omeir Mustafa. Built with React, Tailwind CSS, and optimized for SEO.
+## Getting Started
 
-## 🚀 Quick Start
+First, run the development server:
 
-1.  **Install Dependencies:**
-    ```bash
-    npm install
-    ```
-2.  **Run Development Server:**
-    ```bash
-    npm run dev
-    ```
-3.  **Build for Production:**
-    ```bash
-    npm run build
-    ```
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## 🛠 Tech Stack
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-*   **Core:** React 18, TypeScript, Vite
-*   **Styling:** Tailwind CSS (Prism Theme: Blue -> Violet -> Teal)
-*   **Icons:** Lucide React
-*   **SEO:** React Helmet Async, JSON-LD Schema
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## 🚢 Free Deployment Guide (Vercel)
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-This project is configured to be deployed instantly on Vercel for free.
+## Learn More
 
-1.  Push this code to a new GitHub repository (`omeir-portfolio`).
-2.  Log in to [Vercel](https://vercel.com) using GitHub.
-3.  Click **"Add New Project"** and select the repository.
-4.  Vercel will auto-detect Vite. Keep settings as default.
-5.  Click **Deploy**.
-6.  (Optional) Add your custom domain in Vercel settings.
+To learn more about Next.js, take a look at the following resources:
 
-## 📈 SEO & Content Strategy
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Keywords Target
-*   AI Engineer
-*   React Developer Portfolio
-*   InsightMesh
-*   Prompt Engineering Specialist
-*   Hire Full Stack AI Developer
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### 12-Month Blog Post Ideas (To attract organic traffic)
-1.  **"Beyond Chatbots: Building Visual AI Interfaces with React"** - How InsightMesh visualizes data.
-2.  **"The Stack of 2025: Vite, Tailwind, and Local LLMs"** - A guide to modern performance.
-3.  **"Why Your Prompt Engineering Needs Version Control"** - Introducing DevOps concepts to AI.
-4.  **"Reducing Hallucinations in RAG Pipelines"** - Technical deep dive.
-5.  **"From Python to React: A Data Scientist's Guide to Frontend"** - Bridging the gap.
-6.  **"Building Accessible AI Tools: ARIA and LLM Output"** - Inclusive design.
-7.  **"Optimizing Vector Search Latency on Edge Functions"** - Performance tips.
-8.  **"Case Study: How InsightMesh Handles Real-time Streams"** - Architectural review.
-9.  **"Tailwind CSS Tricks for Glassmorphism"** - Design tutorial.
-10. **"Integrating Gemini Nano in Chrome for Web Apps"** - Future tech.
-11. **"The Ethics of AI User Experience"** - Thought leadership.
-12. **"Migrating from Create React App to Vite"** - Maintenance guide.
+## Deploy on Vercel
 
-## 📣 Social Media Strategy
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-**LinkedIn Post Template:**
-> "I'm excited to share my new portfolio and latest deep-dive case study: InsightMesh. 🚀
-> 
-> It's an exploration into how we can bridge raw data streams with human intent using AI. I built this site using React and Tailwind to reflect my philosophy: technology should feel invisible.
-> 
-> Check it out here: [Your Link]
-> 
-> #AI #React #WebDev #PromptEngineering #SoftwareEngineering #Portfolio"
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-### 📬 Contact
-
-Created by **Omeir Mustafa** - AI Engineer & Full Stack Developer.
-[LinkedIn](https://www.linkedin.com/in/omeir-mustafa-uddin/) • [Email](mailto:kaziomeirmustafa@gmail.com)
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
