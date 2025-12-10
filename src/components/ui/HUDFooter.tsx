@@ -17,13 +17,11 @@ export function HUDFooter() {
                     <p className="text-slate-400 text-sm max-w-md">
                         Digital Product Architect specializing in AI-native infrastructure & dark UX systems.
                     </p>
-                </div>
 
-                <div className="flex items-center gap-6">
                     <Link
                         href="https://linkedin.com"
                         target="_blank"
-                        className="p-2 rounded bg-black/40 border border-cyan-500/20 hover:bg-cyan-500/10 hover:border-cyan-400 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all text-slate-400"
+                        className="mt-4 p-2 rounded bg-black/40 border border-cyan-500/20 hover:bg-cyan-500/10 hover:border-cyan-400 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all text-slate-400"
                     >
                         <Linkedin size={20} />
                     </Link>

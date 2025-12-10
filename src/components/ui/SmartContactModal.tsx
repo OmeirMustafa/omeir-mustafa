@@ -14,7 +14,7 @@ export function SmartContactModal({ isOpen, onClose }: SmartContactModalProps) {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText("kaziomeirmustafa@gmail.com");
+        navigator.clipboard.writeText("omeirmustafa.work@gmail.com");
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -70,7 +70,7 @@ export function SmartContactModal({ isOpen, onClose }: SmartContactModalProps) {
                         <div className="space-y-4 relative z-10">
                             {/* Option 1: Gmail */}
                             <a
-                                href="https://mail.google.com/mail/?view=cm&fs=1&to=kaziomeirmustafa@gmail.com&su=Project%20Inquiry"
+                                href="https://mail.google.com/mail/?view=cm&fs=1&to=omeirmustafa.work@gmail.com&su=Project%20Inquiry"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-4 w-full p-4 border border-cyan-500/30 bg-cyan-950/20 hover:bg-cyan-900/40 hover:border-cyan-400 transition-all group/btn"
@@ -86,7 +86,7 @@ export function SmartContactModal({ isOpen, onClose }: SmartContactModalProps) {
 
                             {/* Option 2: Default Mail */}
                             <a
-                                href="mailto:kaziomeirmustafa@gmail.com"
+                                href="mailto:omeirmustafa.work@gmail.com"
                                 className="flex items-center gap-4 w-full p-4 border border-cyan-500/30 bg-cyan-950/20 hover:bg-cyan-900/40 hover:border-cyan-400 transition-all group/btn"
                             >
                                 <div className="p-2 bg-cyan-500/10 rounded group-hover/btn:bg-cyan-400/20">
