@@ -2,59 +2,64 @@
 
 import React from "react";
 import { TiltCard } from "@/components/ui/TiltCard";
-import { Code2, Cpu, ScanFace } from "lucide-react";
+import { Database, Cpu, Eye } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const modules = [
+    {
+        title: "The Architect",
+        icon: <Database className="w-6 h-6 text-cyan-400" />,
+        desc: "Translating abstract expertise into structured digital systems. Value ladders, product logic, and high-level product thinking."
+    },
+    {
+        title: "The Builder",
+        icon: <Cpu className="w-6 h-6 text-cyan-400" />,
+        desc: "Next.js engineering, secure SSR, vector database design, RAG integration, and component-driven architecture."
+    },
+    {
+        title: "The Visionary",
+        icon: <Eye className="w-6 h-6 text-cyan-400" />,
+        desc: "AI-native product invention: predictive workflows, intelligent dashboards, and next-generation interfaces."
+    }
+];
 
 export function AboutSection() {
     return (
-        <section id="about" className="min-h-screen flex flex-col justify-center py-24 px-6 bg-[#0c0c0e] relative overflow-hidden">
+        <section id="about" className="min-h-screen flex flex-col justify-center py-24 px-6 bg-[#0b0c10] relative overflow-hidden">
 
             <div className="max-w-7xl mx-auto w-full z-10 text-center mb-16">
                 <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-violet">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500">
                         Component Architecture
                     </span>
                 </h2>
-                <p className="text-white/60 max-w-2xl mx-auto text-lg">
+                <p className="text-slate-200/60 max-w-2xl mx-auto text-lg">
                     My operating system consists of three core modules.
                 </p>
             </div>
 
             <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-8">
-                <TiltCard className="h-[400px]">
-                    <div className="h-full w-full bg-[#111] border border-white/5 p-8 flex flex-col items-center text-center rounded-xl">
-                        <div className="w-16 h-16 rounded-2xl bg-neon-cyan/10 flex items-center justify-center mb-6 border border-neon-cyan/20">
-                            <ScanFace className="text-neon-cyan w-8 h-8" />
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-4">The Architect</h3>
-                        <p className="text-white/50 text-sm leading-relaxed">
-                            Product translation, system mapping, and value ladder engineering. I design the blueprint before a single line of code is written to ensure scalability and alignment.
-                        </p>
-                    </div>
-                </TiltCard>
+                {modules.map((module, i) => (
+                    <TiltCard key={module.title} className="h-[350px]">
+                        <div className={cn(
+                            "h-full w-full bg-slate-900/50 backdrop-blur-xl border border-cyan-500/30 p-8 flex flex-col items-center text-center rounded-lg hover:border-cyan-400/70 hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-all duration-300"
+                        )}>
+                            <div className="w-14 h-14 rounded-lg bg-black/40 flex items-center justify-center mb-6 border border-cyan-500/20">
+                                {module.icon}
+                            </div>
+                            <h3 className="text-xl font-mono font-bold text-slate-200 mb-4">{module.title}</h3>
+                            <p className="text-slate-400 text-sm leading-relaxed">
+                                {module.desc}
+                            </p>
 
-                <TiltCard className="h-[400px]">
-                    <div className="h-full w-full bg-[#111] border border-white/5 p-8 flex flex-col items-center text-center rounded-xl">
-                        <div className="w-16 h-16 rounded-2xl bg-neon-violet/10 flex items-center justify-center mb-6 border border-neon-violet/20">
-                            <Code2 className="text-neon-violet w-8 h-8" />
+                            {/* Tech Clamps */}
+                            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500 opacity-50" />
+                            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500 opacity-50" />
+                            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500 opacity-50" />
+                            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500 opacity-50" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-4">The Builder</h3>
-                        <p className="text-white/50 text-sm leading-relaxed">
-                            Full-stack execution using Next.js, Server-Side Rendering (SSR), Tailwind CSS, RAG pipelines, Vector Databases, and Agent Orchestrators.
-                        </p>
-                    </div>
-                </TiltCard>
-
-                <TiltCard className="h-[400px]">
-                    <div className="h-full w-full bg-[#111] border border-white/5 p-8 flex flex-col items-center text-center rounded-xl">
-                        <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 border border-blue-500/20">
-                            <Cpu className="text-blue-500 w-8 h-8" />
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-4">The Visionary</h3>
-                        <p className="text-white/50 text-sm leading-relaxed">
-                            Focusing on AI-native patterns, automation principles, and long-term product viability in a rapidly evolving technological landscape.
-                        </p>
-                    </div>
-                </TiltCard>
+                    </TiltCard>
+                ))}
             </div>
         </section>
     );
