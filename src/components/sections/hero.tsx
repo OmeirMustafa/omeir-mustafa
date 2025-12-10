@@ -65,11 +65,10 @@ export function HeroSection() {
                         I architect investor-ready, AI-native digital ecosystems. transforming abstract vision into high-performance, secure, and scalable reality.
                     </motion.p>
 
-                    <motion.div variants={itemVariants} className="flex flex-wrap gap-6 pt-4 relative z-20">
+                    <motion.div variants={itemVariants} className="flex flex-wrap gap-6 items-center justify-center lg:justify-start pt-4 relative z-20">
                         <Link href="#contact" scroll={true} className="relative group">
                             <MagneticButton
-                                whileHover={{ scale: 1.05, zIndex: 10 }}
-                                className="bg-white text-black hover:bg-gray-200 rounded-lg border border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                                className="bg-white text-black border border-transparent hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] hover:border-cyan-400 transition-all duration-300 rounded-lg"
                             >
                                 INITIATE AUDIT PROTOCOL <ArrowRight className="w-4 h-4 ml-2" />
                             </MagneticButton>
@@ -77,8 +76,7 @@ export function HeroSection() {
 
                         <Link href="#portfolio" scroll={true} className="relative group">
                             <MagneticButton
-                                whileHover={{ scale: 1.05, zIndex: 10 }}
-                                className="bg-slate-900/50 backdrop-blur-md border border-slate-700 hover:border-white/50 text-white rounded-lg"
+                                className="bg-transparent text-white border border-slate-700 hover:bg-slate-900 hover:border-cyan-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all duration-300 rounded-lg backdrop-blur-md"
                             >
                                 INSPECT BLUEPRINTS <ChevronRight className="w-4 h-4 ml-1 opacity-50" />
                             </MagneticButton>
