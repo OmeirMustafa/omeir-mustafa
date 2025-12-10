@@ -1,33 +1,29 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import './globals.css';
+import { HUDNavigation } from '@/components/ui/HUDNavigation';
+import { HUDFooter } from '@/components/ui/HUDFooter';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ['latin'], variable: '--font-primary' });
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 export const metadata: Metadata = {
-  title: "Digital Product Architect | Strategic Infrastructure",
-  description: "Translating high-level consulting expertise into intelligent, AI-integrated digital infrastructure.",
+  title: 'Omeir Mustafa | Digital Product Architect',
+  description: 'Building investor-ready, AI-native digital ecosystems.',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden bg-[#0a0a0a] text-foreground`}
-      >
-        {children}
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased selection:bg-neon-cyan selection:text-black bg-[#0b0b0d]`}>
+        <div className="scan-overlay" />
+        <HUDNavigation />
+        <main className="relative z-10 pt-20">{children}</main>
+        <HUDFooter />
       </body>
     </html>
   );
