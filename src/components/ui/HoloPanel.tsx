@@ -14,7 +14,7 @@ interface HoloPanelProps {
 export function HoloPanel({ children, className, withBrackets = true }: HoloPanelProps) {
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            initial={{ opacity: 0, scale: 0.995, y: 18 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={MOTION.spring}
@@ -24,6 +24,11 @@ export function HoloPanel({ children, className, withBrackets = true }: HoloPane
                 "overflow-hidden group",
                 className
             )}
+            style={{
+                boxShadow: "0 0 40px rgba(34,211,238,0.1)", // Default
+                // We handle dynamic glow via CSS hover states below usually, 
+                // but explicit framer animation could also work if complex.
+            }}
         >
             {/* Scanline Texture */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.02)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none z-0 animate-scanline" />
@@ -33,7 +38,7 @@ export function HoloPanel({ children, className, withBrackets = true }: HoloPane
                 {children}
             </div>
 
-            {/* Tech Brackets - Staggered Reveal */}
+            {/* Tech Brackets - Staggered Reveal 80ms (0.08s) */}
             {withBrackets && (
                 <>
                     <motion.div
@@ -47,21 +52,21 @@ export function HoloPanel({ children, className, withBrackets = true }: HoloPane
                         initial={{ scale: 0, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.3 }}
+                        transition={{ delay: 0.28 }}
                         className="absolute top-0 right-0 w-4 h-4 border-t border-r border-cyan-400/60"
                     />
                     <motion.div
                         initial={{ scale: 0, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.4 }}
+                        transition={{ delay: 0.36 }}
                         className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-cyan-400/60"
                     />
                     <motion.div
                         initial={{ scale: 0, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.5 }}
+                        transition={{ delay: 0.44 }}
                         className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-cyan-400/60"
                     />
                 </>

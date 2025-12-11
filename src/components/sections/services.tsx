@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { QuantumCard } from "@/components/ui/QuantumCard";
 import { ArrowRight, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ReactorCoreHUD } from "@/components/ui/ReactorCoreHUD";
 import { HUDSectionWrapper } from "@/components/ui/HUDSectionWrapper";
 
 const OFFERS = [

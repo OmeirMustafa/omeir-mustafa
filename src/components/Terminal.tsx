@@ -40,7 +40,6 @@ export function Terminal() {
 
             for (const char of chars) {
                 currentLine += char;
-                // Update the last log entry with the new character
                 setLogs((prev) => {
                     const newLogs = [...prev];
                     const lastIndex = newLogs.length - 1;
@@ -48,11 +47,11 @@ export function Terminal() {
                     return newLogs;
                 });
 
-                // Random typing delay 30-70ms for realism
-                await new Promise((resolve) => setTimeout(resolve, 30 + Math.random() * 40));
+                // TACTICAL-OS SPEED: 30-45ms
+                await new Promise((resolve) => setTimeout(resolve, 30 + Math.random() * 15));
             }
 
-            // Mark typing as done for this line
+            // Mark typing as done
             setLogs((prev) => {
                 const newLogs = [...prev];
                 const lastIndex = newLogs.length - 1;
@@ -60,12 +59,22 @@ export function Terminal() {
                 return newLogs;
             });
 
-            // Small pause between lines
-            await new Promise((resolve) => setTimeout(resolve, 300));
+            // Fast pause
+            await new Promise((resolve) => setTimeout(resolve, 150));
         }
 
         setIsLocked(false);
     };
+
+    // Random Heartbeat / System Check
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (!isLocked && Math.random() > 0.85) { // Low frequency
+                setLogs(prev => [...prev.slice(-4), { type: "system", content: "Background process: SYNC_OK [" + new Date().toLocaleTimeString() + "]" }]);
+            }
+        }, 8000);
+        return () => clearInterval(interval);
+    }, [isLocked]);
 
     const handleCommand = (commandId: string) => {
         if (isLocked) return;

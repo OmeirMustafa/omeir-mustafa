@@ -120,3 +120,32 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.animate-holo-sweep {
+  animation: bgSweep 3s linear infinite;
+  background-size: 200% auto;
+}
+
+@keyframes bgSweep {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scan-overlay,
+  .animate-spin-slow,
+  .animate-holo-pulse {
+    animation: none !important;
+  }
+}

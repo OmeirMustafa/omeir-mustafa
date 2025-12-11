@@ -6,7 +6,7 @@ import { MOTION } from "@/config/motion";
 
 export function SmartContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     const [copied, setCopied] = useState(false);
-    const email = "omeirmustafa.work@gmail.com";
+    const email = "kaziomeirmustafa@gmail.com";
     const handleCopy = () => { navigator.clipboard.writeText(email); setCopied(true); setTimeout(() => setCopied(false), 3000); };
 
     return (

@@ -27,9 +27,14 @@ export function ContactSection() {
                         viewport={{ once: true }}
                     >
                         <h2 className="text-3xl md:text-5xl font-mono font-bold text-white mb-6 uppercase tracking-tight leading-tight">
-                            NEED A PLATFORM BUILT WITH <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-200 shadow-cyan-500/50 drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]">
-                                ENGINEERING PRECISION?
+                            NEED A PLATFORM <br />
+                            BUILT WITH <br />
+                            <span className="text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                                ENGINEERING
+                            </span>
+                            <br />
+                            <span className="text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                                PRECISION?
                             </span>
                         </h2>
 

@@ -1,6 +1,5 @@
 import { PortfolioGridHUD } from "@/components/ui/PortfolioGridHUD";
 import { FinalCTASection } from "@/components/sections/final-cta";
-import { ReactorCoreHUD } from "@/components/ui/ReactorCoreHUD";
 import { HUDSectionWrapper } from "@/components/ui/HUDSectionWrapper";
 
 export default function PortfolioPage() {
