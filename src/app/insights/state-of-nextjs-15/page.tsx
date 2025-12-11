@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { HoloPanel } from "@/components/ui/HoloPanel";
 
 export default function NextJs15Article() {
     return (
-        <article className="min-h-screen bg-[#0b0c10] py-24 px-6 text-slate-300">
-            <div className="max-w-3xl mx-auto">
+        <article className="min-h-screen py-32 px-6 text-slate-300">
+            <HoloPanel className="max-w-4xl mx-auto p-8 md:p-12">
                 <Link href="/insights" className="inline-flex items-center gap-2 text-cyan-500 hover:text-cyan-400 mb-8 font-mono text-xs uppercase tracking-widest group">
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Intelligence
                 </Link>
@@ -14,7 +15,7 @@ export default function NextJs15Article() {
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                         The State of Next.js 15: What Founders Need To Know
                     </h1>
-                    <p className="text-xl text-slate-400 leading-relaxed">
+                    <p className="text-xl text-slate-400 leading-relaxed font-light">
                         Why the latest improvements in partial prerendering and edge runtimes matter for your bottom line.
                     </p>
                 </header>
@@ -62,7 +63,7 @@ export async function createLead(formData: FormData) {
                         typical of traditional serverless and keeps your application feeling instant.
                     </p>
                 </div>
-            </div>
+            </HoloPanel>
         </article>
     );
 }

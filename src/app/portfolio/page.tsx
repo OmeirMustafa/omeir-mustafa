@@ -4,7 +4,7 @@ import { FinalCTASection } from "@/components/sections/final-cta";
 export default function PortfolioPage() {
     return (
         <div className="min-h-screen pt-20">
-            <section className="py-24 px-6 bg-[#0b0b0d]">
+            <section className="py-24 px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="mb-16 text-center">
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/40 border border-cyan-400/30 rounded-full backdrop-blur-md mb-6">

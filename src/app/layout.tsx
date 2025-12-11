@@ -5,6 +5,7 @@ import { HUDNavigation } from '@/components/ui/HUDNavigation';
 import { HUDFooter } from '@/components/ui/HUDFooter';
 import { ParticleBackground } from '@/components/ui/ParticleBackground';
 import { ReticleCursor } from '@/components/ui/ReticleCursor';
+import { CircuitGridBackground } from '@/components/ui/CircuitGridBackground';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-primary' });
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased selection:bg-neon-cyan selection:text-black bg-[#0b0b0d]`}>
+        <CircuitGridBackground />
         <ParticleBackground />
         <ReticleCursor />
         <div className="scan-overlay" />
