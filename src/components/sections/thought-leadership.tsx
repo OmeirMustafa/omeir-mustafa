@@ -32,12 +32,12 @@ export function ThoughtLeadershipSection() {
                             className="group block p-6 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-all flex items-center justify-between"
                         >
                             <div className="flex items-center gap-4">
-                                <span className="text-neon-cyan/50 font-mono text-xs">0{idx + 1}</span>
-                                <h3 className="text-lg md:text-xl font-medium text-white group-hover:text-neon-cyan transition-colors">
+                                <span className="text-[var(--accent-green)]/50 font-mono text-xs">0{idx + 1}</span>
+                                <h3 className="text-lg md:text-xl font-medium text-white group-hover:text-[var(--accent-green)] transition-colors">
                                     {article}
                                 </h3>
                             </div>
-                            <ArrowRight className="text-white/20 group-hover:text-neon-cyan group-hover:translate-x-2 transition-all" size={20} />
+                            <ArrowRight className="text-[var(--text-muted)] group-hover:text-[var(--accent-green)] group-hover:translate-x-2 transition-all" size={20} />
                         </motion.a>
                     ))}
                 </div>

@@ -22,7 +22,7 @@ export function WorkflowSection() {
                 {/* Case Teaser Part */}
                 <div>
                     <div className="mb-12 text-center md:text-left">
-                        <div className="text-neon-cyan font-mono text-xs uppercase tracking-widest mb-2">Proof of Work</div>
+                        <div className="text-[var(--accent-green)] font-mono text-xs uppercase tracking-widest mb-2">Proof of Work</div>
                         <h2 className="text-3xl md:text-4xl font-bold text-white">Featured Deployment</h2>
                     </div>
                     <CaseTeaserHUD />

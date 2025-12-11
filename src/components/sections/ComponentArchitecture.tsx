@@ -11,34 +11,30 @@ import { HUDSectionWrapper } from "@/components/ui/HUDSectionWrapper";
 const modules = [
     {
         title: "The Architect",
-        icon: <Database className="w-6 h-6 text-cyan-400" />,
+        icon: <Database className="w-6 h-6 text-[var(--accent-green)]" />,
         desc: "Translating founder expertise into structured systems: product logic, value ladders, architecture thinking."
     },
     {
-        title: "The Builder",
-        icon: <Cpu className="w-6 h-6 text-cyan-400" />,
-        desc: "Next.js engineering, secure SSR, RAG pipelines, component-driven architectures, high-compliance flows."
+        title: "Foundation",
+        desc: "Next.js 15, React Server Components",
+        icon: <Database className="w-6 h-6 text-[var(--accent-green)]" />,
     },
     {
-        title: "The Visionary",
-        icon: <Eye className="w-6 h-6 text-cyan-400" />,
-        desc: "AI-native product invention: predictive workflows, intelligent dashboards, cognitive UI systems."
+        title: "Structure",
+        desc: "Atomic Design, Feature-First Architecture",
+        icon: <Cpu className="w-6 h-6 text-[var(--accent-green)]" />,
+    },
+    {
+        title: "Interface",
+        desc: "Framer Motion, Tailwind v4",
+        icon: <Eye className="w-6 h-6 text-[var(--accent-green)]" />,
     }
 ];
 
 export function ComponentArchitecture() {
     return (
-        <HUDSectionWrapper>
-            <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-5xl font-mono font-bold text-white mb-4">
-                    COMPONENT <span className="text-cyan-400">ARCHITECTURE</span>
-                </h2>
-                <p className="text-slate-400 max-w-2xl mx-auto">
-                    My operating system consists of three core modules, working in unison to deploy authority-grade platforms.
-                </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <HUDSectionWrapper className="py-24">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-16">
                 {modules.map((item, index) => (
                     <motion.div
                         key={index}

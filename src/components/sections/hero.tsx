@@ -50,21 +50,21 @@ export function HeroSection() {
                 className="flex-1 space-y-8 flex flex-col items-start text-left z-10"
             >
                 <motion.div variants={VARIANTS.item}>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/40 border border-cyan-400/30 rounded-full backdrop-blur-md">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/40 border border-[var(--hairline)] rounded-full backdrop-blur-md shadow-[0_0_15px_var(--halo)]">
                         <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-green)] opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent-green)]"></span>
                         </span>
-                        <span className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
+                        <span className="text-xs font-mono text-[var(--accent-green)] tracking-widest uppercase">
                             SYSTEM ONLINE
                         </span>
                     </div>
                 </motion.div>
 
                 {/* H1 with Holo Sweep Mask */}
-                <motion.h1 variants={VARIANTS.item} className="relative text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] text-white overflow-hidden p-1">
+                <motion.h1 variants={VARIANTS.item} className="relative text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] text-[var(--text-primary)] overflow-hidden p-1">
                     <span className="relative z-10">DIGITAL PRODUCT</span> <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 filter drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-green)] to-[#007A52] filter drop-shadow-[0_0_15px_var(--halo)]">
                         ARCHITECT
                     </span>
 
@@ -73,27 +73,27 @@ export function HeroSection() {
                         initial={{ x: "-100%" }}
                         animate={{ x: "100%" }}
                         transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent skew-x-12 z-20 pointer-events-none"
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--accent-green)]/30 to-transparent skew-x-12 z-20 pointer-events-none"
                     />
                 </motion.h1>
 
-                <motion.p variants={VARIANTS.item} className="text-lg text-slate-300 max-w-xl leading-relaxed font-light">
+                <motion.p variants={VARIANTS.item} className="text-lg text-[var(--text-muted)] max-w-xl leading-relaxed font-light">
                     I design and architect AI-native, secure digital systems using Next.js, RAG pipelines, and enterprise-grade component architecture.
                 </motion.p>
 
                 <motion.div variants={VARIANTS.item} className="flex flex-col w-full sm:w-auto gap-4">
                     <Link href="#contact" scroll={true} className="w-full sm:w-auto">
-                        <button className="group relative w-full sm:w-auto px-8 py-4 bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-400 font-bold font-mono rounded border border-cyan-400/50 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] transition-all duration-300 flex items-center justify-center gap-3 overflow-hidden">
+                        <button className="group relative w-full sm:w-auto px-8 py-4 bg-[var(--accent-green)]/10 hover:bg-[var(--accent-green)]/20 text-[var(--accent-green)] font-bold font-mono rounded border border-[var(--hairline)] hover:border-[var(--accent-green)] hover:shadow-[0_0_30px_var(--halo)] transition-all duration-300 flex items-center justify-center gap-3 overflow-hidden">
                             <span className="relative z-10 flex items-center gap-2 tracking-widest uppercase text-sm">
                                 INITIATE AUDIT PROTOCOL <ArrowRight className="w-4 h-4" />
                             </span>
                             {/* Scanline sweep */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--accent-green)]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
                         </button>
                     </Link>
 
                     <Link href="#portfolio" scroll={true} className="w-full sm:w-auto">
-                        <button className="group w-full sm:w-auto px-8 py-4 bg-black/40 hover:bg-black/60 text-slate-300 font-mono rounded border border-white/10 hover:border-cyan-400/30 transition-all duration-300 flex items-center justify-center gap-3 backdrop-blur-sm">
+                        <button className="group w-full sm:w-auto px-8 py-4 bg-black/40 hover:bg-black/60 text-[var(--text-muted)] font-mono rounded border border-[var(--hairline)] hover:border-[var(--accent-green)]/30 transition-all duration-300 flex items-center justify-center gap-3 backdrop-blur-sm">
                             <span className="tracking-widest uppercase text-sm">
                                 VIEW BLUEPRINT ARCHIVES
                             </span>
@@ -111,14 +111,14 @@ export function HeroSection() {
                 animate="visible"
                 className="flex-1 w-full max-w-lg relative min-h-[400px] hidden lg:block"
             >
-                <div className="absolute -inset-10 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none" />
+                <div className="absolute -inset-10 bg-[var(--accent-green)]/10 blur-[100px] rounded-full pointer-events-none" />
                 <motion.div
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                     className="relative z-10"
                 >
                     {/* Holographic Platform */}
-                    <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-cyan-500/20 blur-xl rounded-[100%]" />
+                    <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-[var(--accent-green)]/20 blur-xl rounded-[100%]" />
                     <Terminal />
                 </motion.div>
             </motion.div>
