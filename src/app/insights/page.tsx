@@ -1,6 +1,7 @@
 import { InsightsHUDLayout } from "@/components/ui/InsightsHUDLayout";
 import { FinalCTASection } from "@/components/sections/final-cta";
 import { ReactorCoreHUD } from "@/components/ui/ReactorCoreHUD";
+import { HUDSectionWrapper } from "@/components/ui/HUDSectionWrapper";
 
 export default function InsightsPage() {
     return (
