@@ -83,12 +83,12 @@ export function SmartContactModal({ isOpen, onClose }: { isOpen: boolean; onClos
                                     {/* Option 2: Default Mail */}
                                     <a
                                         href={`mailto:${email}`}
-                                        className="flex items-center justify-between p-4 border border-[var(--hairline)] hover:border-[var(--accent-green)] transition-all group"
+                                        className="flex items-center justify-between p-4 bg-[var(--accent-green)]/10 border border-[var(--accent-green)] hover:bg-[var(--accent-green)]/20 transition-all group"
                                     >
                                         <div className="flex items-center gap-4">
-                                            <Mail className="text-[var(--text-muted)] w-5 h-5 group-hover:text-[var(--accent-green)]" />
+                                            <Mail className="text-[var(--accent-green)] w-5 h-5" />
                                             <div className="text-left">
-                                                <div className="text-sm font-bold text-[var(--text-muted)] group-hover:text-[var(--text-primary)] font-mono">SYSTEM DEFAULT</div>
+                                                <div className="text-sm font-bold text-[var(--text-primary)] font-mono">SYSTEM DEFAULT</div>
                                             </div>
                                         </div>
                                     </a>
@@ -96,12 +96,12 @@ export function SmartContactModal({ isOpen, onClose }: { isOpen: boolean; onClos
                                     {/* Option 3: Copy */}
                                     <button
                                         onClick={handleCopy}
-                                        className="flex items-center justify-between p-4 border border-[var(--hairline)] hover:border-[var(--accent-green)] hover:bg-[var(--accent-green)]/5 transition-all w-full group relative overflow-hidden"
+                                        className="flex items-center justify-between p-4 bg-[var(--accent-green)]/10 border border-[var(--accent-green)] hover:bg-[var(--accent-green)]/20 transition-all w-full group relative overflow-hidden"
                                     >
                                         <div className="flex items-center gap-4 relative z-10">
-                                            <Copy className="text-[var(--text-muted)] w-5 h-5 group-hover:text-[var(--accent-green)]" />
+                                            <Copy className="text-[var(--accent-green)] w-5 h-5" />
                                             <div className="text-left">
-                                                <div className="text-sm font-bold text-[var(--text-muted)] group-hover:text-[var(--text-primary)] font-mono">
+                                                <div className="text-sm font-bold text-[var(--text-primary)] font-mono">
                                                     {copied ? "COORDINATES ACQUIRED" : "COPY COORDINATES"}
                                                 </div>
                                             </div>

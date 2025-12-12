@@ -9,7 +9,7 @@ import { ReticleLogo } from "@/components/ui/ReticleLogo";
 
 const LEFT_LINKS = [
     { name: "Services", href: "/#services" },
-    { name: "Portfolio", href: "/#portfolio" },
+    { name: "Projects", href: "/#portfolio" },
 ];
 
 const RIGHT_LINKS = [

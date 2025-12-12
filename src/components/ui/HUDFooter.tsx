@@ -23,8 +23,7 @@ export function HUDFooter() {
                         <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#00ffa0] blur-md opacity-60 group-hover:opacity-100 transition-opacity" />
                     </h4>
                     <p className="text-[var(--text-muted)] text-sm max-w-lg font-light leading-relaxed">
-                        Omeir Mustafa — Digital Product & Web Architect.
-                        Designing premium brands, intelligent websites, and modern digital systems for businesses of all sizes.
+                        Digital Product & Web Architect. Designing premium brands, intelligent websites, and modern digital systems for businesses of all sizes.
                     </p>
                     <div className="mt-4 text-[10px] font-mono text-[var(--accent-green)]/40 tracking-widest uppercase">
                         SYSTEM STATUS: ONLINE

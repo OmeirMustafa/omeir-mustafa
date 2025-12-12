@@ -32,7 +32,7 @@ const TIERS = [
     {
         title: "TIER 1",
         name: "Brand & Strategy Blueprint",
-        price: "USD 3,500 – 6,000",
+        price: "Starting at USD 3,500+",
         desc: "A deep-dive into your brand, audience, and strategic direction.",
         features: [
             "Brand positioning",
@@ -45,7 +45,7 @@ const TIERS = [
     {
         title: "TIER 2",
         name: "Premium Web Architecture Build",
-        price: "USD 8,000 – 15,000",
+        price: "Starting at USD 7,500+",
         desc: "A fully custom, high-performance website engineered for trust and conversion.",
         features: [
             "Custom Next.js interface",
@@ -59,7 +59,7 @@ const TIERS = [
     {
         title: "TIER 3",
         name: "Intelligent Systems Integration",
-        price: "USD 5,000 – 12,000",
+        price: "Starting at USD 9,500+",
         desc: "Enhance your website with automation, structure, and intelligent systems.",
         features: [
             "Smart content systems",

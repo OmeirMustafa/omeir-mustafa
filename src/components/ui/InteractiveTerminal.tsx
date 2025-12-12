@@ -5,12 +5,12 @@ import { Terminal, ChevronRight, Play, FastForward, SkipForward } from "lucide-r
 import { cn } from "@/lib/utils";
 
 const PRESETS = [
-    { id: "rag", label: "What is the RAG architecture?", query: "Query: Explain RAG Architecture protocol.", answer: "A structured retrieval pipeline that enables websites to deliver accurate, context-aware responses using private data sources." },
-    { id: "secure", label: "How do you secure vector DBs?", query: "Query: Vector Database Security Protocols.", answer: "Restrict access with API gating, IP controls, encrypted embeddings, and zero-retention policies." },
-    { id: "ssr", label: "Explain SSR + Edge benefits", query: "Query: Analysis of SSR/Edge latency benefits.", answer: "Server-Side Rendering improves performance, SEO, and security. Edge rendering reduces latency for global audiences." },
-    { id: "cost", label: "What are the LLM cost controls?", query: "Query: LLM Inference Cost Optimization Strategies.", answer: "Token budgeting, model routing, caching layers, and response compression reduce monthly LLM costs." },
-    { id: "crm", label: "How to integrate CRM data?", query: "Query: CRM Data Ingestion & Vectorization pipeline.", answer: "Connect HubSpot, Salesforce, or custom CRMs through server actions and a unified data layer." },
-    { id: "deploy", label: "Deployment Architecture Specs?", query: "Query: Visualize Production Deployment Topology.", answer: "Next.js 16 stack running on optimized Vercel infra with edge caching, secure API layers, and automated build pipelines." }
+    { id: "rag", label: "What is the RAG architecture?", query: "Query: Explain RAG Architecture protocol.", answer: "RAG (Retrieval-Augmented Generation) combines an LLM with a secure vector database. The system retrieves relevant company data, injects it into the model’s context, and produces grounded, verifiable outputs. Eliminates hallucinations and enables private, domain-specific AI workflows." },
+    { id: "secure", label: "How do you secure vector DBs?", query: "Query: Vector Database Security Protocols.", answer: "Use encrypted embeddings, private VPC networks, API key rotation, role-based access control, and isolated indexes. Never expose embeddings publicly. All retrieval pipelines run through server-side authorization." },
+    { id: "ssr", label: "Explain SSR + Edge benefits", query: "Query: Analysis of SSR/Edge latency benefits.", answer: "Next.js SSR + Edge improves performance, SEO, security, and reliability. Sensitive logic executes server-side. Edge routing reduces latency and enables real-time personalization at global scale." },
+    { id: "cost", label: "What are the LLM cost controls?", query: "Query: LLM Inference Cost Optimization Strategies.", answer: "Token budgeting, response-length constraints, caching embeddings, rate limiting, batching requests, and model-tier switching. Reduces operational cost without affecting intelligence output." },
+    { id: "crm", label: "How to integrate CRM data?", query: "Query: CRM Data Ingestion & Vectorization pipeline.", answer: "Use secure API bridges or webhooks. Normalize fields, sync contacts, map pipelines, and run ingestion through a safe server layer. No client-side exposure. Built for HubSpot/Salesforce compatibility." },
+    { id: "deploy", label: "Deployment Architecture Specs?", query: "Query: Visualize Production Deployment Topology.", answer: "Next.js 14 stack running on Vercel with edge caching, secure API layers, isolated server actions, rate-limited RAG endpoints, encrypted DB storage, and automated CI/CD pipelines." }
 ];
 
 export function InteractiveTerminal() {
@@ -108,7 +108,7 @@ export function InteractiveTerminal() {
                 </div>
 
                 {/* Terminal Body */}
-                <div aria-live="polite" className="p-6 font-mono text-sm leading-relaxed text-[var(--text-primary)] flex-1 overflow-y-auto custom-scrollbar">
+                <div aria-live="polite" className="p-6 font-mono text-sm leading-relaxed text-[var(--text-primary)] flex-1 overflow-y-auto custom-scrollbar whitespace-pre-wrap break-words">
                     {!activeId ? (
                         <div className="opacity-50 space-y-2">
                             <p>&gt; SYSTEM INITIALIZED...</p>
