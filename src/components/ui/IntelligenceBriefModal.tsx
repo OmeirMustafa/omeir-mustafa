@@ -17,7 +17,7 @@ export function IntelligenceBriefModal({ isOpen, onClose, data }: { isOpen: bool
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                <div role="dialog" aria-modal="true" className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -32,18 +32,25 @@ export function IntelligenceBriefModal({ isOpen, onClose, data }: { isOpen: bool
                         exit={{ scale: 0.9, opacity: 0, y: 10 }}
                         className="relative w-full max-w-2xl"
                     >
-                        <HoloPanel className="p-8 md:p-12 relative">
-                            <button onClick={onClose} className="absolute top-4 right-4 text-[var(--text-muted)] hover:text-[#00ffa0] transition-colors">
-                                <X className="w-5 h-5" />
-                            </button>
+                        <HoloPanel className="p-8 md:p-12 relative flex flex-col">
+                            {/* Close Button - Top Center as requested */}
+                            <div className="absolute top-0 left-0 right-0 flex justify-center -mt-5 md:-mt-6">
+                                <button
+                                    onClick={onClose}
+                                    aria-label="Close"
+                                    className="bg-[var(--bg-deep)] border border-[var(--hairline)] text-[var(--text-muted)] hover:text-[#00ffa0] hover:border-[#00ffa0] transition-colors rounded-full p-2 shadow-lg z-20"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
 
-                            <div className="space-y-6">
+                            <div className="space-y-6 mt-4">
                                 <div>
                                     <div className="text-[10px] font-mono text-[var(--accent-green)] tracking-widest mb-2">INTELLIGENCE BRIEF</div>
                                     <h3 className="text-2xl font-bold text-[var(--text-primary)] leading-tight">{data.title}</h3>
                                 </div>
 
-                                <div className="space-y-4 text-[var(--text-muted)] leading-relaxed text-sm md:text-base border-l-2 border-[var(--accent-green)]/20 pl-6">
+                                <div className="space-y-4 text-[var(--text-muted)] leading-relaxed text-sm md:text-base border-l-2 border-[var(--accent-green)]/20 pl-6 h-auto max-h-[60vh] overflow-y-auto custom-scrollbar">
                                     {data.content.split('\n\n').map((p, i) => (
                                         <p key={i}>{p}</p>
                                     ))}

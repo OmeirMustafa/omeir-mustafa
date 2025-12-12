@@ -18,7 +18,7 @@ export function HUDFooter() {
 
                 {/* Left Side */}
                 <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                    <h4 className="text-xl font-bold font-mono text-[var(--text-primary)] tracking-tight relative group cursor-default mb-2 shadow-[0_0_15px_rgba(0,255,160,0.1)] rounded px-2">
+                    <h4 className="text-xl font-bold font-mono text-[var(--text-primary)] tracking-tight relative group cursor-default mb-2 shadow-[0_0_15px_rgba(0,255,160,0.1)] rounded px-2" style={{ textShadow: "0 0 10px rgba(0,255,160,0.3)" }}>
                         OMEIR<span className="text-[#00ffa0]">.MUSTAFA</span>
                         <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#00ffa0]/50 blur-sm opacity-50 group-hover:opacity-100 transition-opacity" />
                     </h4>

@@ -17,13 +17,13 @@ const MODULES = [
         title: "BUILDER",
         icon: <Cpu className="w-8 h-8 text-[var(--accent-green)]" />,
         desc: "High-Velocity Engineering. Next.js 15, React Server Components, and Type-Safe production code.",
-        details: ["Next.js 15", "TypeScript", "RAG Pipelines"]
+        details: ["Next.js 16.0.8", "TypeScript", "RAG Pipelines"]
     },
     {
         title: "VISIONARY",
         icon: <Eye className="w-8 h-8 text-[var(--accent-green)]" />,
         desc: "User Experience & Motion. Interactive data visualization, fluid interfaces, and reactor-grade aesthetics.",
-        details: ["Framer Motion", "UI Systems", "Data Viz"]
+        details: ["Framer Motion 12", "UI Systems", "Data Viz"]
     }
 ];
 
@@ -33,7 +33,7 @@ export function ServicesSection() {
     return (
         <section id="services" className="py-24 px-6 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
-                <MasterPanel title="CORE_MODULES // V.3.1">
+                <MasterPanel title="CORE_MODULES // V.3.2">
                     <div className="text-center mb-16 space-y-6">
                         <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-[var(--text-primary)]">
                             OPERATING <span className="text-[var(--accent-green)] text-glow">MODULES</span>

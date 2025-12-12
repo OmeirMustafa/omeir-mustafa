@@ -36,6 +36,13 @@ const VISUAL_MAPPING = [
 export function ThoughtLeadershipSection() {
     const [selectedSummary, setSelectedSummary] = useState<{ title: string; content: string } | null>(null);
 
+    const scrollToContact = () => {
+        const contactSection = document.getElementById("contact");
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <section id="insights" className="py-24 px-6 relative overflow-hidden">
             <div className="container mx-auto max-w-5xl">
@@ -77,7 +84,10 @@ export function ThoughtLeadershipSection() {
                     </div>
 
                     <div className="mt-12 text-center">
-                        <button className="px-6 py-3 border border-[var(--hairline)] text-[var(--text-muted)] hover:text-[var(--accent-green)] hover:border-[var(--accent-green)] font-mono text-xs tracking-widest uppercase transition-all">
+                        <button
+                            onClick={scrollToContact}
+                            className="px-6 py-3 border border-[var(--hairline)] text-[var(--text-muted)] hover:text-[var(--accent-green)] hover:border-[var(--accent-green)] font-mono text-xs tracking-widest uppercase transition-all"
+                        >
                             ACCESS FULL DATABASE
                         </button>
                     </div>
