@@ -32,40 +32,40 @@ const TIERS = [
     {
         title: "TIER 1",
         name: "Brand & Strategy Blueprint",
-        price: "Starting at 15k+",
-        desc: "A deep-dive into your brand, market, audience, and goals.",
+        price: "USD 3,500 – 6,000",
+        desc: "A deep-dive into your brand, audience, and strategic direction.",
         features: [
             "Brand positioning",
             "Visual identity direction",
             "Website architecture plan",
-            "Competitive analysis",
+            "Competitive mapping",
             "Strategic execution roadmap"
         ]
     },
     {
         title: "TIER 2",
         name: "Premium Web Architecture Build",
-        price: "Starting at 15k+",
-        desc: "A complete custom-built website engineered for performance, clarity, and conversion.",
+        price: "USD 8,000 – 15,000",
+        desc: "A fully custom, high-performance website engineered for trust and conversion.",
         features: [
             "Custom Next.js interface",
             "High-fidelity dark-mode design",
-            "Modern UI motion",
+            "Modern motion system",
             "SEO engineering",
-            "Fully responsive layouts",
-            "Fast, accessible, scalable"
+            "Responsive layouts",
+            "Scalable site architecture"
         ]
     },
     {
         title: "TIER 3",
         name: "Intelligent Systems Integration",
-        price: "Starting at 15k+",
-        desc: "Add depth and intelligence to your digital ecosystem.",
+        price: "USD 5,000 – 12,000",
+        desc: "Enhance your website with automation, structure, and intelligent systems.",
         features: [
-            "Automated flows",
             "Smart content systems",
+            "Automated flows",
             "Operational UX improvements",
-            "Scalable component architecture",
+            "Component architecture",
             "Foundations for future AI adoption"
         ]
     }
@@ -145,7 +145,7 @@ export function ServicesSection() {
                 </MasterPanel>
 
                 {/* PART 2: PRODUCTIZED ENGAGEMENT MODELS */}
-                <MasterPanel title="ENGAGEMENT_PROTOCOLS // TIERS">
+                <MasterPanel title="ENGAGEMENT_PROTOCOLS // BLUEPRINTS">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-[var(--text-primary)]">
                             PROJECT <span className="text-[var(--accent-green)] text-glow">BLUEPRINTS</span>

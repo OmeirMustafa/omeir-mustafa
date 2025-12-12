@@ -9,27 +9,27 @@ import { IntelligenceBriefModal } from "@/components/ui/IntelligenceBriefModal";
 const VISUAL_MAPPING = [
     {
         title: "What makes a website feel premium?", tag: "DESIGN",
-        content: "Premium websites communicate clarity, structure, and trust. They use minimal noise, strong typography, balanced space, and clear brand signals."
+        content: "Premium websites rely on clarity, balanced typography, and intentional spacing. They avoid clutter and use consistent design systems that signal professionalism and trust instantly."
     },
 
     {
         title: "Why dark mode for modern brands?", tag: "AESTHETICS",
-        content: "Dark systems signal precision, focus, and professionalism. They make content feel more intentional and reduce visual fatigue."
+        content: "Dark interfaces reduce eye strain and allow visual assets to pop. When executed well, they signal engineering precision and a modern, high-tech identity."
     },
 
     {
         title: "How do you turn ideas into real products?", tag: "EXECUTION",
-        content: "By combining research, strategy, prototyping, and a scalable architecture built with modern frameworks like Next.js 16."
+        content: "By applying a structured architectural approach—starting with strategy, moving to blueprinting, and executing with performant code frameworks like Next.js."
     },
 
     {
         title: "What defines intelligent UI motion?", tag: "INTERACTION",
-        content: "Smooth micro-interactions that guide the user, reduce confusion, and improve usability without distraction."
+        content: "Motion should be functional, not just decorative. Good motion guides the user's eye, provides feedback, and makes the system feel alive without slowing down tasks."
     },
 
     {
         title: "How do modern businesses differentiate online?", tag: "STRATEGY",
-        content: "By creating a digital identity that feels engineered, not template-based. Custom systems always outperform generic website builders."
+        content: "By investing in custom-built digital experiences rather than generic templates. A tailored site reflects your unique value and operational excellence."
     }
 ];
 

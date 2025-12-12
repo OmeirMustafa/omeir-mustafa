@@ -23,7 +23,8 @@ export function HUDFooter() {
                         <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#00ffa0] blur-md opacity-60 group-hover:opacity-100 transition-opacity" />
                     </h4>
                     <p className="text-[var(--text-muted)] text-sm max-w-lg font-light leading-relaxed">
-                        Omeir Mustafa Uddin is a Digital Product & Web Architect specializing in premium brand systems and intelligent websites. Every build is engineered with strategy, precision, and long-term scalability.
+                        Omeir Mustafa — Digital Product & Web Architect.
+                        Designing premium brands, intelligent websites, and modern digital systems for businesses of all sizes.
                     </p>
                     <div className="mt-4 text-[10px] font-mono text-[var(--accent-green)]/40 tracking-widest uppercase">
                         SYSTEM STATUS: ONLINE
@@ -46,7 +47,7 @@ export function HUDFooter() {
             {/* Copyright / Version */}
             <div className="relative z-10 mt-12 text-center border-t border-[rgba(0,255,160,0.1)] pt-8">
                 <p className="text-[10px] text-[var(--text-muted)] font-mono opacity-60">
-                    © 2025 OMEIR MUSTAFA // OMEIR OS v3.2
+                    © 2025 OMEIR MUSTAFA // OMEIR OS v4
                 </p>
             </div>
         </footer>

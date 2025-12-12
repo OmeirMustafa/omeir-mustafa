@@ -46,7 +46,7 @@ export function HeroSection() {
 
                     {/* Version Text */}
                     <motion.div variants={VARIANTS.item} className="text-xs font-mono text-[var(--accent-green)] tracking-[0.2em] uppercase bg-[var(--bg-deep)]/80 backdrop-blur px-3 py-1 rounded border border-[var(--hairline)]">
-                        OMEIR OS v3.2
+                        OMEIR OS v4
                     </motion.div>
 
                     {/* H1 Title */}
@@ -59,23 +59,19 @@ export function HeroSection() {
 
                     {/* Subtitle */}
                     <motion.p variants={VARIANTS.item} className="text-lg md:text-xl text-[var(--text-muted)] max-w-3xl leading-relaxed font-light px-4 bg-[var(--bg-deep)]/60 backdrop-blur-sm rounded-xl py-2">
-                        Designing premium brand systems and intelligent websites for modern businesses.<br className="hidden md:block" />
-                        From strategy to execution — every build is engineered with precision, clarity, and long-term scalability.
+                        Designing premium websites, intelligent systems, and modern digital experiences built for clarity, performance, and trust.
                     </motion.p>
 
                     {/* CTAs */}
-                    <motion.div variants={VARIANTS.item} className="flex flex-wrap justify-center gap-4 mt-4">
-                        <Link href="#contact" scroll={true}>
-                            <button className="group relative px-8 py-4 bg-[var(--accent-green)]/5 hover:bg-[var(--accent-green)]/10 text-[var(--accent-green)] font-bold font-mono text-sm tracking-widest uppercase border border-[var(--accent-green)] hover:shadow-[0_0_30px_var(--halo)] transition-all duration-300 flex items-center gap-3">
-                                <span className="relative z-10">INITIALIZE PROTOCOL</span>
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </button>
+                    <motion.div variants={VARIANTS.item} className="flex flex-col sm:flex-row items-center gap-6 mt-8">
+                        <Link href="#contact" className="group relative px-8 py-4 bg-[var(--accent-green)] text-black font-bold font-mono text-xs tracking-widest uppercase hover:bg-white transition-all duration-300 shadow-[0_0_20px_var(--halo)] hover:shadow-[0_0_40px_var(--accent-green)]">
+                            <span className="relative z-10 flex items-center gap-2">
+                                INITIATE BLUEPRINT PROTOCOL <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </span>
                         </Link>
 
-                        <Link href="#portfolio" scroll={true}>
-                            <button className="group px-8 py-4 bg-transparent border border-[var(--hairline)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-green)]/50 font-mono text-sm tracking-widest uppercase transition-all duration-300">
-                                BLUEPRINT ARCHIVES
-                            </button>
+                        <Link href="#portfolio" className="group relative px-8 py-4 bg-transparent border border-[var(--hairline)] text-[var(--text-muted)] font-mono text-xs tracking-widest uppercase hover:text-[var(--accent-green)] hover:border-[var(--accent-green)] transition-all duration-300">
+                            <span className="relative z-10">ACCESS PROJECT ARCHIVES</span>
                         </Link>
                     </motion.div>
                 </div>

@@ -8,6 +8,20 @@ export function SmartContactModal({ isOpen, onClose }: { isOpen: boolean; onClos
     const [copied, setCopied] = useState(false);
     const email = "omeirmustafa.work@gmail.com";
 
+    React.useEffect(() => {
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === "Escape") onClose();
+        };
+        if (isOpen) {
+            document.addEventListener("keydown", handleEsc);
+            document.body.style.overflow = "hidden";
+        }
+        return () => {
+            document.removeEventListener("keydown", handleEsc);
+            document.body.style.overflow = "unset";
+        };
+    }, [isOpen, onClose]);
+
     const handleCopy = () => {
         navigator.clipboard.writeText(email);
         setCopied(true);

@@ -48,7 +48,7 @@ export function CaseStudiesSection() {
                             Recalibrating Portfolio Data
                         </h3>
                         <p className="text-[var(--text-muted)] max-w-md">
-                            Detailed case studies for Enterprise RAG Systems and High-Scale SaaS Architectures are being indexed.
+                            Case studies showcasing premium brand builds, intelligent websites, and modern digital systems across multiple industries.
                         </p>
 
                         <div className="mt-12 grid grid-cols-2 gap-4 opacity-50">
