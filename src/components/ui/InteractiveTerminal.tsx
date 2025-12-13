@@ -168,7 +168,10 @@ export function InteractiveTerminal() {
                                 </div>
 
                                 {/* Answer Block */}
-                                <div className="font-mono text-sm md:text-base leading-relaxed text-[var(--text-primary)] whitespace-pre-wrap break-words">
+                                <div
+                                    className="font-mono text-sm md:text-base leading-[1.6] text-[var(--text-primary)] whitespace-pre-wrap break-words pl-[0.75ch]"
+                                    style={{ transform: "translateZ(0)" }}
+                                >
                                     {typedText}
                                     {showCursor && <span className="text-[var(--accent-green)] font-bold">_</span>}
                                 </div>
