@@ -92,7 +92,7 @@ export function InteractiveTerminal() {
             </div>
 
             {/* Right: Terminal Output */}
-            <div className="flex-1 relative rounded-xl overflow-hidden bg-black/95 border border-[var(--hairline)] shadow-inner flex flex-col min-h-[300px] md:min-h-0">
+            <div className="flex-1 relative rounded-xl overflow-hidden bg-black/95 border border-[var(--hairline)] shadow-inner flex flex-col">
                 {/* Terminal Header */}
                 <div className="flex items-center justify-between px-4 py-2 bg-[var(--accent-green)]/5 border-b border-[var(--hairline)]">
                     <div className="flex items-center gap-2">
@@ -108,7 +108,7 @@ export function InteractiveTerminal() {
                 </div>
 
                 {/* Terminal Body */}
-                <div aria-live="polite" className="p-6 font-mono text-sm leading-relaxed text-[var(--text-primary)] flex-1 overflow-y-auto custom-scrollbar whitespace-pre-wrap break-words md:break-normal">
+                <div aria-live="polite" className="p-6 font-mono text-sm leading-relaxed text-[var(--text-primary)] flex-1 overflow-y-auto custom-scrollbar">
                     {!activeId ? (
                         <div className="opacity-50 space-y-2">
                             <p>&gt; SYSTEM INITIALIZED...</p>
