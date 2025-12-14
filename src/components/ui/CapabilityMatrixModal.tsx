@@ -110,7 +110,7 @@ export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; on
                                 </div>
 
                                 {/* Scrollable Body */}
-                                <div className="flex-1 overflow-y-auto custom-scrollbar pr-4 space-y-10 min-h-0 pb-24">
+                                <div className="flex-1 overflow-y-auto custom-scrollbar pr-4 space-y-10 min-h-0 pb-24 md:pb-0 [-webkit-overflow-scrolling:touch]">
                                     {SECTIONS.map((section, idx) => (
                                         <div key={idx} className="space-y-4">
                                             <h3 className="text-[var(--text-primary)] font-bold text-lg font-mono tracking-tight uppercase border-l-2 border-[var(--accent-green)] pl-3">
