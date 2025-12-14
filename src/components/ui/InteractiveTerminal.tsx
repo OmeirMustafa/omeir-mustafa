@@ -48,7 +48,6 @@ export function InteractiveTerminal() {
     const [typedText, setTypedText] = useState("");
     const [speed, setSpeed] = useState(35); // ms per char
     const [isTyping, setIsTyping] = useState(false);
-    const [showCursor, setShowCursor] = useState(true);
     const [isReducedMotion, setIsReducedMotion] = useState(false);
 
     // Auto-scroll ref
@@ -93,17 +92,11 @@ export function InteractiveTerminal() {
         return () => clearInterval(interval);
     }, [activeId, speed, isReducedMotion]);
 
-    // Cursor blink
-    useEffect(() => {
-        const interval = setInterval(() => setShowCursor((prev) => !prev), 500);
-        return () => clearInterval(interval);
-    }, []);
-
     return (
         // Adjusted height for desktop to be taller/wider as requested
         <div className="w-full h-[500px] md:h-[600px] flex flex-col md:flex-row gap-6">
             {/* Left: Command List */}
-            <div className="w-full md:w-1/3 flex flex-col gap-3 h-[180px] md:h-full overflow-y-auto custom-scrollbar">
+            <div className="w-full md:w-1/3 flex flex-col gap-3 h-auto max-h-[240px] md:h-full overflow-y-auto custom-scrollbar shrink-0">
                 <div className="text-[10px] font-mono text-[var(--accent-green)]/50 uppercase tracking-widest mb-2 shrink-0">
                     Available Commands
                 </div>
@@ -173,7 +166,7 @@ export function InteractiveTerminal() {
                                     style={{ transform: "translateZ(0)" }}
                                 >
                                     {typedText}
-                                    {showCursor && <span className="text-[var(--accent-green)] font-bold">_</span>}
+                                    <span className="text-[var(--accent-green)] font-bold animate-pulse">_</span>
                                 </div>
                             </div>
                         )}
