@@ -103,7 +103,7 @@ export function InteractiveTerminal() {
         // Adjusted height for desktop to be taller/wider as requested
         <div className="w-full h-[500px] md:h-[600px] flex flex-col md:flex-row gap-6">
             {/* Left: Command List */}
-            <div className="w-full md:w-1/3 flex flex-col gap-3 h-full overflow-y-auto custom-scrollbar">
+            <div className="w-full md:w-1/3 flex flex-col gap-3 h-[180px] md:h-full overflow-y-auto custom-scrollbar">
                 <div className="text-[10px] font-mono text-[var(--accent-green)]/50 uppercase tracking-widest mb-2 shrink-0">
                     Available Commands
                 </div>
