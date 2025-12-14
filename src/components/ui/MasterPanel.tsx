@@ -26,7 +26,7 @@ export function MasterPanel({ children, className, title = "SYS // ACTIVE" }: Ma
             </div>
 
             {/* Content */}
-            <div className="relative z-10">
+            <div className="relative z-10 h-full">
                 {children}
             </div>
 

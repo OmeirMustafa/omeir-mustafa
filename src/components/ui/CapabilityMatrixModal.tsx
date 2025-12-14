@@ -95,13 +95,13 @@ export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; on
                         initial={{ scale: 0.95, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.95, opacity: 0 }}
-                        className="relative w-full max-w-4xl h-[85vh] max-h-[85vh] flex flex-col pointer-events-auto"
+                        className="relative w-full max-w-4xl h-auto max-h-[85vh] md:h-[85vh] flex flex-col pointer-events-auto"
                     >
-                        <MasterPanel title="FULL CAPABILITY MATRIX" className="bg-[#0b0b0d] flex-1 flex flex-col overflow-hidden h-full">
+                        <MasterPanel title="FULL CAPABILITY MATRIX" className="bg-[#0b0b0d] flex-1 flex flex-col overflow-hidden h-full p-4 md:p-12">
 
                             {/* Sticky Header */}
                             <div className="flex-none flex justify-between items-center mb-6 pb-4 border-b border-[var(--hairline)]">
-                                <div id="modal-title" className="text-xs font-mono text-[var(--accent-green)] tracking-widest">
+                                <div id="modal-title" className="text-[10px] md:text-xs font-mono text-[var(--accent-green)] tracking-widest">
                                     SYSTEM_CAPABILITY_OVERVIEW // V4.0
                                 </div>
                                 <button onClick={onClose} aria-label="Close" className="p-2 hover:bg-[var(--accent-green)]/10 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-green)]">
