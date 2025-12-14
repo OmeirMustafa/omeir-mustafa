@@ -7,12 +7,12 @@ import { ArrowUpRight, Loader2 } from "lucide-react";
 
 export function CaseStudiesSection() {
     return (
-        <section id="portfolio" className="py-24 px-6 relative overflow-hidden">
+        <section id="portfolio" className="py-12 md:py-24 px-6 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <MasterPanel title="PROJECT_DB // ARCHIVES">
 
                     {/* Header */}
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16 gap-6">
                         <div>
                             <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter text-[var(--text-primary)] mb-4">
                                 BLUEPRINT <span className="text-[var(--accent-green)]">ARCHIVES</span>
@@ -30,7 +30,7 @@ export function CaseStudiesSection() {
                     </div>
 
                     {/* Content Placeholder */}
-                    <div className="relative min-h-[400px] border border-dashed border-[var(--hairline)] rounded-lg flex flex-col items-center justify-center p-12 text-center bg-[var(--bg-deep)]/50">
+                    <div className="relative min-h-[400px] border border-dashed border-[var(--hairline)] rounded-lg flex flex-col items-center justify-center p-6 md:p-12 text-center bg-[var(--bg-deep)]/50">
 
                         <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,255,160,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
 
@@ -51,7 +51,7 @@ export function CaseStudiesSection() {
                             Case studies showcasing premium brand builds, intelligent websites, and modern digital systems across multiple industries.
                         </p>
 
-                        <div className="mt-12 grid grid-cols-2 gap-4 opacity-50">
+                        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 opacity-50">
                             <div className="h-32 w-48 bg-[var(--hairline)] rounded animate-pulse" />
                             <div className="h-32 w-48 bg-[var(--hairline)] rounded animate-pulse animation-delay-500" />
                         </div>

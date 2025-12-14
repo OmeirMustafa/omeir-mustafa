@@ -13,7 +13,7 @@ export function HeroSection() {
     return (
         <section
             ref={ref}
-            className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20 pb-20 overflow-hidden"
+            className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-12 pb-12 md:pt-20 md:pb-20 overflow-hidden"
         >
             {/* 0. GLOBAL ENVIRONMENT */}
             <ParticleCanvas />
@@ -25,7 +25,7 @@ export function HeroSection() {
                 className="relative z-10 w-full max-w-4xl mx-auto flex items-center justify-center"
             >
                 {/* Concentric Circles Background (The "Circle Element") */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none scale-[0.6] md:scale-100 transition-transform duration-500">
                     {/* Outer Ring */}
                     <div className="w-[600px] h-[600px] border border-[var(--accent-green)]/10 rounded-full animate-[spin_60s_linear_infinite]" />
                     {/* Middle Ring */}
@@ -37,7 +37,7 @@ export function HeroSection() {
                 </div>
 
                 {/* Centered Content */}
-                <div className="relative text-center flex flex-col items-center gap-8 py-24">
+                <div className="relative text-center flex flex-col items-center gap-6 md:gap-8 py-12 md:py-24">
 
                     {/* Blinking Dot (Centered Top) */}
                     <motion.div variants={VARIANTS.item} className="mb-4">
