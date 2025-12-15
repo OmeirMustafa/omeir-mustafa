@@ -5,9 +5,6 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { MasterPanel } from "@/components/ui/MasterPanel";
 import { IntelligenceBriefModal } from "@/components/ui/IntelligenceBriefModal";
-import { InteractiveGlass } from "@/components/ui/InteractiveGlass";
-
-const MotionGlass = motion(InteractiveGlass);
 
 const VISUAL_MAPPING = [
     {
@@ -56,15 +53,14 @@ export function ThoughtLeadershipSection() {
 
                     <div className="grid gap-3 md:gap-4">
                         {VISUAL_MAPPING.map((article, idx) => (
-                            <MotionGlass
+                            <motion.button
                                 key={article.title}
                                 onClick={() => setSelectedSummary({ title: article.title, content: article.content })}
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ delay: idx * 0.1 }}
                                 viewport={{ once: true }}
-                                className="w-full text-left flex items-center justify-between p-4 md:p-6 group cursor-pointer"
-                                role="button"
+                                className="w-full text-left flex items-center justify-between p-4 md:p-6 group cursor-pointer bg-[#050505] border border-emerald-900/30 rounded-lg hover:border-emerald-500/50 hover:bg-emerald-950/20 transition-all duration-300"
                             >
                                 <div className="flex items-center gap-3 md:gap-6">
                                     <span className="text-emerald-500/40 font-mono text-xs tracking-widest shrink-0">
@@ -83,7 +79,7 @@ export function ThoughtLeadershipSection() {
                                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-emerald-500/20 flex items-center justify-center group-hover:border-emerald-500 group-hover:shadow-[0_0_15px_#10b981] transition-all shrink-0 bg-black/40">
                                     <ArrowRight className="text-emerald-500/50 w-3 h-3 md:w-4 md:h-4 group-hover:text-emerald-400 group-hover:-rotate-45 transition-all duration-300" />
                                 </div>
-                            </MotionGlass>
+                            </motion.button>
                         ))}
                     </div>
 

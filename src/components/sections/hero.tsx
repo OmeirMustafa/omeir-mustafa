@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ParticleCanvas } from "@/components/ui/ParticleCanvas";
 import { VARIANTS } from "@/config/motion";
-import { InteractiveGlass } from "@/components/ui/InteractiveGlass";
 
 export function HeroSection() {
     const ref = useRef<HTMLDivElement>(null);
@@ -14,7 +13,7 @@ export function HeroSection() {
     return (
         <section
             ref={ref}
-            className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-12 pb-12 md:pt-20 md:pb-20 overflow-hidden"
+            className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-12 pb-12 md:pt-20 md:pb-20 overflow-hidden bg-transparent"
         >
             {/* 0. GLOBAL ENVIRONMENT */}
             <ParticleCanvas />
@@ -37,8 +36,8 @@ export function HeroSection() {
                     <div className="absolute w-[500px] h-[500px] border-2 border-emerald-500/5 rounded-full animate-pulse" />
                 </div>
 
-                {/* Centered Content Wrapped in InteractiveGlass */}
-                <InteractiveGlass className="flex flex-col items-center gap-6 md:gap-8 py-16 md:py-24 px-8 md:px-12 max-w-5xl mx-auto text-center" glowOpacity={0.25}>
+                {/* Centered Content (Solid/Stable Container) */}
+                <div className="relative text-center flex flex-col items-center gap-6 md:gap-8 py-16 md:py-24 px-8 md:px-12 max-w-5xl mx-auto">
 
                     {/* Blinking Dot (Centered Top) */}
                     <motion.div variants={VARIANTS.item} className="mb-4">
@@ -47,7 +46,7 @@ export function HeroSection() {
 
                     {/* Version Text */}
                     <motion.div variants={VARIANTS.item} className="text-xs font-mono text-emerald-400 tracking-[0.2em] uppercase bg-black/50 px-4 py-2 rounded-full border border-emerald-500/20">
-                        OMEIR OS v4 :: LIVING GLASS
+                        OMEIR OS v4 :: ONLINE
                     </motion.div>
 
                     {/* H1 Title */}
@@ -75,7 +74,7 @@ export function HeroSection() {
                             <span className="relative z-10">ACCESS ARCHIVES</span>
                         </Link>
                     </motion.div>
-                </InteractiveGlass>
+                </div>
             </motion.div>
         </section>
     );

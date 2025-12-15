@@ -6,9 +6,6 @@ import { MasterPanel } from "@/components/ui/MasterPanel";
 import { Database, Cpu, Eye, CheckCircle2, ArrowRight } from "lucide-react";
 import { CapabilityMatrixModal } from "@/components/ui/CapabilityMatrixModal";
 import Link from "next/link";
-import { InteractiveGlass } from "@/components/ui/InteractiveGlass";
-
-const MotionGlass = motion(InteractiveGlass);
 
 const MODULES = [
     {
@@ -101,14 +98,17 @@ export function ServicesSection() {
 
                     <div className="grid md:grid-cols-3 gap-6 md:gap-8 relative z-10">
                         {MODULES.map((mod, i) => (
-                            <MotionGlass
+                            <motion.div
                                 key={mod.title}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.15 }}
-                                className="group p-8 flex flex-col items-center text-center"
+                                className="group p-8 flex flex-col items-center text-center bg-[#050505] border border-emerald-900/30 rounded-2xl relative overflow-hidden hover:border-emerald-500/50 transition-colors duration-300"
                             >
+                                {/* Subtle static glow */}
+                                <div className="absolute inset-0 shadow-[0_0_20px_rgba(16,185,129,0.05)] pointer-events-none" />
+
                                 {/* Icon Ring */}
                                 <div className="mb-6 relative">
                                     <div className="w-16 h-16 rounded-full border border-emerald-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 bg-black/50 z-10 relative">
@@ -130,7 +130,7 @@ export function ServicesSection() {
                                         </span>
                                     ))}
                                 </div>
-                            </MotionGlass>
+                            </motion.div>
                         ))}
                     </div>
 
@@ -157,14 +157,17 @@ export function ServicesSection() {
 
                     <div className="grid md:grid-cols-3 gap-6 relative z-10">
                         {TIERS.map((tier, i) => (
-                            <MotionGlass
+                            <motion.div
                                 key={tier.title}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 + (i * 0.15) }}
-                                className="flex flex-col p-8 group overflow-hidden"
+                                className="relative flex flex-col p-8 rounded-xl border border-emerald-900/30 bg-[#050505] transition-all duration-300 group animate-[greenBurn_3s_infinite_alternate] overflow-hidden"
                             >
+                                {/* Plasma Background Layer (Restored) */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-black via-[#0a3315] to-black bg-[length:400%_400%] animate-[plasmaFlow_15s_ease_infinite] opacity-40 z-0" />
+
                                 <div className="relative z-10 mb-6 pb-6 border-b border-emerald-500/20">
                                     <div className="text-emerald-500/70 font-mono text-xs tracking-widest mb-2">
                                         // {tier.title}
@@ -192,7 +195,7 @@ export function ServicesSection() {
                                         <ArrowRight className="w-3 h-3" />
                                     </button>
                                 </Link>
-                            </MotionGlass>
+                            </motion.div>
                         ))}
                     </div>
                 </MasterPanel>

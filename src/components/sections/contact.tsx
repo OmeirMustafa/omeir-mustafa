@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { InteractiveGlass } from "@/components/ui/InteractiveGlass";
 import { MasterPanel } from "@/components/ui/MasterPanel";
 import SmartContactModal from "@/components/ui/SmartContactModal";
 
@@ -19,7 +18,7 @@ export function ContactSection() {
                     viewport={{ once: true }}
                     className="text-center"
                 >
-                    <InteractiveGlass className="p-8 md:p-12 text-center">
+                    <div className="p-8 md:p-12 text-center bg-[#050505] border border-emerald-900/30 rounded-2xl relative shadow-[0_0_20px_rgba(16,185,129,0.05)]">
                         <div className="mb-8">
                             <span className="text-emerald-400 font-mono text-xs tracking-widest uppercase border border-emerald-900/50 px-3 py-1 rounded bg-black/50">
                                 COMMS_CHANNEL // STANDBY
@@ -54,7 +53,7 @@ export function ContactSection() {
                                 <span className="relative z-10">OPEN UPLINK</span>
                             </button>
                         </div>
-                    </InteractiveGlass>
+                    </div>
                 </motion.div>
 
             </div>

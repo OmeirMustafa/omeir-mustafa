@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { Linkedin } from "lucide-react";
-import { InteractiveGlass } from "@/components/ui/InteractiveGlass";
 
 export function HUDFooter() {
     return (
@@ -15,7 +14,7 @@ export function HUDFooter() {
             {/* Grid & Scanlines (Subtle) */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-50" />
 
-            <InteractiveGlass className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8 p-6 md:p-8" glowOpacity={0.1}>
+            <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8 bg-[#050505] border border-emerald-900/30 rounded-xl p-6 md:p-8">
 
                 {/* Left Side */}
                 <div className="flex flex-col items-center md:items-start text-center md:text-left">
@@ -42,12 +41,12 @@ export function HUDFooter() {
                         <Linkedin size={20} className="relative z-10 group-hover:drop-shadow-[0_0_5px_rgba(16,185,129,0.8)]" />
                     </Link>
                 </div>
-            </InteractiveGlass>
+            </div>
 
             {/* Copyright / Version */}
             <div className="relative z-10 mt-12 text-center border-t border-emerald-500/10 pt-8">
                 <p className="text-xs text-zinc-600 font-mono opacity-60">
-                    © 2025 OMEIR MUSTAFA // OMEIR OS v4 :: LIVING GLASS
+                    © 2025 OMEIR MUSTAFA // OMEIR OS v4 :: STABLE
                 </p>
             </div>
         </footer>
