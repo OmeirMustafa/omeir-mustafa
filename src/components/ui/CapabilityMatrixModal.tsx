@@ -77,70 +77,77 @@ export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; on
     return (
         <AnimatePresence>
             {isOpen && (
-                <div role="dialog" aria-modal="true" aria-labelledby="modal-title" className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                <div role="dialog" aria-modal="true" className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="absolute inset-0 bg-black/90 backdrop-blur-md"
+                        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                     />
 
-                    {/* Modal Content */}
+                    {/* Premium Card Content */}
                     <motion.div
-                        initial={{ scale: 0.95, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.95, opacity: 0 }}
-                        className="relative z-50 w-full max-w-2xl h-auto flex flex-col pointer-events-auto"
+                        initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                        exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                        className="relative w-full max-w-3xl bg-[#050505] border border-green-500/30 rounded-xl p-8 shadow-[0_0_50px_rgba(0,255,0,0.15)] overflow-hidden"
                     >
-                        <MasterPanel title="SYSTEM STATUS" className="bg-[#0b0b0d] flex-1 flex flex-col overflow-hidden h-auto p-4 md:p-8">
-                            <div className="flex flex-col h-full overflow-hidden">
-                                {/* Header */}
-                                <div className="flex-none flex justify-between items-center mb-4 pb-2 border-b border-[var(--hairline)] bg-[#0b0b0d]">
-                                    <div id="modal-title" className="text-[10px] md:text-xs font-mono text-[var(--accent-green)] tracking-widest">
-                                        SYSTEM_CAPABILITY_OVERVIEW // V4.0
-                                    </div>
-                                    <button onClick={onClose} aria-label="Close" className="p-1 hover:bg-[var(--accent-green)]/10 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-green)]">
-                                        <X className="w-5 h-5 text-[var(--text-muted)]" />
-                                    </button>
-                                </div>
+                        {/* Close Button */}
+                        <button
+                            onClick={onClose}
+                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors z-20"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
 
-                                {/* Data Matrix Grid */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-x-8 md:gap-y-6">
-                                    {SECTIONS.map((section, idx) => (
-                                        <div key={idx} className="space-y-1">
-                                            <h3 className="text-[var(--accent-green)] font-bold text-xs font-mono tracking-wider uppercase border-l-2 border-[var(--accent-green)] pl-2 leading-none">
-                                                {section.title}
-                                            </h3>
-                                            <div className="pl-3 text-[10px] md:text-xs text-[var(--text-muted)] font-mono leading-tight flex flex-wrap gap-1">
-                                                {section.tags.map((tag, i) => (
-                                                    <span key={i} className="opacity-80">[{tag}]</span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ))}
+                        <div className="relative z-10">
+                            {/* Header */}
+                            <div className="mb-8 border-b border-green-500/20 pb-6">
+                                <div className="text-xs text-green-500/70 uppercase tracking-widest mb-2 font-mono">
+                                    SYSTEM ARCHITECTURE
                                 </div>
-
-                                {/* Sticky Footer */}
-                                <div className="flex-none mt-6 pt-4 border-t border-[var(--hairline)] flex flex-wrap gap-4 justify-end bg-[#0b0b0d]">
-                                    <button
-                                        onClick={handleCopy}
-                                        className="flex items-center gap-2 px-4 py-2 border border-[var(--hairline)] rounded text-xs font-mono text-[var(--text-muted)] hover:text-[#00ffa0] hover:border-[#00ffa0] transition-colors focus:ring-2 focus:ring-[var(--accent-green)]"
-                                    >
-                                        {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                                        {copied ? "COPIED" : "COPY MARKDOWN"}
-                                    </button>
-                                    <button
-                                        onClick={handleDownload}
-                                        className="flex items-center gap-2 px-4 py-2 bg-[var(--accent-green)]/10 border border-[var(--hairline)] rounded text-xs font-mono text-[var(--accent-green)] hover:bg-[var(--accent-green)]/20 transition-colors focus:ring-2 focus:ring-[var(--accent-green)]"
-                                    >
-                                        <Download className="w-3 h-3" />
-                                        DOWNLOAD JSON
-                                    </button>
-                                </div>
+                                <h2 className="text-2xl md:text-3xl font-bold text-white">
+                                    System Capability Matrix
+                                </h2>
                             </div>
-                        </MasterPanel>
+
+                            {/* 2-Column Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {SECTIONS.map((section, idx) => (
+                                    <div key={idx} className="group">
+                                        <h3 className="text-green-400 font-bold mb-2 text-sm font-mono uppercase flex items-center gap-2">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                            {section.title.replace("_", " ")}
+                                        </h3>
+                                        <div className="space-y-1 pl-4 border-l border-green-500/10 group-hover:border-green-500/30 transition-colors">
+                                            {section.tags.map((tag, i) => (
+                                                <div key={i} className="text-zinc-400 text-sm leading-relaxed">
+                                                    {tag}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Actions */}
+                            <div className="mt-8 pt-6 border-t border-green-500/20 flex justify-end gap-3">
+                                <button
+                                    onClick={handleCopy}
+                                    className="px-4 py-2 rounded text-xs font-bold font-mono uppercase bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-black transition-all"
+                                >
+                                    {copied ? "COPIED" : "COPY DATA"}
+                                </button>
+                                <button
+                                    onClick={handleDownload}
+                                    className="px-4 py-2 rounded text-xs font-bold font-mono uppercase border border-white/20 text-white/70 hover:border-white hover:text-white transition-all"
+                                >
+                                    DOWNLOAD JSON
+                                </button>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
             )}

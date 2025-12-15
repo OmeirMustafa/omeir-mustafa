@@ -137,9 +137,9 @@ export function ServicesSection() {
                     <div className="mt-16 text-center">
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="text-[var(--accent-green)] font-mono text-sm tracking-widest uppercase hover:underline underline-offset-4 decoration-[var(--accent-green)] decoration-2"
+                            className="px-8 py-4 border border-green-500/30 text-green-400 font-mono text-sm tracking-widest uppercase rounded hover:bg-green-500/10 hover:border-green-500 transition-all duration-300 flex items-center gap-2 mx-auto"
                         >
-                            VIEW FULL CAPABILITY MATRIX -&gt;
+                            VIEW FULL CAPABILITY MATRIX <ArrowRight className="w-4 h-4" />
                         </button>
                     </div>
                 </MasterPanel>
