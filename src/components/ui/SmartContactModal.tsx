@@ -15,10 +15,12 @@ export function SmartContactModal({ isOpen, onClose }: { isOpen: boolean; onClos
         if (isOpen) {
             document.addEventListener("keydown", handleEsc);
             document.body.style.overflow = "hidden";
+            document.documentElement.style.overflow = "hidden";
         }
         return () => {
             document.removeEventListener("keydown", handleEsc);
             document.body.style.overflow = "unset";
+            document.documentElement.style.overflow = "unset";
         };
     }, [isOpen, onClose]);
 
@@ -31,14 +33,14 @@ export function SmartContactModal({ isOpen, onClose }: { isOpen: boolean; onClos
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="absolute inset-0 bg-black/90 backdrop-blur-md"
+                        className="absolute inset-0 bg-[#0b0b0d]/80 backdrop-blur-md"
                     />
 
                     {/* Modal Content */}
