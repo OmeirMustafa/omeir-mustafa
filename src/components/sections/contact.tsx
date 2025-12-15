@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { MasterPanel } from "@/components/ui/MasterPanel";
+import SmartContactModal from "@/components/ui/SmartContactModal";
 
 export function ContactSection() {
     const [isModalOpen, setIsModalOpen] = useState(false);
