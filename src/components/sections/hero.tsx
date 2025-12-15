@@ -59,7 +59,7 @@ export function HeroSection() {
                     </motion.h1>
 
                     {/* Subtitle */}
-                    <motion.p variants={VARIANTS.item} className="text-lg md:text-xl text-[var(--text-muted)] max-w-3xl leading-relaxed font-light px-4 bg-[var(--bg-deep)]/60 backdrop-blur-sm rounded-xl py-2">
+                    <motion.p variants={VARIANTS.item} className="text-lg md:text-xl text-[var(--text-muted)] max-w-3xl leading-relaxed font-light px-4 rounded-xl py-2">
                         Designing premium websites, intelligent systems, and modern digital experiences built for clarity, performance, and trust.
                     </motion.p>
 
