@@ -21,6 +21,16 @@ const RIGHT_LINKS = [
 export function HUDNavigation() {
     const pathname = usePathname();
     const [isMobileOpen, setIsMobileOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    React.useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const NavLink = ({ item, onClick }: { item: { name: string; href: string }, onClick?: () => void }) => (
         <Link
@@ -37,7 +47,14 @@ export function HUDNavigation() {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-6 pointer-events-none">
-            <div className="bg-[var(--bg-deep)]/90 backdrop-blur-xl border border-[var(--hairline)] rounded-full px-4 md:px-8 py-2 flex items-center gap-8 pointer-events-auto transition-all hover:border-[var(--accent-green)]/50 shadow-[0_0_20px_var(--halo)] relative">
+            <div
+                className={cn(
+                    "border rounded-full px-4 md:px-8 py-2 flex items-center gap-8 pointer-events-auto transition-all duration-300 ease-in-out shadow-[0_0_20px_var(--halo)] relative",
+                    isScrolled
+                        ? "bg-black/60 backdrop-blur-md border-[var(--accent-green)]/20"
+                        : "bg-black/90 backdrop-blur-xl border-white/10"
+                )}
+            >
 
                 {/* Left Group (Desktop) */}
                 <div className="hidden md:flex items-center gap-6">
@@ -69,7 +86,7 @@ export function HUDNavigation() {
                             initial={{ opacity: 0, y: -20, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                            className="absolute top-full left-0 right-0 mt-4 bg-[var(--bg-deep)] border border-[var(--hairline)] rounded-2xl p-6 flex flex-col gap-4 items-center shadow-2xl md:hidden overflow-hidden"
+                            className="absolute top-full left-0 right-0 mt-4 bg-black border border-white/10 rounded-2xl p-6 flex flex-col gap-4 items-center shadow-2xl md:hidden overflow-hidden backdrop-blur-xl"
                         >
                             {[...LEFT_LINKS, ...RIGHT_LINKS].map((item) => (
                                 <NavLink key={item.name} item={item} onClick={() => setIsMobileOpen(false)} />
