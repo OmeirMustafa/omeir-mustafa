@@ -8,31 +8,24 @@ import { MasterPanel } from "@/components/ui/MasterPanel";
 // Structure Content
 const SECTIONS = [
     {
-        title: "1. Brand Intelligence Layer",
-        content: "Research-driven brand identity. Visual language systems. Positioning & messaging frameworks. Industry adaptation for ANY business type (restaurant, medical, legal, SaaS, consulting, fitness, etc.)"
+        title: "BRAND_INTELLIGENCE",
+        tags: ["Identity System", "Visual Language", "Global Positioning"]
     },
     {
-        title: "2. Premium Web Architecture",
-        custom: true,
-        items: [
-            { label: "Custom Next.js 16 builds", text: "Latest framework features for optimal performance." },
-            { label: "Responsive dark-mode systems", text: "Adaptive theming for visual comfort and style." },
-            { label: "Component architecture", text: "Modular design meant for scalability." },
-            { label: "High-performance SEO", text: "Technical SEO optimization for search visibility." },
-            { label: "Enterprise-grade UI motion", text: "Fluid interactions using Framer Motion 12." }
-        ]
+        title: "WEB_ARCHITECTURE",
+        tags: ["Next.js 16", "Dark Mode", "Technical SEO", "Framer Motion"]
     },
     {
-        title: "3. Intelligent Systems Integration",
-        content: "Automated content pipelines. Smart UX flows. On-site micro-interactions. Modular, upgrade-ready internal tools. Foundation for future AI expansion."
+        title: "SYS_INTEGRATION",
+        tags: ["Auto-Pipelines", "Smart UX", "AI-Ready Core"]
     },
     {
-        title: "4. Security & Compliance Layer",
-        content: "Secure frontend practices. SSR-first architecture. Data minimization principles. Industry-compliant flows. Zero third-party exposure in critical components."
+        title: "SECURITY_LAYER",
+        tags: ["SSR-First", "Data Minimization", "Zero-Exposure"]
     },
     {
-        title: "5. Operational Performance",
-        content: "Faster page loads with LCP optimization. Reduced layout shifts (CLS). High accessibility scores. Technical debt reduction for maintainability. Clean, maintainable architecture."
+        title: "OPS_PERFORMANCE",
+        tags: ["Zero CLS", "Fast LCP", "Clean Code"]
     }
 ];
 
@@ -62,12 +55,9 @@ export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; on
     }, [isOpen, onClose]);
 
     const handleCopy = () => {
-        const text = SECTIONS.map(s => {
-            if (s.custom) {
-                return `${s.title}\n${s.items?.map(i => `- ${i.label}: ${i.text}`).join('\n')}`;
-            }
-            return `${s.title}\n${s.content}`;
-        }).join('\n\n');
+        const text = SECTIONS.map(s =>
+            `${s.title}\n${s.tags.map(t => `[${t}]`).join(' ')}`
+        ).join('\n\n');
 
         navigator.clipboard.writeText(text);
         setCopied(true);
@@ -102,42 +92,32 @@ export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; on
                         initial={{ scale: 0.95, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.95, opacity: 0 }}
-                        className="relative z-50 w-[90%] max-h-[75vh] overflow-y-auto overscroll-contain md:w-full md:max-w-4xl md:h-[85vh] md:overflow-hidden flex flex-col pointer-events-auto"
+                        className="relative z-50 w-full max-w-2xl h-auto flex flex-col pointer-events-auto"
                     >
-                        <MasterPanel title="FULL CAPABILITY MATRIX" className="bg-[#0b0b0d] flex-1 flex flex-col overflow-hidden h-auto md:h-full p-4 md:p-12">
+                        <MasterPanel title="SYSTEM STATUS" className="bg-[#0b0b0d] flex-1 flex flex-col overflow-hidden h-auto p-4 md:p-8">
                             <div className="flex flex-col h-full overflow-hidden">
-                                {/* Sticky Header */}
-                                <div className="flex-none flex justify-between items-center mb-6 pb-4 border-b border-[var(--hairline)] bg-[#0b0b0d] z-50 sticky top-0">
+                                {/* Header */}
+                                <div className="flex-none flex justify-between items-center mb-4 pb-2 border-b border-[var(--hairline)] bg-[#0b0b0d]">
                                     <div id="modal-title" className="text-[10px] md:text-xs font-mono text-[var(--accent-green)] tracking-widest">
                                         SYSTEM_CAPABILITY_OVERVIEW // V4.0
                                     </div>
-                                    <button onClick={onClose} aria-label="Close" className="p-2 hover:bg-[var(--accent-green)]/10 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-green)]">
+                                    <button onClick={onClose} aria-label="Close" className="p-1 hover:bg-[var(--accent-green)]/10 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-green)]">
                                         <X className="w-5 h-5 text-[var(--text-muted)]" />
                                     </button>
                                 </div>
 
-                                {/* Scrollable Body */}
-                                <div className="flex-1 overflow-visible md:overflow-y-auto custom-scrollbar pr-4 space-y-10 min-h-0 pb-24 md:pb-0">
+                                {/* Data Matrix Grid */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-x-8 md:gap-y-6">
                                     {SECTIONS.map((section, idx) => (
-                                        <div key={idx} className="space-y-4">
-                                            <h3 className="text-[var(--text-primary)] font-bold text-lg font-mono tracking-tight uppercase border-l-2 border-[var(--accent-green)] pl-3">
+                                        <div key={idx} className="space-y-1">
+                                            <h3 className="text-[var(--accent-green)] font-bold text-xs font-mono tracking-wider uppercase border-l-2 border-[var(--accent-green)] pl-2 leading-none">
                                                 {section.title}
                                             </h3>
-
-                                            {section.custom && section.items ? (
-                                                <dl className="grid sm:grid-cols-2 gap-4 text-sm pl-4">
-                                                    {section.items.map((item, i) => (
-                                                        <div key={i} className="flex flex-col gap-1">
-                                                            <dt className="text-[var(--accent-green)] font-mono text-xs uppercase opacity-80">{item.label}</dt>
-                                                            <dd className="text-[var(--text-muted)] leading-snug">{item.text}</dd>
-                                                        </div>
-                                                    ))}
-                                                </dl>
-                                            ) : (
-                                                <p className="text-[var(--text-muted)] text-sm leading-relaxed pl-4 max-w-3xl">
-                                                    {section.content}
-                                                </p>
-                                            )}
+                                            <div className="pl-3 text-[10px] md:text-xs text-[var(--text-muted)] font-mono leading-tight flex flex-wrap gap-1">
+                                                {section.tags.map((tag, i) => (
+                                                    <span key={i} className="opacity-80">[{tag}]</span>
+                                                ))}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
