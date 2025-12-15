@@ -51,7 +51,7 @@ export function HUDNavigation() {
                 className={cn(
                     "rounded-full px-4 md:px-8 py-2 flex items-center gap-8 pointer-events-auto transition-all duration-500 ease-in-out shadow-[0_0_20px_var(--halo)] relative border",
                     isScrolled
-                        ? "bg-[#0b0b0d]/80 backdrop-blur-md border-[var(--accent-green)]/10"
+                        ? "bg-[#040506]/90 backdrop-blur-md border-[var(--accent-green)]/10"
                         : "bg-transparent border-transparent backdrop-blur-none shadow-none"
                 )}
             >
@@ -86,7 +86,7 @@ export function HUDNavigation() {
                             initial={{ opacity: 0, y: -20, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                            className="absolute top-full left-0 right-0 mt-4 bg-black border border-white/10 rounded-2xl p-6 flex flex-col gap-4 items-center shadow-2xl md:hidden overflow-hidden backdrop-blur-xl"
+                            className="absolute top-full left-0 right-0 mt-4 bg-[#040506]/95 border border-[var(--accent-green)]/10 rounded-2xl p-6 flex flex-col gap-4 items-center shadow-2xl md:hidden overflow-hidden backdrop-blur-xl"
                         >
                             {[...LEFT_LINKS, ...RIGHT_LINKS].map((item) => (
                                 <NavLink key={item.name} item={item} onClick={() => setIsMobileOpen(false)} />
