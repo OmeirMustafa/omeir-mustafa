@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { InteractiveGlass } from "@/components/ui/InteractiveGlass";
 import { MasterPanel } from "@/components/ui/MasterPanel";
 import SmartContactModal from "@/components/ui/SmartContactModal";
 
@@ -11,7 +11,7 @@ export function ContactSection() {
 
     return (
         <section id="contact" className="pt-12 md:pt-24 pb-24 md:pb-32 px-6 relative overflow-hidden bg-transparent mb-0">
-            <div className="container mx-auto max-w-4xl pt-12 border-t border-[var(--hairline)]">
+            <div className="container mx-auto max-w-4xl pt-12 border-t border-emerald-500/20">
 
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -19,7 +19,7 @@ export function ContactSection() {
                     viewport={{ once: true }}
                     className="text-center"
                 >
-                    <SpotlightCard className="p-8 md:p-12 text-center" style={{ animationDelay: '2.5s' }}>
+                    <InteractiveGlass className="p-8 md:p-12 text-center">
                         <div className="mb-8">
                             <span className="text-emerald-400 font-mono text-xs tracking-widest uppercase border border-emerald-900/50 px-3 py-1 rounded bg-black/50">
                                 COMMS_CHANNEL // STANDBY
@@ -54,7 +54,7 @@ export function ContactSection() {
                                 <span className="relative z-10">OPEN UPLINK</span>
                             </button>
                         </div>
-                    </SpotlightCard>
+                    </InteractiveGlass>
                 </motion.div>
 
             </div>

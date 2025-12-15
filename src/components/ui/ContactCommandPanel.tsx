@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Calendar } from "lucide-react";
-import { SmartContactModal } from "./SmartContactModal";
+import SmartContactModal from "./SmartContactModal";
 import { cn } from "@/lib/utils";
 
 export function ContactCommandPanel() {

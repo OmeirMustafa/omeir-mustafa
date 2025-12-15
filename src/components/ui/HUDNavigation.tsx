@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ReticleLogo } from "@/components/ui/ReticleLogo";
 import { Menu, X } from "lucide-react";
+import { InteractiveGlass } from "@/components/ui/InteractiveGlass";
 
 const LEFT_LINKS = [
     { name: "Services", href: "/#services" },
@@ -38,7 +39,7 @@ export function HUDNavigation() {
             onClick={onClick}
             className={cn(
                 "relative text-sm font-mono tracking-wide transition-all duration-300 px-3 py-1",
-                pathname === item.href ? "text-[var(--accent-green)] font-bold text-shadow-[0_0_8px_rgba(0,255,160,0.5)]" : "text-[var(--text-muted)] hover:text-[var(--accent-green)]"
+                pathname === item.href ? "text-emerald-400 font-bold text-shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "text-slate-400 hover:text-emerald-400"
             )}
         >
             {item.name}
@@ -47,13 +48,14 @@ export function HUDNavigation() {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-6 pointer-events-none">
-            <div
+            <InteractiveGlass
                 className={cn(
-                    "rounded-full px-4 md:px-8 py-2 flex items-center gap-8 pointer-events-auto transition-all duration-500 ease-in-out shadow-[0_0_20px_var(--halo)] relative border",
+                    "rounded-full px-4 md:px-8 py-2 flex items-center gap-8 pointer-events-auto transition-all duration-500 ease-in-out relative border",
                     isScrolled
-                        ? "bg-[#040506]/90 backdrop-blur-md border-[var(--accent-green)]/10"
+                        ? "bg-[#020202]/85 backdrop-blur-lg border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.12)]"
                         : "bg-transparent border-transparent backdrop-blur-none shadow-none"
                 )}
+                glowOpacity={0.15}
             >
 
                 {/* Left Group (Desktop) */}
@@ -73,7 +75,7 @@ export function HUDNavigation() {
 
                 {/* Mobile Menu Toggle */}
                 <button
-                    className="md:hidden p-1 text-[var(--accent-green)]"
+                    className="md:hidden p-1 text-emerald-500"
                     onClick={() => setIsMobileOpen(!isMobileOpen)}
                 >
                     {isMobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -86,7 +88,7 @@ export function HUDNavigation() {
                             initial={{ opacity: 0, y: -20, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                            className="absolute top-full left-0 right-0 mt-4 bg-[#040506]/95 border border-[var(--accent-green)]/10 rounded-2xl p-6 flex flex-col gap-4 items-center shadow-2xl md:hidden overflow-hidden backdrop-blur-xl"
+                            className="absolute top-full left-0 right-0 mt-4 bg-[#020202]/95 border border-emerald-500/20 rounded-2xl p-6 flex flex-col gap-4 items-center shadow-2xl md:hidden overflow-hidden backdrop-blur-xl"
                         >
                             {[...LEFT_LINKS, ...RIGHT_LINKS].map((item) => (
                                 <NavLink key={item.name} item={item} onClick={() => setIsMobileOpen(false)} />
@@ -94,7 +96,7 @@ export function HUDNavigation() {
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </div>
+            </InteractiveGlass>
         </nav>
     );
 }

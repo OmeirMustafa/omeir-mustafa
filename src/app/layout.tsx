@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased selection:bg-[#00ffa0] selection:text-black bg-[#020202]`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-[#020202] text-slate-300 selection:bg-emerald-500/30`}>
         <div className="global-bg" />
         <ScrollManager />
         {/* <CircuitGridBackground /> */}
