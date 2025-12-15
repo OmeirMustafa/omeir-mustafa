@@ -1,40 +1,20 @@
-"use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Mail, Copy, ShieldCheck } from "lucide-react";
-import { MasterPanel } from "@/components/ui/MasterPanel"; // Reusing MasterPanel logic nicely inside if possible, or manual custom styles to match
+'use client';
 
-export function SmartContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-    const [copied, setCopied] = useState(false);
-    const email = "omeirmustafa.work@gmail.com";
+import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
 
-    React.useEffect(() => {
-        const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === "Escape") onClose();
-        };
-        if (isOpen) {
-            document.addEventListener("keydown", handleEsc);
-            document.body.style.overflow = "hidden";
-            document.documentElement.style.overflow = "hidden";
-        }
-        return () => {
-            document.removeEventListener("keydown", handleEsc);
-            document.body.style.overflow = "unset";
-            document.documentElement.style.overflow = "unset";
-        };
-    }, [isOpen, onClose]);
+interface SmartContactModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText(email);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 3000);
-    };
-
+export function SmartContactModal({ isOpen, onClose }: SmartContactModalProps) {
     return (
         <AnimatePresence>
             {isOpen && (
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
-                    {/* Backdrop */}
+                    {/* Backdrop with Blur */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -43,78 +23,64 @@ export function SmartContactModal({ isOpen, onClose }: { isOpen: boolean; onClos
                         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                     />
 
-                    {/* Modal Content */}
+                    {/* The Glass Modal */}
                     <motion.div
                         initial={{ scale: 0.95, opacity: 0, y: 20 }}
                         animate={{ scale: 1, opacity: 1, y: 0 }}
                         exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                        className="relative w-full max-w-md"
+                        className="relative w-full max-w-lg z-10"
                     >
-                        <MasterPanel title="SECURE_UPLINK" className="bg-[var(--bg-deep)]/95 shadow-[0_0_60px_var(--halo)]">
-                            <div className="space-y-8">
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <h3 className="text-xl font-mono font-bold text-[var(--text-primary)] tracking-widest uppercase mb-1">
-                                            ESTABLISH UPLINK
-                                        </h3>
-                                        <div className="text-[10px] text-[var(--accent-green)] font-mono flex items-center gap-2">
-                                            <span className="w-1.5 h-1.5 bg-[var(--accent-green)] rounded-full animate-blink" />
-                                            SECURE CHANNEL READY
+                        <SpotlightCard className="w-full p-0 overflow-hidden border-emerald-500/30 bg-[#050505] shadow-[0_0_50px_rgba(16,185,129,0.1)]" noFloat={true}>
+                            {/* Header */}
+                            <div className="flex items-center justify-between border-b border-emerald-500/20 p-6 bg-black/40">
+                                <h2 className="font-mono text-lg tracking-widest text-emerald-400">
+                                    ESTABLISH UPLINK
+                                </h2>
+                                <button
+                                    onClick={onClose}
+                                    className="rounded-full p-2 text-zinc-500 hover:bg-emerald-500/20 hover:text-emerald-400 transition-colors"
+                                >
+                                    ✕
+                                </button>
+                            </div>
+
+                            {/* Body */}
+                            <div className="p-8 space-y-6">
+                                <div className="space-y-4">
+                                    {/* Option 1 */}
+                                    <button className="w-full group flex items-center gap-4 p-4 border border-emerald-500/20 rounded hover:bg-emerald-500/10 transition-all text-left bg-black/20">
+                                        <div className="text-emerald-500">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                         </div>
-                                    </div>
-                                    <button onClick={onClose} className="hover:rotate-90 transition-transform duration-300">
-                                        <X className="text-[var(--text-muted)] hover:text-[var(--accent-green)]" />
+                                        <div>
+                                            <div className="text-sm font-bold text-white group-hover:text-emerald-400 font-mono">INITIALIZE GMAIL</div>
+                                            <div className="text-xs text-zinc-500">Secure encrypted channel</div>
+                                        </div>
                                     </button>
-                                </div>
 
-                                <div className="space-y-3">
-                                    {/* Option 1: Gmail */}
-                                    <a
-                                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=Project%20Inquiry`}
-                                        target="_blank"
-                                        className="flex items-center justify-between p-4 bg-[var(--accent-green)]/10 border border-[var(--accent-green)] hover:bg-[var(--accent-green)]/20 transition-all group"
-                                    >
-                                        <div className="flex items-center gap-4">
-                                            <ShieldCheck className="text-[var(--accent-green)] w-5 h-5" />
-                                            <div className="text-left">
-                                                <div className="text-sm font-bold text-[var(--text-primary)] font-mono">INITIALIZE GMAIL</div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    {/* Option 2: Default Mail */}
-                                    <a
-                                        href={`mailto:${email}`}
-                                        className="flex items-center justify-between p-4 bg-[var(--accent-green)]/10 border border-[var(--accent-green)] hover:bg-[var(--accent-green)]/20 transition-all group"
-                                    >
-                                        <div className="flex items-center gap-4">
-                                            <Mail className="text-[var(--accent-green)] w-5 h-5" />
-                                            <div className="text-left">
-                                                <div className="text-sm font-bold text-[var(--text-primary)] font-mono">SYSTEM DEFAULT</div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    {/* Option 3: Copy */}
+                                    {/* Option 2 */}
                                     <button
-                                        onClick={handleCopy}
-                                        className="flex items-center justify-between p-4 bg-[var(--accent-green)]/10 border border-[var(--accent-green)] hover:bg-[var(--accent-green)]/20 transition-all w-full group relative overflow-hidden"
+                                        onClick={() => navigator.clipboard.writeText("omeir.mustafa@example.com")} // Placeholder email, user can update
+                                        className="w-full group flex items-center gap-4 p-4 border border-emerald-500/20 rounded hover:bg-emerald-500/10 transition-all text-left bg-black/20"
                                     >
-                                        <div className="flex items-center gap-4 relative z-10">
-                                            <Copy className="text-[var(--accent-green)] w-5 h-5" />
-                                            <div className="text-left">
-                                                <div className="text-sm font-bold text-[var(--text-primary)] font-mono">
-                                                    {copied ? "COORDINATES ACQUIRED" : "COPY COORDINATES"}
-                                                </div>
-                                            </div>
+                                        <div className="text-emerald-500">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                                         </div>
-                                        {copied && (
-                                            <div className="absolute inset-0 bg-[var(--accent-green)]/20" />
-                                        )}
+                                        <div>
+                                            <div className="text-sm font-bold text-white group-hover:text-emerald-400 font-mono">COPY COORDINATES</div>
+                                            <div className="text-xs text-zinc-500">Save comms data to clipboard</div>
+                                        </div>
                                     </button>
                                 </div>
                             </div>
-                        </MasterPanel>
+
+                            {/* Footer Status */}
+                            <div className="bg-emerald-950/30 p-3 text-center border-t border-emerald-500/20">
+                                <span className="text-[10px] text-emerald-500 tracking-[0.2em] animate-pulse font-mono">
+                                    ● SECURE CHANNEL READY
+                                </span>
+                            </div>
+                        </SpotlightCard>
                     </motion.div>
                 </div>
             )}

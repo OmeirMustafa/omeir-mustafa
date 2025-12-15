@@ -152,10 +152,12 @@ body::after {
     box-shadow: 0 0 15px #022c22, inset 0 0 10px #022c22;
     border-color: #064e3b;
   }
+
   50% {
     box-shadow: 0 0 30px #064e3b, inset 0 0 20px #064e3b;
     border-color: #10b981;
   }
+
   100% {
     box-shadow: 0 0 15px #022c22, inset 0 0 10px #022c22;
     border-color: #064e3b;
@@ -174,6 +176,22 @@ body::after {
   100% {
     background-position: 0% 50%;
   }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: float 7s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

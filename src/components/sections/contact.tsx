@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { SmartContactModal } from "@/components/ui/SmartContactModal";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { MasterPanel } from "@/components/ui/MasterPanel";
 
 export function ContactSection() {
@@ -18,16 +18,22 @@ export function ContactSection() {
                     viewport={{ once: true }}
                     className="text-center"
                 >
-                    <MasterPanel title="COMMS_CHANNEL // STANDBY" className="border-none shadow-none bg-transparent backdrop-blur-none">
+                    <SpotlightCard className="p-8 md:p-12 text-center" style={{ animationDelay: '2.5s' }}>
+                        <div className="mb-8">
+                            <span className="text-emerald-400 font-mono text-xs tracking-widest uppercase border border-emerald-900/50 px-3 py-1 rounded bg-black/50">
+                                COMMS_CHANNEL // STANDBY
+                            </span>
+                        </div>
+
                         <div className="max-w-xl mx-auto space-y-8">
-                            <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] leading-[1.1]">
+                            <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
                                 READY TO <br />
-                                <span className="text-[var(--accent-green)] text-glow">
+                                <span className="text-emerald-400 text-glow">
                                     INITIALIZE?
                                 </span>
                             </h2>
 
-                            <p className="text-[var(--text-muted)] text-lg font-light">
+                            <p className="text-zinc-400 text-lg font-light">
                                 Architecting the future requires precise communication. <br />
                                 Open a secure channel securely.
                             </p>
@@ -42,12 +48,12 @@ export function ContactSection() {
                                         contactSection.scrollIntoView({ behavior: "smooth", block: "center" });
                                     }
                                 }}
-                                className="group relative inline-flex items-center gap-3 px-12 py-5 bg-[var(--accent-green)] text-black font-bold font-mono text-sm tracking-[0.2em] uppercase hover:bg-white transition-all duration-300 shadow-[0_0_30px_var(--halo)] hover:shadow-[0_0_50px_var(--accent-green)] transform hover:-translate-y-1"
+                                className="group relative inline-flex items-center gap-3 px-12 py-5 bg-emerald-500 text-black font-bold font-mono text-sm tracking-[0.2em] uppercase hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] transform hover:-translate-y-1 rounded-sm"
                             >
                                 <span className="relative z-10">OPEN UPLINK</span>
                             </button>
                         </div>
-                    </MasterPanel>
+                    </SpotlightCard>
                 </motion.div>
 
             </div>
