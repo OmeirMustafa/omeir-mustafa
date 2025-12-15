@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SpotlightCard } from './SpotlightCard';
@@ -11,7 +13,7 @@ export default function SmartContactModal({ isOpen, onClose }: SmartContactModal
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -27,7 +29,7 @@ export default function SmartContactModal({ isOpen, onClose }: SmartContactModal
                         exit={{ scale: 0.95, opacity: 0, y: 20 }}
                         className="relative w-full max-w-lg z-10"
                     >
-                        <SpotlightCard className="w-full p-0 overflow-hidden border-emerald-500/30" noFloat={true}>
+                        <SpotlightCard className="w-full p-0 overflow-hidden border-emerald-500/30 bg-[#050505]" noFloat={true}>
                             <div className="flex items-center justify-between border-b border-emerald-500/20 p-6 bg-black/40">
                                 <h2 className="font-mono text-lg tracking-widest text-emerald-400">ESTABLISH UPLINK</h2>
                                 <button onClick={onClose} className="rounded-full p-2 text-zinc-500 hover:bg-emerald-500/20 hover:text-emerald-400 transition-colors">✕</button>

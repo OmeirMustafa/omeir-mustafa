@@ -1,29 +1,7 @@
 @import "tailwindcss";
 
-@theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
-  /* DEEP-GREEN REACTOR Palette - v3.1 Strict */
-  --color-accent-green: #00ffa0;
-  --color-accent-dim: #00cc7e;
-  --color-bg-deep: #040506;
-  --color-bg-overlay: rgba(5, 8, 10, 0.72);
-
-  --color-text-primary: #E6FFF6;
-  --color-text-muted: #9CCDBF;
-
-  --color-hairline: rgba(0, 255, 160, 0.22);
-  --color-halo: rgba(0, 255, 160, 0.55);
-  --color-grid-line: rgba(0, 255, 160, 0.06);
-
-  --font-sans: var(--font-primary), ui-sans-serif, system-ui;
-  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular;
-
-  --animate-scanline: scanline 8s linear infinite;
-  --animate-spin-slow: spin 12s linear infinite;
-  --animate-pulse-glow: pulseGlow 4s ease-in-out infinite;
-}
+/* DEEP-GREEN REACTOR Palette - v3.1 Strict */
+/* Moved variables to :root for standard Tailwind compatibility */
 
 :root {
   /* Core Variables */
