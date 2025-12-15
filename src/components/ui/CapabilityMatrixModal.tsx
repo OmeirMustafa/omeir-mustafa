@@ -31,6 +31,7 @@ const SECTIONS = [
 
 export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     const [copied, setCopied] = React.useState(false);
+    const cardRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleEsc = (e: KeyboardEvent) => {
@@ -53,6 +54,15 @@ export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; on
             document.documentElement.style.overflow = "unset";
         };
     }, [isOpen, onClose]);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        cardRef.current.style.setProperty("--x", `${x}px`);
+        cardRef.current.style.setProperty("--y", `${y}px`);
+    };
 
     const handleCopy = () => {
         const text = SECTIONS.map(s =>
@@ -87,24 +97,32 @@ export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; on
                         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
                     />
 
-                    {/* Premium Card Content */}
+                    {/* Premium Card Content with Spotlight */}
                     <motion.div
+                        ref={cardRef}
+                        onMouseMove={handleMouseMove}
                         initial={{ scale: 0.95, opacity: 0, y: 20 }}
                         animate={{ scale: 1, opacity: 1, y: 0 }}
                         exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                        className="relative w-full max-w-3xl bg-[#050505] border border-green-500/30 rounded-xl p-8 shadow-[0_0_50px_rgba(0,255,0,0.15)] overflow-hidden"
+                        className="relative w-full max-w-2xl bg-[#050505] border border-green-500/30 rounded-xl p-8 shadow-[0_0_50px_rgba(0,255,0,0.15)] overflow-visible group/card"
+                        style={{
+                            backgroundImage: "radial-gradient(600px circle at var(--x, 0px) var(--y, 0px), rgba(0, 255, 0, 0.08), transparent 40%)"
+                        }}
                     >
-                        {/* Close Button */}
+                        {/* Floating Close Button (Top Center Outside) */}
                         <button
                             onClick={onClose}
-                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors z-20"
+                            className="absolute -top-16 left-1/2 -translate-x-1/2 p-3 rounded-full bg-black border border-green-500 text-white hover:bg-green-500 hover:text-black transition-all z-50 shadow-[0_0_20px_rgba(0,255,160,0.3)]"
+                            aria-label="Close Modal"
                         >
                             <X className="w-5 h-5" />
                         </button>
+                        {/* Connector Line */}
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-px h-6 bg-green-500/30"></div>
 
-                        <div className="relative z-10">
+                        <div className="relative z-10 pointer-events-none">
                             {/* Header */}
-                            <div className="mb-8 border-b border-green-500/20 pb-6">
+                            <div className="mb-6 border-b border-green-500/20 pb-4 text-center">
                                 <div className="text-xs text-green-500/70 uppercase tracking-widest mb-2 font-mono">
                                     SYSTEM ARCHITECTURE
                                 </div>
@@ -113,17 +131,17 @@ export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; on
                                 </h2>
                             </div>
 
-                            {/* 2-Column Grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* 2-Column Grid - Compact Spacing */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                                 {SECTIONS.map((section, idx) => (
-                                    <div key={idx} className="group">
-                                        <h3 className="text-green-400 font-bold mb-2 text-sm font-mono uppercase flex items-center gap-2">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                    <div key={idx} className="group/item">
+                                        <h3 className="text-green-400 font-bold mb-1 text-xs font-mono uppercase flex items-center gap-2">
+                                            <div className="w-1 h-1 rounded-full bg-green-500" />
                                             {section.title.replace("_", " ")}
                                         </h3>
-                                        <div className="space-y-1 pl-4 border-l border-green-500/10 group-hover:border-green-500/30 transition-colors">
+                                        <div className="space-y-0.5 pl-3 border-l border-green-500/10 group-hover/item:border-green-500/30 transition-colors">
                                             {section.tags.map((tag, i) => (
-                                                <div key={i} className="text-zinc-400 text-sm leading-relaxed">
+                                                <div key={i} className="text-zinc-400 text-[11px] md:text-xs leading-relaxed">
                                                     {tag}
                                                 </div>
                                             ))}
@@ -132,17 +150,17 @@ export function CapabilityMatrixModal({ isOpen, onClose }: { isOpen: boolean; on
                                 ))}
                             </div>
 
-                            {/* Actions */}
-                            <div className="mt-8 pt-6 border-t border-green-500/20 flex justify-end gap-3">
+                            {/* Actions - Pointer Events Auto for Buttons */}
+                            <div className="mt-6 pt-4 border-t border-green-500/20 flex justify-center gap-3 pointer-events-auto">
                                 <button
                                     onClick={handleCopy}
-                                    className="px-4 py-2 rounded text-xs font-bold font-mono uppercase bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-black transition-all"
+                                    className="px-4 py-2 rounded text-[10px] font-bold font-mono uppercase bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-black transition-all border border-transparent hover:border-green-500"
                                 >
                                     {copied ? "COPIED" : "COPY DATA"}
                                 </button>
                                 <button
                                     onClick={handleDownload}
-                                    className="px-4 py-2 rounded text-xs font-bold font-mono uppercase border border-white/20 text-white/70 hover:border-white hover:text-white transition-all"
+                                    className="px-4 py-2 rounded text-[10px] font-bold font-mono uppercase border border-white/20 text-white/70 hover:border-white hover:text-white transition-all"
                                 >
                                     DOWNLOAD JSON
                                 </button>

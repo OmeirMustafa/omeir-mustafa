@@ -163,7 +163,7 @@ export function ServicesSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 + (i * 0.15) }}
-                                className="relative flex flex-col p-8 rounded-xl border border-[var(--hairline)] bg-[var(--bg-deep)] hover:border-[var(--accent-green)]/60 transition-all duration-300 group"
+                                className="relative flex flex-col p-8 rounded-xl border border-[var(--hairline)] bg-[var(--bg-deep)] transition-all duration-300 group animate-[greenBurn_3s_infinite_alternate]"
                             >
                                 <div className="mb-6 pb-6 border-b border-[var(--hairline)]/50">
                                     <div className="text-[var(--accent-green)] font-mono text-xs tracking-widest mb-2 opacity-70">
