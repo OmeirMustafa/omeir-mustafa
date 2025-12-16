@@ -6,14 +6,14 @@ import Link from "next/link";
 
 const MODELS = [
     {
-        title: "Architecture Audit",
+        title: "Strategic Audit",
         price: "Fixed Scope",
         desc: "A surgical review of your codebase, stack, and deployment pipeline. I identify critical risks before investors do.",
         features: ["Codebase Analysis", "Security Posture Check", "Scalability Report", "Remediation Roadmap"],
         cta: "Request Audit"
     },
     {
-        title: "The Product Build",
+        title: "Build Sprint",
         price: "Project Basis",
         desc: "I step in as Interim Product Architect to build your MVP or v2.0 foundation correctly from day one.",
         features: ["Next.js/React Architecture", "Design System Implementation", "Performance Engineering", "SEO/Analytics Setup"],
@@ -21,8 +21,8 @@ const MODELS = [
         highlight: true
     },
     {
-        title: "Fractional Architect",
-        price: "Retainer",
+        title: "Fractional Retainer",
+        price: "Monthly",
         desc: "Ongoing technical leadership for non-technical founders. I manage your dev team and own the roadmap.",
         features: ["Team Management", "Vendor Selection", "Code Review", "Strategic Planning"],
         cta: "Discuss Retainer"
@@ -48,8 +48,8 @@ export function EngagementModels() {
                         <div
                             key={idx}
                             className={`p-8 border rounded-sm flex flex-col h-full transition-all duration-300 ${model.highlight
-                                    ? "bg-emerald-950/10 border-emerald-500/30"
-                                    : "bg-transparent border-white/10 hover:border-emerald-500/20"
+                                ? "bg-emerald-950/10 border-emerald-500/30"
+                                : "bg-transparent border-white/10 hover:border-emerald-500/20"
                                 }`}
                         >
                             <div className="mb-6">
@@ -73,8 +73,8 @@ export function EngagementModels() {
                             <Link
                                 href="#contact"
                                 className={`w-full py-4 text-xs font-bold uppercase tracking-widest text-center transition-colors flex items-center justify-center gap-2 ${model.highlight
-                                        ? "bg-emerald-600 text-white hover:bg-emerald-500"
-                                        : "bg-white/5 text-slate-300 hover:bg-white/10"
+                                    ? "bg-emerald-600 text-white hover:bg-emerald-500"
+                                    : "bg-white/5 text-slate-300 hover:bg-white/10"
                                     }`}
                             >
                                 {model.cta} <ArrowRight size={14} />

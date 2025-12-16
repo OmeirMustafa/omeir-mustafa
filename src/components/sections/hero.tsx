@@ -40,12 +40,8 @@ export function HeroSection() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-5">
-                            <Link href="#contact" className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-slate-200 text-black font-bold tracking-tight text-sm rounded-sm transition-colors min-w-[180px]">
-                                Review Architecture
-                            </Link>
-                            <Link href="#approach" className="inline-flex items-center justify-center px-8 py-4 bg-transparent border border-white/10 text-slate-300 hover:text-white hover:border-white/30 font-medium tracking-tight text-sm rounded-sm transition-all min-w-[180px] group">
-                                View Methodology
-                                <ArrowDownRight size={16} className="ml-2 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5" />
+                            <Link href="#contact" className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-slate-200 text-black font-bold tracking-tight text-sm rounded-sm transition-colors min-w-[220px]">
+                                Request Architecture Review
                             </Link>
                         </div>
                     </motion.div>
