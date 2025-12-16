@@ -1,81 +1,71 @@
 "use client";
 
-import React, { useRef } from "react";
-import Link from "next/link";
+import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { ParticleCanvas } from "@/components/ui/ParticleCanvas";
-import { VARIANTS } from "@/config/motion";
+import { ArrowDownRight, ShieldCheck } from "lucide-react";
+import Link from "next/link";
 
 export function HeroSection() {
-    const ref = useRef<HTMLDivElement>(null);
-
     return (
-        <section
-            ref={ref}
-            className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-12 pb-12 md:pt-20 md:pb-20 overflow-hidden bg-transparent"
-        >
-            {/* 0. GLOBAL ENVIRONMENT */}
-            <ParticleCanvas />
+        <section className="relative min-h-[90vh] flex flex-col justify-center px-6 pt-24 bg-[#030504]">
 
-            <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={VARIANTS.container}
-                className="relative z-10 w-full max-w-4xl mx-auto flex items-center justify-center"
-            >
-                {/* Concentric Circles Background (The "Circle Element") */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none scale-[0.6] md:scale-100 transition-transform duration-500">
-                    {/* Outer Ring */}
-                    <div className="w-[600px] h-[600px] border border-emerald-500/10 rounded-full animate-[spin_60s_linear_infinite]" />
-                    {/* Middle Ring */}
-                    <div className="absolute w-[450px] h-[450px] border border-dashed border-emerald-500/20 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
-                    {/* Inner Ring */}
-                    <div className="absolute w-[300px] h-[300px] border border-emerald-500/10 rounded-full opacity-50" />
-                    {/* Pulse Ring */}
-                    <div className="absolute w-[500px] h-[500px] border-2 border-emerald-500/5 rounded-full animate-pulse" />
-                </div>
+            {/* Background Grid - Extremely subtle */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98105_1px,transparent_1px),linear-gradient(to_bottom,#10b98105_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
-                {/* Centered Content (Solid/Stable Container) */}
-                <div className="relative text-center flex flex-col items-center gap-6 md:gap-8 py-16 md:py-24 px-8 md:px-12 max-w-5xl mx-auto">
+            <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
 
-                    {/* Blinking Dot (Centered Top) */}
-                    <motion.div variants={VARIANTS.item} className="mb-4">
-                        <div className="w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_15px_#10b981] animate-ping" />
-                    </motion.div>
-
-                    {/* Version Text */}
-                    <motion.div variants={VARIANTS.item} className="text-xs font-mono text-emerald-400 tracking-[0.2em] uppercase bg-black/50 px-4 py-2 rounded-full border border-emerald-500/20">
-                        OMEIR OS v4 :: ONLINE
-                    </motion.div>
-
-                    {/* H1 Title */}
-                    <motion.h1 variants={VARIANTS.item} className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] text-white">
-                        DIGITAL PRODUCT <br />
-                        <span className="text-emerald-500 text-glow">
-                            ARCHITECT
-                        </span>
-                    </motion.h1>
-
-                    {/* Subtitle */}
-                    <motion.p variants={VARIANTS.item} className="text-lg md:text-xl text-zinc-400 max-w-3xl leading-relaxed font-light">
-                        Designing premium websites, intelligent systems, and modern digital experiences built for clarity, performance, and trust.
-                    </motion.p>
-
-                    {/* CTAs */}
-                    <motion.div variants={VARIANTS.item} className="flex flex-col sm:flex-row items-center gap-6 mt-10 w-full sm:w-auto">
-                        <Link href="#contact" className="w-full sm:w-auto group relative px-8 py-4 bg-emerald-600/20 border border-emerald-500/50 text-emerald-400 font-bold font-mono text-xs tracking-widest uppercase hover:bg-emerald-500 hover:text-black transition-all duration-300 rounded flex justify-center overflow-hidden">
-                            <span className="relative z-10 flex items-center gap-2">
-                                INITIATE PROTOCOL <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                {/* Left: Decisive Copy */}
+                <div className="md:col-span-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded bg-emerald-900/10 border border-emerald-900/20">
+                            <ShieldCheck size={14} className="text-emerald-500" />
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-500/80">
+                                TECHNICAL RISK MITIGATION
                             </span>
-                        </Link>
+                        </div>
 
-                        <Link href="#portfolio" className="w-full sm:w-auto group relative px-8 py-4 bg-transparent border border-zinc-800 text-zinc-500 font-mono text-xs tracking-widest uppercase hover:text-emerald-400 hover:border-emerald-500/50 transition-all duration-300 flex justify-center rounded">
-                            <span className="relative z-10">ACCESS ARCHIVES</span>
-                        </Link>
+                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-8">
+                            I prevent expensive <br />
+                            <span className="text-emerald-500">technical mistakes</span> <br />
+                            before they happen.
+                        </h1>
+
+                        <p className="text-xl text-slate-400 max-w-2xl font-light leading-relaxed mb-10">
+                            Digital Product Architect for Founders & VC. <br />
+                            I audit, structured, and build high-performance web systems that survive due diligence.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-5">
+                            <Link href="#contact" className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-slate-200 text-black font-bold tracking-tight text-sm rounded-sm transition-colors min-w-[180px]">
+                                Review Architecture
+                            </Link>
+                            <Link href="#approach" className="inline-flex items-center justify-center px-8 py-4 bg-transparent border border-white/10 text-slate-300 hover:text-white hover:border-white/30 font-medium tracking-tight text-sm rounded-sm transition-all min-w-[180px] group">
+                                View Methodology
+                                <ArrowDownRight size={16} className="ml-2 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5" />
+                            </Link>
+                        </div>
                     </motion.div>
                 </div>
-            </motion.div>
+
+                {/* Right: Abstract Logic Visualization (Code/Data) */}
+                <div className="md:col-span-4 hidden md:block opacity-80">
+                    <div className="border border-white/5 bg-white/[0.02] rounded-lg p-6 font-mono text-xs text-emerald-500/50 leading-loose">
+                        <div>// SYSTEM_AUDIT_LOG</div>
+                        <div className="text-slate-500">Analyzing Next.js Architecture...</div>
+                        <div className="pl-4 border-l border-emerald-900/30 my-2">
+                            <div>→ SSR Strategy: <span className="text-emerald-400">OPTIMIZED</span></div>
+                            <div>→ Database Schema: <span className="text-emerald-400">NORMALIZED</span></div>
+                            <div>→ Security Headers: <span className="text-emerald-400">A+ RATING</span></div>
+                        </div>
+                        <div className="text-slate-500 animate-pulse">Waiting for input...</div>
+                    </div>
+                </div>
+
+            </div>
         </section>
     );
 }

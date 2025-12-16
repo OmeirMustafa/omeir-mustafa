@@ -1,155 +1,75 @@
 @import "tailwindcss";
 
-/* DEEP-GREEN REACTOR Palette - v3.1 Strict */
-/* Moved variables to :root for standard Tailwind compatibility */
+/* EXECUTIVE FINTECH PALETTE - v4.0 Surgical */
 
 :root {
-  /* Core Variables */
-  --bg-deep: #020202;
-  /* Deep Black Void */
-  --bg-glass: rgba(2, 2, 2, 0.85);
-  /* Glass Base */
-  --accent-green: #10b981;
-  --hairline: rgba(16, 185, 129, 0.2);
+  /* Base - Near-Black Green */
+  --bg-deep: #030504;
 
+  /* Text */
+  --fg-primary: #ecfdf5;
+  /* emerald-50 */
+  --fg-secondary: #6ee7b7;
+  /* emerald-300 (muted) */
+  --fg-tertiary: #34d399;
+  /* emerald-400 (dim) */
+
+  /* Accents */
+  --accent-emerald: #10b981;
+  --border-subtle: rgba(16, 185, 129, 0.15);
+
+  /* Typography */
   --font-primary: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
 @layer base {
   body {
-    @apply bg-[#020202] text-slate-300 antialiased overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-200;
+    @apply bg-[#030504] text-slate-300 antialiased overflow-x-hidden selection:bg-emerald-900/50 selection:text-white;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 body {
   background-color: var(--bg-deep);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  overflow-x: hidden;
   width: 100%;
-  cursor: none;
-  /* Custom Reticle Cursor */
   position: relative;
 }
 
-/* Global Background System */
-/* Global Background System - REMOVED for Stability */
-
 @layer utilities {
-
-  /* Master Panel Implementation */
-  .master-panel {
-    background: var(--bg-overlay);
-    backdrop-filter: blur(18px);
-    border: 1px solid var(--hairline);
-    border-radius: 16px;
-    box-shadow: 0 0 48px rgba(0, 255, 160, 0.08);
-    position: relative;
-    overflow: hidden;
+  .precision-text {
+    @apply tracking-tight font-light text-slate-300;
   }
 
-  .text-glow {
-    text-shadow: 0 0 10px rgba(0, 255, 160, 0.5);
+  .mono-label {
+    @apply font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-500/60;
   }
 
-  /* Scanline Overlay */
-  .scanlines::before {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-    background-size: 100% 4px;
-    z-index: 2;
-    pointer-events: none;
-    opacity: 0.15;
+  .surgical-border {
+    @apply border border-emerald-500/10;
+  }
+
+  .glass-executive {
+    @apply bg-[#030504]/90 backdrop-blur-md border-b border-white/5;
   }
 }
 
-/* Keyframes */
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes scanline {
-  0% {
-    transform: translateY(0%);
-  }
-
-  100% {
-    transform: translateY(100%);
-  }
-}
-
-@keyframes pulseGlow {
+/* Minimal Animations */
+@keyframes pulse-slow {
 
   0%,
   100% {
-    opacity: 0.5;
-    box-shadow: 0 0 20px rgba(0, 255, 160, 0.2);
+    opacity: 0.4;
   }
 
   50% {
-    opacity: 1;
-    box-shadow: 0 0 40px rgba(0, 255, 160, 0.6);
+    opacity: 0.7;
   }
 }
 
-@keyframes greenBurn {
-  0% {
-    box-shadow: 0 0 15px #022c22, inset 0 0 10px #022c22;
-    border-color: #064e3b;
-  }
-
-  50% {
-    box-shadow: 0 0 30px #064e3b, inset 0 0 20px #064e3b;
-    border-color: #10b981;
-  }
-
-  100% {
-    box-shadow: 0 0 15px #022c22, inset 0 0 10px #022c22;
-    border-color: #064e3b;
-  }
-}
-
-@keyframes plasmaFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
-.animate-float {
-  animation: float 7s ease-in-out infinite;
+.animate-pulse-slow {
+  animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
