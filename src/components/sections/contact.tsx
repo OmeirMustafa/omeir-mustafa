@@ -1,64 +1,41 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { MasterPanel } from "@/components/ui/MasterPanel";
-import SmartContactModal from "@/components/ui/SmartContactModal";
+import React from "react";
+import { Mail, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function ContactSection() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
     return (
-        <section id="contact" className="pt-12 md:pt-24 pb-24 md:pb-32 px-6 relative overflow-hidden bg-transparent mb-0">
-            <div className="container mx-auto max-w-4xl pt-12 border-t border-emerald-500/20">
+        <section id="contact" className="section-spacing bg-[#0F172A] border-t border-slate-800">
+            <div className="container-width">
+                <div className="max-w-3xl mx-auto text-center">
 
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    className="text-center"
-                >
-                    <div className="p-8 md:p-12 text-center bg-[#050505] border border-emerald-900/30 rounded-2xl relative shadow-[0_0_20px_rgba(16,185,129,0.05)]">
-                        <div className="mb-8">
-                            <span className="text-emerald-400 font-mono text-xs tracking-widest uppercase border border-emerald-900/50 px-3 py-1 rounded bg-black/50">
-                                COMMS_CHANNEL // STANDBY
-                            </span>
-                        </div>
+                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-8 leading-tight">
+                        Ready to stop losing leads? <br />
+                        <span className="text-blue-500">Email me directly.</span>
+                    </h2>
 
-                        <div className="max-w-xl mx-auto space-y-8">
-                            <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
-                                READY TO <br />
-                                <span className="text-emerald-400 text-glow">
-                                    INITIALIZE?
-                                </span>
-                            </h2>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12">
+                        <Link
+                            href="mailto:omeirmustafa.work@gmail.com"
+                            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#0F172A] hover:bg-slate-200 font-bold text-lg rounded-lg transition-colors min-w-[240px]"
+                        >
+                            <Mail size={20} />
+                            omeirmustafa.work@gmail.com
+                        </Link>
 
-                            <p className="text-zinc-400 text-lg font-light">
-                                Architecting the future requires precise communication. <br />
-                                Open a secure channel securely.
-                            </p>
-
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setIsModalOpen(true);
-                                    const contactSection = document.getElementById("contact");
-                                    if (contactSection) {
-                                        contactSection.scrollIntoView({ behavior: "smooth", block: "center" });
-                                    }
-                                }}
-                                className="group relative inline-flex items-center gap-3 px-12 py-5 bg-emerald-500 text-black font-bold font-mono text-sm tracking-[0.2em] uppercase hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] transform hover:-translate-y-1 rounded-sm"
-                            >
-                                <span className="relative z-10">OPEN UPLINK</span>
-                            </button>
-                        </div>
+                        <Link
+                            href="https://www.linkedin.com/in/omeir-mustafa-uddin/"
+                            className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-slate-700 hover:border-blue-500 text-slate-400 hover:text-white font-medium text-lg rounded-lg transition-all min-w-[240px]"
+                        >
+                            Connect on LinkedIn <ArrowRight size={18} />
+                        </Link>
                     </div>
-                </motion.div>
 
+                    <p className="mt-12 text-slate-500 text-sm">
+                        No forms. No spam. Just direct communication.
+                    </p>
+
+                </div>
             </div>
-
-            <SmartContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </section>
     );
 }

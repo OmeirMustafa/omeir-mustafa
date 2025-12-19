@@ -1,89 +1,77 @@
-"use client";
+import React from "react";
+import { CheckCircle2 } from "lucide-react";
 
-import React from 'react';
-import { Database, Cpu, Eye } from 'lucide-react';
-import { motion } from "framer-motion";
-import { TiltCard } from "@/components/ui/TiltCard";
-
-const SKILLS = [
-    {
-        title: "Technical Foundation",
-        desc: "Next.js 15, React Server Components, and Edge Runtime optimization.",
-        icon: <Database className="w-6 h-6 text-[var(--accent-green)] group-hover:animate-pulse" />,
-    },
-    {
-        title: "System Architecture",
-        desc: "Scalable component patterns and atomic design principles.",
-        icon: <Cpu className="w-6 h-6 text-[var(--accent-green)] group-hover:animate-spin-slow" />,
-    },
-    {
-        title: "Visual Intelligence",
-        desc: "Data visualization and interactive HUD interfaces.",
-        icon: <Eye className="w-6 h-6 text-[var(--accent-green)]" />,
-    }
+const STATS = [
+    "3+ Years Engineering Foundation",
+    "JS / TS / Python Capable",
+    "Business-First Focus"
 ];
 
 export function AboutSection() {
     return (
-        <section className="py-24 px-6 relative overflow-hidden" id="about">
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+        <section id="about" className="section-spacing bg-[#0F172A] border-t border-slate-800">
+            <div className="container-width">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
-                {/* Left: Interactive Diagram */}
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className="relative aspect-square md:aspect-auto md:h-[500px]"
-                >
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-green)]/5 to-transparent rounded-2xl border border-white/5 backdrop-blur-sm p-8 flex items-center justify-center">
-                        <div className="text-center space-y-4">
-                            <h3 className="text-2xl font-bold text-[var(--text-primary)]">
-                                Component <span className="text-[var(--accent-green)]">Architecture</span>
-                            </h3>
-                            <p className="text-[var(--text-muted)] max-w-xs mx-auto text-sm">
-                                Modular, type-safe, and built for scale.
+                    {/* Copy Side */}
+                    <div>
+                        <div className="inline-block px-3 py-1 mb-6 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest">
+                            Engineer's Story
+                        </div>
+
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-8 leading-tight">
+                            Why I trade theory <br />
+                            for <span className="text-blue-500">velocity</span>.
+                        </h2>
+
+                        <div className="space-y-6 text-slate-400 text-lg leading-relaxed">
+                            <p>
+                                Traditional education optimizes for theory. <span className="text-white font-medium">The market optimizes for shipping.</span>
+                            </p>
+                            <p>
+                                I made the strategic decision to leave the lecture hall and build my engineering foundation in the real world. This wasn't a shortcut—it was an acceleration.
+                            </p>
+                            <p>
+                                Today, I combine that engineering rigor with the founder mentality needed to ship products that actually survive the market.
                             </p>
                         </div>
 
-                        {/* Orbiting Elements */}
-                        <div className="absolute inset-0 m-auto w-64 h-64 border border-[var(--hairline)] rounded-full animate-spin-slow border-dashed opacity-30" />
-                        <div className="absolute inset-0 m-auto w-48 h-48 border border-[var(--accent-green)]/20 rounded-full animate-[spin_12s_linear_infinite_reverse]" />
-                    </div>
-                </motion.div>
-
-                {/* Right: Cards */}
-                <div className="space-y-6">
-                    {SKILLS.map((skill, i) => (
-                        <motion.div
-                            key={skill.title}
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                        >
-                            <div className="relative h-full group p-8 rounded-lg bg-slate-900/60 backdrop-blur-xl border border-[var(--hairline)] hover:border-[var(--accent-green)]/60 transition-all duration-300 hover:shadow-[0_0_30px_var(--halo)] flex flex-col">
-
-                                {/* Corner Accents */}
-                                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--accent-green)]/50 group-hover:border-[var(--accent-green)] transition-colors" />
-                                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[var(--accent-green)]/50 group-hover:border-[var(--accent-green)] transition-colors" />
-                                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[var(--accent-green)]/50 group-hover:border-[var(--accent-green)] transition-colors" />
-                                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--accent-green)]/50 group-hover:border-[var(--accent-green)] transition-colors" />
-
-                                <div className="flex items-start gap-6 relative z-10">
-                                    <div className="p-3 rounded bg-[var(--accent-green)]/10 border border-[var(--accent-green)]/20 group-hover:bg-[var(--accent-green)]/20 group-hover:border-[var(--accent-green)]/50 transition-all">
-                                        {skill.icon}
-                                    </div>
-                                    <div>
-                                        <h4 className="text-xl font-bold text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent-green)] transition-colors">{skill.title}</h4>
-                                        <p className="text-[var(--text-muted)] leading-relaxed">{skill.desc}</p>
-                                    </div>
+                        {/* Stats Row */}
+                        <div className="mt-10 pt-10 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            {STATS.map((stat, idx) => (
+                                <div key={idx} className="flex items-start gap-3">
+                                    <CheckCircle2 className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                                    <span className="text-sm font-medium text-slate-300 leading-tight">
+                                        {stat}
+                                    </span>
                                 </div>
+                            ))}
+                        </div>
+                    </div>
 
-                                {/* Hover Gradient Sweep */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--accent-green)]/5 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-700 ease-in-out pointer-events-none" />
+                    {/* Visual Side */}
+                    <div className="relative aspect-square md:aspect-[4/5] lg:aspect-square bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden group">
+                        {/* Abstract Grid Visual */}
+                        <div className="absolute inset-0 opacity-20"
+                            style={{
+                                backgroundImage: "linear-gradient(#3B82F6 1px, transparent 1px), linear-gradient(90deg, #3B82F6 1px, transparent 1px)",
+                                backgroundSize: "32px 32px"
+                            }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent" />
+
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="text-center p-8">
+                                <span className="block text-6xl font-bold text-slate-700 mb-2 group-hover:text-blue-500 transition-colors duration-500">
+                                    &lt;/&gt;
+                                </span>
+                                <span className="text-slate-500 text-sm font-mono uppercase tracking-widest">
+                                    System Architecture
+                                </span>
                             </div>
-                        </motion.div>
-                    ))}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>

@@ -1,82 +1,66 @@
 @import "tailwindcss";
 
-/* EXECUTIVE FINTECH PALETTE - v4.0 Surgical */
+/* VALIDATOR PROTOCOL - v1.0 */
 
 :root {
-  /* Base - Near-Black Green */
-  --bg-deep: #030504;
+  /* Slate-900 Base */
+  --bg-primary: #0F172A;
+  /* Slate-800 Surface */
+  --bg-surface: #1E293B;
 
-  /* Text */
-  --fg-primary: #ecfdf5;
-  /* emerald-50 */
-  --fg-secondary: #6ee7b7;
-  /* emerald-300 (muted) */
-  --fg-tertiary: #34d399;
-  /* emerald-400 (dim) */
+  /* Slate-50 Text */
+  --text-primary: #F8FAFC;
+  /* Slate-400 Muted */
+  --text-secondary: #94A3B8;
 
-  /* Accents */
-  --accent-emerald: #10b981;
-  /* Sacred Green - Primary CTA Only */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  /* White based border, not green */
-
-  /* Typography */
-  --font-primary: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Blue-500 Accent */
+  --accent-primary: #3B82F6;
+  --accent-hover: #2563EB;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-[#030504] text-slate-300 antialiased overflow-x-hidden selection:bg-emerald-900/50 selection:text-white;
+    @apply bg-[#0F172A] text-[#F8FAFC] antialiased selection:bg-blue-500/30 selection:text-white;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
     -webkit-font-smoothing: antialiased;
   }
-}
 
-body {
-  background-color: var(--bg-deep);
-  width: 100%;
-  position: relative;
+  /* Semantic Typography Hierarchy */
+  h1 {
+    @apply text-4xl md:text-6xl font-bold tracking-tight text-white;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold tracking-tight text-white;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-semibold text-white;
+  }
+
+  p {
+    @apply text-slate-400 leading-relaxed;
+  }
 }
 
 @layer utilities {
-  .precision-text {
-    @apply tracking-tight font-light text-slate-300;
+  .section-spacing {
+    @apply py-20 md:py-32;
   }
 
-  .mono-label {
-    @apply font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-500/60;
+  .container-width {
+    @apply max-w-6xl mx-auto px-6;
   }
 
-  .surgical-border {
-    @apply border border-emerald-500/10;
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium rounded transition-colors duration-200;
   }
 
-  .glass-executive {
-    @apply bg-[#030504]/90 backdrop-blur-md border-b border-white/5;
-  }
-}
-
-/* Minimal Animations */
-@keyframes pulse-slow {
-
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-medium rounded transition-colors duration-200;
   }
 }

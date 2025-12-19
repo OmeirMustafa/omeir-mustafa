@@ -24,14 +24,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-[#020202] text-slate-300 selection:bg-emerald-500/30`}>
-        <ScrollManager />
-        {/* <CircuitGridBackground /> */}
-        <ParticleBackground />
-        <ReticleCursor />
-        <HUDNavigation />
-        <main className="relative z-10 pt-20">{children}</main>
-        <HUDFooter />
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-[#0F172A] text-slate-50 antialiased`}>
+        <main className="min-h-screen flex flex-col">
+          {children}
+        </main>
       </body>
     </html>
   );
