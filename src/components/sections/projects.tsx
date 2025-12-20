@@ -9,24 +9,21 @@ const PROJECTS = [
         id: "lumina",
         title: "Lumina Law",
         category: "Legal Authority",
-        desc: "Transforming a legacy firm into a high-trust digital brand.",
-        image: "bg-slate-900", // placeholder class
+        desc: "Rebuilt a legacy legal website into a high-trust digital presence designed to increase qualified inquiries.",
         available: true
     },
     {
         id: "kuro",
         title: "Kuro Coffee",
-        category: "E-Commerce",
-        desc: "Speed-focused retail experience for modern consumers.",
-        image: "bg-amber-900",
+        category: "E-Commerce Performance",
+        desc: "Designed a fast, mobile-first storefront focused on speed, clarity, and repeat purchases.",
         available: false
     },
     {
         id: "apex",
         title: "Apex SaaS",
         category: "Enterprise Data",
-        desc: "Complex dashboard visualization for decision support.",
-        image: "bg-blue-900", // placeholder
+        desc: "Structured complex information into a calm, decision-ready dashboard experience.",
         available: false
     }
 ];

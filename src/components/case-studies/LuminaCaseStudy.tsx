@@ -49,7 +49,7 @@ export function LuminaCaseStudy({ isOpen, onClose }: LuminaCaseStudyProps) {
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-0 left-0 z-50 p-3 bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white rounded-br-2xl transition-colors backdrop-blur-sm"
+                    className="absolute top-0 left-0 z-50 p-6 bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white rounded-br-2xl transition-colors backdrop-blur-sm"
                 >
                     <X size={24} />
                 </button>
