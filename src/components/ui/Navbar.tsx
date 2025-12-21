@@ -31,12 +31,16 @@ export function Navbar() {
             <div className="container-width">
                 <div
                     className={`flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 ${scrolled
-                            ? "bg-white/70 backdrop-blur-xl shadow-sm border border-white/40"
-                            : "bg-transparent"
+                        ? "bg-white/70 backdrop-blur-xl shadow-sm border border-white/40"
+                        : "bg-transparent"
                         }`}
                 >
                     {/* LEFT: Logo */}
-                    <Link href="/" className="text-lg font-bold tracking-tight text-slate-900 group">
+                    <Link
+                        href="/"
+                        onClick={() => window.scrollTo(0, 0)}
+                        className="text-lg font-bold tracking-tight text-slate-900 group"
+                    >
                         Omeir Mustafa
                         <span className="text-slate-400 font-normal ml-2 hidden sm:inline-block group-hover:text-slate-600 transition-colors">
                             / Architect

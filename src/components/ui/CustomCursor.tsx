@@ -1,73 +1,103 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 export function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isPointer, setIsPointer] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const position = useRef({ x: 0, y: 0 });
+  const target = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     // Only run on desktop
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    if (isMobile) return;
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return;
 
-    const onMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      setIsVisible(true);
-
-      // Check if hovering interactive element
-      const target = e.target as HTMLElement;
-      setIsPointer(
-        window.getComputedStyle(target).cursor === "pointer" ||
-        target.tagName === "BUTTON" ||
-        target.tagName === "A"
-      );
+    const handleMouseMove = (e: MouseEvent) => {
+      target.current = { x: e.clientX, y: e.clientY };
+      // Ensure cursor is visible on movement
+      if (cursorRef.current) cursorRef.current.style.opacity = "1";
     };
 
-    const onMouseLeave = () => setIsVisible(false);
-    const onMouseEnter = () => setIsVisible(true);
+    const handleMouseDown = () => {
+      // Shrink on click
+      if (cursorRef.current) cursorRef.current.style.transform = `translate3d(${position.current.x}px, ${position.current.y}px, 0) scale(0.8)`;
+    };
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseleave", onMouseLeave);
-    window.addEventListener("mouseenter", onMouseEnter);
+    const handleMouseUp = () => {
+      if (cursorRef.current) cursorRef.current.style.transform = `translate3d(${position.current.x}px, ${position.current.y}px, 0) scale(1)`;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    // Animation Loop
+    let rafId: number;
+    const animate = () => {
+      // Lerp for smooth trailing
+      const dx = target.current.x - position.current.x;
+      const dy = target.current.y - position.current.y;
+
+      position.current.x += dx * 0.15; // Speed factor
+      position.current.y += dy * 0.15;
+
+      if (cursorRef.current) {
+        // translate3d for GPU acceleration
+        cursorRef.current.style.transform = `translate3d(${position.current.x}px, ${position.current.y}px, 0)`;
+      }
+
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseleave", onMouseLeave);
-      window.removeEventListener("mouseenter", onMouseEnter);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 
-  if (!isVisible) return null;
-
   return (
     <>
+      {/* Global Cursor Hide */}
       <style jsx global>{`
-        @media (min-width: 768px) {
-          body {
-            cursor: none;
-          }
-        }
-      `}</style>
-      
-      {/* Main Cursor (Dot) */}
+                @media (pointer: fine) {
+                    body { cursor: none; }
+                    a, button, [role="button"] { cursor: none; }
+                }
+            `}</style>
+
+      {/* Cursor Follower (Neon Ring) */}
       <div
-        className="fixed top-0 left-0 w-3 h-3 bg-blue-500 rounded-full pointer-events-none z-[9999] mix-blend-exclusion transition-transform duration-100 ease-out will-change-transform"
+        ref={cursorRef}
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-cyan-400 bg-cyan-500/10 pointer-events-none z-[9999] hidden md:block mix-blend-screen transition-opacity duration-300"
         style={{
-          transform: `translate3d(${position.x - 6}px, ${position.y - 6}px, 0) scale(${isPointer ? 0.5 : 1})`,
+          marginTop: -16, // Center offset
+          marginLeft: -16,
+          boxShadow: "0 0 15px 1px rgba(34, 211, 238, 0.6), 0 0 5px 1px rgba(255, 255, 255, 0.4)" // Neon Cyan/Blue Glow
         }}
       />
 
-      {/* Trailing Ring (Glow) */}
+      {/* Center Dot (Standard Pointer Replacement) */}
       <div
-        className="fixed top-0 left-0 w-8 h-8 border border-blue-400/50 rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out will-change-transform mix-blend-difference"
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-cyan-200 rounded-full pointer-events-none z-[9999] hidden md:block mix-blend-screen"
         style={{
-          transform: `translate3d(${position.x - 16}px, ${position.y - 16}px, 0) scale(${isPointer ? 1.5 : 1})`,
-          boxShadow: isPointer ? "0 0 20px rgba(59, 130, 246, 0.5)" : "none",
-          backgroundColor: isPointer ? "rgba(59, 130, 246, 0.1)" : "transparent",
+          transform: 'translate(-50%, -50%)', // Center
+          left: 0, top: 0, // Reset default
         }}
       />
+
+      {/* JS Logic for Dot Following (Simple) */}
+      <script dangerouslySetInnerHTML={{
+        __html: `
+                const dot = document.querySelector('.bg-cyan-200');
+                if(dot) {
+                    document.addEventListener('mousemove', (e) => {
+                        dot.style.left = e.clientX + 'px';
+                        dot.style.top = e.clientY + 'px';
+                    });
+                }
+            `}} />
     </>
   );
 }
