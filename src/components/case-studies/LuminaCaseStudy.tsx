@@ -73,6 +73,71 @@ export function LuminaCaseStudy({ isOpen, onClose }: LuminaCaseStudyProps) {
                     {/* Content Grid */}
                     <div className="space-y-16 max-w-[85ch]">
 
+                        {/* VISUAL PROOF SECTION */}
+                        <section>
+                            <div className="mb-8">
+                                <h3 className="text-2xl font-bold text-slate-900 mb-2">Proof beats promises.</h3>
+                                <p className="text-lg text-slate-500">
+                                    This comparison shows what changes when clarity, structure, and trust are engineered deliberately — not decorated.
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                                {/* LEFT: Before */}
+                                <div className="space-y-3">
+                                    <div className="font-bold text-xs text-slate-400 uppercase tracking-widest">
+                                        Before: Legacy Website
+                                    </div>
+                                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-slate-200 bg-slate-100 group">
+                                        <iframe
+                                            src="https://luminalaw.ca/"
+                                            className="w-[200%] h-[200%] scale-50 origin-top-left pointer-events-none grayscale opacity-80 transition-all duration-500"
+                                            loading="lazy"
+                                            title="Original Website"
+                                            scrolling="no"
+                                            style={{ filter: "grayscale(0.6) contrast(0.9)" }} // Visual treatment: muted
+                                        />
+                                        <div className="absolute inset-0 bg-slate-900/5 group-hover:bg-transparent transition-colors" />
+                                        <div className="absolute top-4 left-4 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm">
+                                            ORIGINAL
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* RIGHT: After */}
+                                <div className="space-y-3">
+                                    <div className="font-bold text-xs text-blue-600 uppercase tracking-widest">
+                                        After: Strategic Rebuild
+                                    </div>
+                                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-blue-100 bg-blue-50 shadow-2xl shadow-blue-900/10 group">
+                                        <iframe
+                                            src="https://lumina-law-website-rebuilt.vercel.app/"
+                                            className="w-[200%] h-[200%] scale-50 origin-top-left pointer-events-none transition-all duration-500"
+                                            loading="lazy"
+                                            title="Rebuilt Homepage"
+                                            scrolling="no"
+                                        />
+                                        <div className="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-lg">
+                                            REBUILT
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-center md:justify-start">
+                                <a
+                                    href="https://lumina-law-website-rebuilt.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-xl font-bold text-slate-900 shadow-sm hover:border-blue-400 hover:shadow-md transition-all group"
+                                >
+                                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                    View Live Rebuild
+                                    <svg className="w-4 h-4 ml-1 text-slate-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            </div>
+                        </section>
+
                         {/* BEFORE */}
                         <section>
                             <h3 className="text-2xl font-bold text-slate-900 mb-6">--- BEFORE: What was broken</h3>

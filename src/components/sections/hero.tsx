@@ -25,8 +25,9 @@ export function Hero() {
                Let's trust the user's specific "Add 48px... top padding".
                I will remove 'items-center' and use 'items-start' with explicit padding-top to ensure the gap is exact.
             */}
-            <div className="absolute inset-0 bg-noise opacity-30 pointer-events-none" />
-            <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-100 rounded-full blur-[120px] opacity-50 animate-pulse delay-1000 duration-[10s]" />
+
+            {/* Minimalist ambient tint - removed heavy noise/blur for "Restraint" */}
+            <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[120px] opacity-30 pointer-events-none" />
 
             <div className="container-width relative z-10 w-full h-full flex flex-col justify-start"> {/* Align Top */}
 
@@ -39,7 +40,7 @@ export function Hero() {
                     */}
 
                     <h1 className="text-[32px] md:text-[40px] lg:text-[48px] font-bold tracking-tight text-slate-900 leading-[1.05] mb-6 animate-fade-up opacity-0">
-                        Turn your leaking website into a predictable revenue engine.
+                        Turn your leaking website into a <span className="text-[#0A58FF] inline-block text-glow">predictable revenue engine.</span>
                     </h1>
 
                     <h2 className="text-[18px] text-slate-500 max-w-[70ch] leading-[1.6] mb-12 font-regular animate-fade-up delay-100 opacity-0">

@@ -8,8 +8,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-primary' });
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 export const metadata: Metadata = {
-  title: 'Omeir Mustafa | Digital Product & Web Architect',
-  description: 'Designing premium brand systems and intelligent websites for modern businesses.',
+  title: 'Omeir Mustafa | Conversion-Focused Web Systems',
+  description: 'I architect high-trust website rebuilds for founders and scaling teams. Turn your digital presence into a predictable revenue engine.',
 };
 
 export default function RootLayout({

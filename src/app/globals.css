@@ -4,12 +4,16 @@
 
 :root {
   /* Surface colors */
-  --bg-primary: #F1F5F9; /* Platinum / Slate-100 */
-  --bg-secondary: #E2E8F0; /* Slate-200 */
-  
+  --bg-primary: #F1F5F9;
+  /* Platinum / Slate-100 */
+  --bg-secondary: #E2E8F0;
+  /* Slate-200 */
+
   /* Text colors */
-  --text-primary: #1E293B; /* Slate-800 - Softer than pure black */
-  --text-secondary: #475569; /* Slate-600 */
+  --text-primary: #1E293B;
+  /* Slate-800 - Softer than pure black */
+  --text-secondary: #475569;
+  /* Slate-600 */
 
   /* Accent */
   --accent-primary: #2563EB;
@@ -43,7 +47,7 @@
 
 @layer utilities {
   .section-spacing {
-    @apply py-24 md:py-32;
+    @apply py-32 md:py-48;
   }
 
   .container-width {
@@ -110,10 +114,26 @@
 
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
-      display: none;
+    display: none;
   }
+
   .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(10, 88, 255, 0);
+    animation: glowFade 420ms ease-out forwards 600ms;
+    /* Delayed to start after text fades in */
+  }
+}
+
+@keyframes glowFade {
+  to {
+    text-shadow: 0 0 30px rgba(10, 88, 255, 0.25);
+    /* Subtle glow, not spammy */
   }
 }
