@@ -48,18 +48,15 @@ export function CustomCursor() {
     // Animation Loop
     let rafId: number;
     const animate = () => {
-      // Lerp for smooth trailing
+      // Lerp for smooth trailing (0.12)
       const dx = target.current.x - position.current.x;
       const dy = target.current.y - position.current.y;
 
-      position.current.x += dx * 0.15;
-      position.current.y += dy * 0.15;
+      position.current.x += dx * 0.12;
+      position.current.y += dy * 0.12;
 
       if (cursorRef.current) {
-        const scale = isHovering ? 2.5 : 1; // 14px -> 35px approx (28px requested, so ~2x)
-        // Using 2.0 for 28px/14px
-        const targetScale = isHovering ? 2.0 : 1;
-
+        const targetScale = isHovering ? 1.9 : 1;
         cursorRef.current.style.transform = `translate3d(${position.current.x}px, ${position.current.y}px, 0) scale(${targetScale})`;
       }
 
@@ -79,7 +76,7 @@ export function CustomCursor() {
                 @media (pointer: fine) {
                     body, a, button, [role="button"] { cursor: none !important; }
                 }
-                /* Ensure default cursor returns on touch/coarse */
+                /* Ensure default cursor returns on touch/coarse or if validation fails */
                 @media (pointer: coarse) {
                     body, a, button, [role="button"] { cursor: auto !important; }
                 }
@@ -92,16 +89,16 @@ export function CustomCursor() {
       >
         {/* Custom Arrow SVG */}
         <div className="relative">
+          {/* Glow Layer: 18px blur, 0.18 opacity base, 0.28 on hover? User said "glow opacity to 0.28" on hover */}
+          <div className={`absolute inset-0 rounded-full bg-[#0A58FF] blur-[18px] transition-opacity duration-300 ${isHovering ? 'opacity-[0.28]' : 'opacity-[0.18]'}`} style={{ width: '100%', height: '100%' }} />
+
           <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className={`transition-transform duration-300 ease-out-expo ${isHovering ? 'scale-110 translate-x-1 translate-y-1' : 'scale-100'}`}
-            style={{
-              filter: "drop-shadow(0 0 8px rgba(10, 88, 255, 0.5))"
-            }}
+            className={`transition-transform duration-300 ease-out-expo relative z-10 ${isHovering ? 'scale-100 translate-x-1 translate-y-1' : 'scale-100'}`}
           >
             <path
               d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z"

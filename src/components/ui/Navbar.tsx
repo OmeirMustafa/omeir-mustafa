@@ -69,10 +69,10 @@ export function Navbar() {
                                     contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                                 }
                             }}
-                            className="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-[#0A58FF] transition-colors shadow-lg shadow-slate-900/10 active:scale-95 flex items-center gap-2 group"
+                            className="bg-slate-900 text-white px-6 py-3 rounded-xl text-[16px] font-medium hover:bg-[#0A58FF] transition-colors shadow-lg shadow-slate-900/10 active:scale-95 flex items-center gap-2 group min-h-[44px]"
                         >
                             Contact Now
-                            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                            <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                         </button>
                     </div>
                 </div>
@@ -81,16 +81,14 @@ export function Navbar() {
     );
 }
 
+
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
     return (
         <Link
             href={href}
-            className="group relative px-4 py-2 text-sm font-medium text-slate-600 transition-colors duration-300 hover:text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-[#0A58FF]/50 rounded-lg"
+            className="group relative px-4 py-2 text-[16px] md:text-[18px] font-medium tracking-[0.02em] text-[#5B6570] transition-all duration-240 ease-[cubic-bezier(0.25,0.8,0.25,1)] hover:text-[#0B1220] hover:-translate-y-[2px] focus:outline-hidden focus:ring-2 focus:ring-[#0A58FF]/50 rounded-lg hover:shadow-[0_6px_20px_rgba(10,88,255,0.12)]"
         >
             <span className="relative z-10">{children}</span>
-            {/* Soft Outer Glow - No text blur, expensive feel */}
-            <span className="absolute inset-0 rounded-lg bg-[#0A58FF]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            <span className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#0A58FF]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Link>
     );
 }
