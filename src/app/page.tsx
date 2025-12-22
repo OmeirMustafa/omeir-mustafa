@@ -12,10 +12,25 @@ export default function Home() {
     <main className="relative z-10">
       <Navbar />
       <Hero />
+      <div className="section-separator relative">
+        <div className="absolute inset-x-0 top-1/2 h-[1px] bg-gradient-to-r from-transparent via-blue-200/50 to-transparent" />
+      </div>
       <Projects />
+      <div className="section-separator relative">
+        <div className="absolute inset-x-0 top-1/2 h-[1px] bg-gradient-to-r from-transparent via-blue-200/50 to-transparent" />
+      </div>
       <Approach />
+      <div className="section-separator relative">
+        <div className="absolute inset-x-0 top-1/2 h-[1px] bg-gradient-to-r from-transparent via-blue-200/50 to-transparent" />
+      </div>
       <QA />
+      <div className="section-separator relative">
+        <div className="absolute inset-x-0 top-1/2 h-[1px] bg-gradient-to-r from-transparent via-blue-200/50 to-transparent" />
+      </div>
       <ContactSection />
+      <div className="section-separator relative">
+        <div className="absolute inset-x-0 top-1/2 h-[1px] bg-gradient-to-r from-transparent via-blue-200/50 to-transparent" />
+      </div>
       <Footer />
     </main>
   );

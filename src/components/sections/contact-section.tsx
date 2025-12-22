@@ -8,42 +8,48 @@ export function ContactSection() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <section id="contact" className="py-24 md:py-32 bg-[#F1F5F9] relative overflow-hidden">
+        <section id="contact" className="py-24 md:py-32 bg-[#F8FAFC] relative overflow-hidden"> {/* Lighter bg to contrast with dark modal popup if needed, but keeping global consist. */}
             <div className="container-width">
-                <div className="max-w-[920px] mx-auto glass-panel rounded-2xl p-8 md:p-16 text-center shadow-2xl border border-white/60 relative overflow-hidden group">
+                <div className="max-w-[920px] mx-auto glass-panel rounded-3xl p-8 md:p-16 text-center shadow-2xl shadow-blue-900/5 border border-white/60 relative overflow-hidden group">
 
-                    {/* Decorative Pulse Glows */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30" />
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30" />
+                    {/* Background: Subtle Moving Gradient Mesh */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white/80 to-blue-50/50 opacity-100" />
 
-                    <div className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-blue-400/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-blue-400/20 transition-colors duration-700" />
-                    <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-slate-400/10 rounded-full blur-[100px] pointer-events-none" />
+                    {/* Animated Accents */}
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-[#0A58FF]/5 to-transparent rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 animate-pulse-slow" />
+                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-t from-[#0A58FF]/5 to-transparent rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 animate-pulse-slow delay-1000" />
 
                     <div className="relative z-10">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-wider mb-8">
-                            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-                            Status: Accepting New Projects
+                        {/* Status Indicator */}
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-blue-100 shadow-sm text-slate-600 text-xs font-bold uppercase tracking-wider mb-8 animate-fade-up">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            Accepting New Projects
                         </div>
 
-                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 leading-[1.1] tracking-tight">
-                            Most websites don’t fail.<br className="hidden md:block" /> They quietly <span className="text-blue-600">leak opportunity.</span>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-[1.1] tracking-tight animate-fade-up delay-100">
+                            Most websites don’t fail.<br className="hidden md:block" /> They quietly <span className="text-gradient">leak opportunity.</span>
                         </h2>
 
-                        <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed">
-                            If you suspect your site isn’t pulling its weight, you’re probably right. The cost compounds every month you wait.
+                        <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up delay-200">
+                            If you suspect your site isn’t pulling its weight, you’re likely right. The cost of inaction compounds every week.
                         </p>
 
-                        <button
-                            onClick={() => setIsModalOpen(true)}
-                            className="inline-flex items-center justify-center px-10 py-5 rounded-xl bg-slate-900 text-white font-bold text-lg shadow-xl shadow-slate-900/10 hover:bg-blue-600 hover:shadow-blue-600/20 transition-all hover:-translate-y-1 active:scale-95 group relative overflow-hidden"
-                        >
-                            <span className="relative z-10 flex items-center gap-2">
-                                Stop the Leak
-                                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                            </span>
-                            {/* Button Glow on Hover */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </button>
+                        <div className="animate-fade-up delay-300">
+                            <button
+                                onClick={() => setIsModalOpen(true)}
+                                className="inline-flex items-center justify-center px-10 py-5 rounded-2xl bg-slate-900 text-white font-bold text-lg shadow-xl shadow-slate-900/20 hover:bg-[#0A58FF] hover:shadow-[#0A58FF]/40 transition-all duration-300 hover:-translate-y-1 active:scale-95 group relative overflow-hidden"
+                            >
+                                <span className="relative z-10 flex items-center gap-3">
+                                    Stop the Leak
+                                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                </span>
+                                {/* Gloss Effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

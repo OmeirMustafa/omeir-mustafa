@@ -1,34 +1,37 @@
 @import "tailwindcss";
 
-/* MASTER UPGRADE V2 - Light/Dark Hybrid */
+/* MASTER UPGRADE V3 - Apple Glass Aesthetic */
 
 :root {
   /* Surface colors */
-  --bg-primary: #F1F5F9;
-  /* Platinum / Slate-100 */
-  --bg-secondary: #E2E8F0;
-  /* Slate-200 */
+  --bg-primary: #F5F7FA;
+  /* Slightly cooler, brighter platinum */
+  --bg-secondary: #E6EAF0;
 
   /* Text colors */
-  --text-primary: #1E293B;
-  /* Slate-800 - Softer than pure black */
-  --text-secondary: #475569;
-  /* Slate-600 */
+  --text-primary: #111827;
+  /* Almost black, crisp */
+  --text-secondary: #4B5563;
+  /* Cool grey */
 
-  /* Accent */
-  --accent-primary: #2563EB;
-  /* Blue-600 */
-  --accent-hover: #1D4ED8;
-  /* Blue-700 */
+  /* Gradient Tokens */
+  --gradient-accent: linear-gradient(135deg, #0A58FF 0%, #5FA8FF 100%);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-[#F1F5F9] text-slate-800 antialiased overflow-x-hidden selection:bg-blue-100 selection:text-blue-900;
+    @apply bg-[#F5F7FA] text-slate-900 antialiased overflow-x-hidden selection:bg-blue-100 selection:text-blue-900;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 17px;
+    /* Apple standard base size */
+    line-height: 1.6;
+    letter-spacing: -0.011em;
   }
 
   /* Custom Scrollbar */
@@ -51,25 +54,48 @@
   }
 
   .container-width {
-    @apply max-w-7xl mx-auto px-6 md:px-12;
+    @apply max-w-[1200px] mx-auto px-6 md:px-12;
   }
 
-  /* Premium Glass (Light) */
+  /* Premium Glass (Apple Style) */
   .glass-panel {
-    @apply bg-white/70 backdrop-blur-xl border border-white/50 shadow-sm transition-all duration-300;
+    @apply bg-white/60 backdrop-blur-[20px] border border-white/40 shadow-xl shadow-slate-200/40 transition-all duration-500;
   }
 
   .glass-card {
-    @apply bg-white rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 hover:shadow-md hover:border-blue-100;
+    @apply bg-white/80 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg shadow-slate-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 hover:border-blue-200/50;
   }
+
+  /* Gradient Text Utility */
+  .text-gradient {
+    @apply bg-gradient-to-r from-[#0A58FF] to-[#5FA8FF] bg-clip-text text-transparent;
+  }
+
+  /* Animated Shimmer Text */
+  .animate-text-shimmer {
+    background: linear-gradient(to right, #0A58FF 20%, #5FA8FF 40%, #5FA8FF 60%, #0A58FF 80%);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 8s linear infinite;
+  }
+
+  /* Section Divider Gradient */
+  .separator-gradient {
+    @apply w-full h-[1px] bg-gradient-to-r from-transparent via-[#0A58FF]/20 to-transparent;
+  }
+
 
   /* Animations */
   .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+    animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
 
   .animate-fade-up {
-    animation: fadeUp 0.8s ease-out forwards;
+    animation: fadeUp 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
 
   .delay-100 {
@@ -84,9 +110,13 @@
     animation-delay: 300ms;
   }
 
-  /* Subtle Gradient Noise Background */
-  .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
@@ -112,28 +142,8 @@
   }
 }
 
-@layer utilities {
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-}
-
-@layer utilities {
-  .text-glow {
-    text-shadow: 0 0 20px rgba(10, 88, 255, 0);
-    animation: glowFade 420ms ease-out forwards 600ms;
-    /* Delayed to start after text fades in */
-  }
-}
-
-@keyframes glowFade {
+@keyframes shimmer {
   to {
-    text-shadow: 0 0 30px rgba(10, 88, 255, 0.25);
-    /* Subtle glow, not spammy */
+    background-position: 200% center;
   }
 }

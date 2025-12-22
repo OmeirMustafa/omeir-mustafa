@@ -40,7 +40,7 @@ export function Hero() {
                     */}
 
                     <h1 className="text-[32px] md:text-[40px] lg:text-[48px] font-bold tracking-tight text-slate-900 leading-[1.05] mb-6 animate-fade-up opacity-0">
-                        Turn your leaking website into a <span className="text-[#0A58FF] inline-block text-glow">predictable revenue engine.</span>
+                        Turn your leaking website into a <span className="animate-text-shimmer inline-block">predictable revenue engine.</span>
                     </h1>
 
                     <h2 className="text-[18px] text-slate-500 max-w-[70ch] leading-[1.6] mb-12 font-regular animate-fade-up delay-100 opacity-0">
@@ -49,18 +49,32 @@ export function Hero() {
 
                     <div className="flex flex-col sm:flex-row gap-5 animate-fade-up delay-200 opacity-0">
                         <button
-                            onClick={scrollToContact}
-                            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-slate-900 text-white font-bold text-lg shadow-xl shadow-slate-900/10 hover:bg-slate-800 transition-all hover:-translate-y-1 active:scale-95 min-w-[180px]"
+                            onClick={() => {
+                                const approachSection = document.getElementById('approach');
+                                if (approachSection) {
+                                    approachSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }}
+                            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-slate-900 text-white font-bold text-lg shadow-xl shadow-slate-900/20 hover:shadow-[#0A58FF]/40 hover:bg-[#0A58FF] transition-all duration-300 hover:-translate-y-1 active:scale-95 min-w-[180px] group relative overflow-hidden"
                         >
-                            Contact Now
+                            <span className="relative z-10 flex items-center gap-2">
+                                See How It Works
+                            </span>
+                            {/* Subtle Glow Gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#0A58FF] to-[#5FA8FF] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </button>
 
-                        <Link
-                            href="#projects"
-                            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white border border-slate-200 text-slate-900 font-bold text-lg shadow-sm hover:border-slate-300 hover:shadow-md transition-all hover:-translate-y-1 active:scale-95 min-w-[180px]"
+                        <button
+                            onClick={() => {
+                                const projectsSection = document.getElementById('projects');
+                                if (projectsSection) {
+                                    projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }}
+                            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-transparent border border-slate-300 text-slate-900 font-bold text-lg shadow-sm hover:border-[#0A58FF]/50 hover:shadow-[#0A58FF]/10 transition-all hover:-translate-y-1 active:scale-95 min-w-[180px] group"
                         >
-                            View Projects
-                        </Link>
+                            View Results
+                        </button>
                     </div>
                 </div>
             </div>

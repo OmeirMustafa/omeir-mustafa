@@ -61,16 +61,19 @@ export function Navbar() {
                     </div>
 
                     {/* RIGHT: Contact Now */}
-                    <div> {/* Removed relative since modal is global fixed */}
+                    <div>
                         <button
-                            onClick={() => setContactOpen(true)}
-                            className="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 active:scale-95 flex items-center gap-2"
+                            onClick={() => {
+                                const contactSection = document.getElementById('contact');
+                                if (contactSection) {
+                                    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }}
+                            className="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-[#0A58FF] transition-colors shadow-lg shadow-slate-900/10 active:scale-95 flex items-center gap-2 group"
                         >
                             Contact Now
                             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                         </button>
-
-                        <SmartContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
                     </div>
                 </div>
             </div>
@@ -82,9 +85,12 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
     return (
         <Link
             href={href}
-            className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
+            className="group relative px-4 py-2 text-sm font-medium text-slate-600 transition-colors duration-300 hover:text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-[#0A58FF]/50 rounded-lg"
         >
-            {children}
+            <span className="relative z-10">{children}</span>
+            {/* Soft Outer Glow - No text blur, expensive feel */}
+            <span className="absolute inset-0 rounded-lg bg-[#0A58FF]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <span className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#0A58FF]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Link>
     );
 }
