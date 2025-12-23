@@ -1,12 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
-import { ArrowRight, X, ExternalLink, Maximize2 } from "lucide-react";
-import Image from "next/image";
+import React, { useState, useEffect } from "react";
+import { ArrowRight, X, ExternalLink } from "lucide-react";
 import { BeforeAfterSlider } from "@/components/ui/BeforeAfterSlider";
 
 export function LuminaCaseStudy() {
     const [isOpen, setIsOpen] = useState(false);
+
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+        return () => { document.body.style.overflow = "unset"; };
+    }, [isOpen]);
 
     return (
         <>
@@ -39,141 +48,193 @@ export function LuminaCaseStudy() {
                     </div>
                 </div>
 
-                {/* Hoever State: Soft Gradient Bottom */}
+                {/* Hover State: Soft Gradient Bottom */}
                 <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-[#0A58FF] to-[#5FA8FF] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-
-                {/* Background Glow */}
-                <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             </div>
 
             {/* Premium Modal */}
             {isOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-4">
                     <div
                         className="absolute inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in"
                         onClick={() => setIsOpen(false)}
                     />
 
-                    <div className="relative w-full max-w-7xl h-[90vh] bg-white rounded-[32px] shadow-2xl overflow-hidden flex flex-col lg:flex-row animate-fade-up">
+                    <div className="relative w-full max-w-[1120px] h-[100dvh] md:h-[90vh] bg-white md:rounded-[32px] shadow-2xl overflow-hidden flex flex-col md:flex-row animate-[slideUp_300ms_cubic-bezier(0.16,1,0.3,1)_forwards]">
 
-                        {/* LEFT: Visual Engine (Slider + Proof) */}
-                        <div className="w-full lg:w-[65%] bg-slate-50 relative flex flex-col border-r border-slate-200">
-                            {/* Toolbar */}
-                            <div className="p-6 bg-white/80 backdrop-blur-md border-b border-slate-200 flex justify-between items-center z-10 sticky top-0">
-                                <div className="flex items-center gap-3">
-                                    <span className="w-2 h-2 bg-[#0A58FF] rounded-full animate-pulse" />
-                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Visual Evidence</span>
-                                </div>
-                                <a
-                                    href="https://luminalaw.ca"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-[#0A58FF] transition-all shadow-lg shadow-slate-900/10 active:scale-95"
-                                >
-                                    View Live Details <ExternalLink size={12} />
-                                </a>
+                        {/* CONTENT CONTAINER - Scrollable Area */}
+                        <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide bg-white relative">
+
+                            {/* Sticky Header */}
+                            <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 px-6 py-4 flex justify-between items-center md:hidden">
+                                <span className="font-bold text-slate-900">Lumina Law Case Study</span>
+                                <button onClick={() => setIsOpen(false)} className="p-2 bg-slate-100 rounded-full">
+                                    <X size={20} className="text-slate-600" />
+                                </button>
                             </div>
 
-                            {/* Slider Content */}
-                            <div className="flex-1 overflow-y-auto p-8 lg:p-12 scrollbar-hide">
-                                <div className="space-y-12">
-                                    {/* Proof Block 1: Before/After */}
-                                    <div className="bg-white p-2 rounded-2xl shadow-sm border border-slate-200">
-                                        <div className="mb-4 px-4 pt-4">
-                                            <h4 className="text-base font-bold text-slate-900">Transformation Engine</h4>
-                                            <p className="text-sm text-slate-500">Drag to compare 2014 Legacy vs. 2024 Authority</p>
+                            <div className="p-6 md:p-10 lg:p-12 pb-24">
+                                {/* Header Section */}
+                                <div className="mb-12 max-w-3xl">
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+                                                Lumina Law — Strategic Rebuild for Trust & Conversion
+                                            </h2>
                                         </div>
-                                        <BeforeAfterSlider
-                                            beforeImage="/images/lumina-old.jpg"
-                                            afterImage="/images/lumina-new.jpg"
-                                            alt="Lumina Law Redesign"
-                                        />
+                                        <button
+                                            onClick={() => setIsOpen(false)}
+                                            className="hidden md:flex p-3 hover:bg-slate-100 rounded-full transition-colors group"
+                                        >
+                                            <X className="w-6 h-6 text-slate-400 group-hover:text-slate-900" />
+                                        </button>
                                     </div>
-
-                                    {/* Quote Block */}
-                                    <blockquote className="text-xl md:text-2xl font-medium text-slate-900 text-center max-w-2xl mx-auto leading-relaxed">
-                                        "Most websites are brochures. This is a <span className="text-gradient">conversion weapon</span>."
-                                    </blockquote>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* RIGHT: Editorial Content */}
-                        <div className="w-full lg:w-[35%] bg-white h-auto lg:h-full overflow-y-auto flex flex-col relative z-20">
-                            <div className="p-8 md:p-10 flex-1">
-                                <div className="flex justify-between items-start mb-8">
-                                    <div>
-                                        <span className="text-[#0A58FF] font-bold text-sm tracking-widest uppercase mb-2 block">The Protocol</span>
-                                        <h2 className="text-3xl font-bold text-slate-900 leading-tight">
-                                            Lumina Law
-                                        </h2>
-                                    </div>
-                                    <button
-                                        onClick={() => setIsOpen(false)}
-                                        className="p-2 hover:bg-slate-100 rounded-full transition-colors group"
-                                    >
-                                        <X className="w-6 h-6 text-slate-400 group-hover:text-slate-900" />
-                                    </button>
                                 </div>
 
-                                <div className="space-y-10">
-                                    <div className="space-y-6">
-                                        {/* Problem */}
-                                        <div className="relative pl-6 border-l-2 border-red-200">
-                                            <h4 className="font-bold text-slate-900 text-sm uppercase tracking-wider mb-2">The Leak</h4>
-                                            <p className="text-slate-600 text-sm leading-relaxed">
-                                                Lumina's legacy site was leaking 90% of mobile traffic. The "brochure" layout failed to communicate their specialized authority in high-net-worth estate planning.
-                                            </p>
-                                        </div>
+                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
 
-                                        {/* Intervention */}
-                                        <div className="relative pl-6 border-l-2 border-[#0A58FF]">
-                                            <h4 className="font-bold text-slate-900 text-sm uppercase tracking-wider mb-2">The Fix</h4>
-                                            <p className="text-slate-600 text-sm leading-relaxed">
-                                                We deployed a <strong>Next.js + Sanity</strong> architecture.
+                                    {/* Left Column: Narrative */}
+                                    <div className="lg:col-span-7 space-y-12">
+
+                                        {/* BEFORE */}
+                                        <section>
+                                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Before: What was broken</h3>
+                                            <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                                                The original site was dense, text-heavy, and mobile-hostile. It signaled low credibility and created friction at every decision point.
                                             </p>
-                                            <ul className="mt-3 space-y-2">
-                                                <li className="flex items-center gap-2 text-sm text-slate-700">
-                                                    <span className="w-1.5 h-1.5 bg-[#0A58FF] rounded-full" />
-                                                    High-Velocity Branding
+
+                                            <div className="bg-red-50/50 border-l-4 border-red-200 p-6 rounded-r-xl">
+                                                <h4 className="font-bold text-slate-900 text-sm mb-3">What it was costing them:</h4>
+                                                <ul className="space-y-2 text-slate-600 text-sm">
+                                                    <li className="flex items-start gap-3">
+                                                        <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 shrink-0" />
+                                                        Lost trust from high-intent visitors, particularly in competitive legal searches.
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 shrink-0" />
+                                                        Missed high-value inquiries that never converted due to unclear paths.
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-2 shrink-0" />
+                                                        Increased acquisition costs as paid campaigns struggled to justify spend.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </section>
+
+                                        {/* RISKS */}
+                                        <section>
+                                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Risks of keeping it unchanged</h3>
+                                            <ul className="space-y-3 text-slate-600">
+                                                <li className="flex items-start gap-3">
+                                                    <span className="w-1.5 h-1.5 bg-slate-300 rounded-full mt-2.5 shrink-0" />
+                                                    Continued revenue leakage from qualified visitors.
                                                 </li>
-                                                <li className="flex items-center gap-2 text-sm text-slate-700">
-                                                    <span className="w-1.5 h-1.5 bg-[#0A58FF] rounded-full" />
-                                                    Probate Fee Calculator Hook
+                                                <li className="flex items-start gap-3">
+                                                    <span className="w-1.5 h-1.5 bg-slate-300 rounded-full mt-2.5 shrink-0" />
+                                                    Reduced ability to win retainers versus firms with clearer digital authority.
                                                 </li>
-                                                <li className="flex items-center gap-2 text-sm text-slate-700">
-                                                    <span className="w-1.5 h-1.5 bg-[#0A58FF] rounded-full" />
-                                                    Zero-Latency Page Loads
+                                                <li className="flex items-start gap-3">
+                                                    <span className="w-1.5 h-1.5 bg-slate-300 rounded-full mt-2.5 shrink-0" />
+                                                    Compounding reputational cost as prospective clients form negative first impressions.
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </section>
 
-                                        {/* Outcome */}
-                                        <div className="relative pl-6 border-l-2 border-emerald-400">
-                                            <h4 className="font-bold text-slate-900 text-sm uppercase tracking-wider mb-2">The Result</h4>
-                                            <p className="text-emerald-700 bg-emerald-50 p-4 rounded-xl text-sm leading-relaxed border border-emerald-100 font-medium">
-                                                "Since launch, our qualified inquiry rate has tripled. The calculator alone generates 5-10 high-value leads per week."
-                                            </p>
+                                        {/* AFTER */}
+                                        <section>
+                                            <h3 className="text-sm font-bold text-[#0A58FF] uppercase tracking-widest mb-4">After: What we changed and why it matters</h3>
+                                            <p className="text-slate-600 mb-6 font-medium">Homepage-focused interventions:</p>
+                                            <ul className="space-y-4 text-slate-600">
+                                                <li className="group">
+                                                    <strong className="text-slate-900 block group-hover:text-[#0A58FF] transition-colors">Visual authority</strong>
+                                                    Replaced dated imagery and inconsistent type with an editorial, high-trust visual system that signals competence at first glance.
+                                                </li>
+                                                <li className="group">
+                                                    <strong className="text-slate-900 block group-hover:text-[#0A58FF] transition-colors">Clarity-first headings</strong>
+                                                    Immediate, left-aligned messaging that communicates outcomes and next steps within two screenfuls.
+                                                </li>
+                                                <li className="group">
+                                                    <strong className="text-slate-900 block group-hover:text-[#0A58FF] transition-colors">Structured funnels</strong>
+                                                    Simplified CTAs that guide visitors from problem → proof → contact in fewer than three interactions.
+                                                </li>
+                                                <li className="group">
+                                                    <strong className="text-slate-900 block group-hover:text-[#0A58FF] transition-colors">Performance uplift</strong>
+                                                    Reduced critical load and improved perceived speed to restore trust and reduce bounce.
+                                                </li>
+                                                <li className="group">
+                                                    <strong className="text-slate-900 block group-hover:text-[#0A58FF] transition-colors">Micro-trust signals</strong>
+                                                    Curated case highlights and succinct proof points that accelerate decision confidence.
+                                                </li>
+                                            </ul>
+                                        </section>
+
+                                        {/* BUSINESS IMPACT */}
+                                        <section className="bg-slate-900 text-white p-8 rounded-2xl relative overflow-hidden">
+                                            <div className="absolute top-0 right-0 w-64 h-64 bg-[#0A58FF] rounded-full blur-[80px] opacity-20 -translate-y-1/2 translate-x-1/2" />
+                                            <div className="relative z-10">
+                                                <h3 className="text-sm font-bold text-blue-200 uppercase tracking-widest mb-4">Business Impact</h3>
+                                                <p className="text-lg leading-relaxed text-blue-50/90 font-medium">
+                                                    These changes reduce friction where it matters most — perception and decision. Clearer trust signals + faster interaction directly increase the rate at which qualified visitors convert into inquiries. Small structural changes to the homepage produce outsized results because they address the earliest moments of user judgment and friction.
+                                                </p>
+                                            </div>
+                                        </section>
+
+                                    </div>
+
+                                    {/* Right Column: Visual Proof */}
+                                    <div className="lg:col-span-5 space-y-8 sticky top-12 self-start">
+                                        <div className="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100 shadow-lg">
+                                            <div className="mb-6">
+                                                <h3 className="text-2xl font-bold text-slate-900 mb-2">Proof beats promises.</h3>
+                                                <p className="text-sm text-slate-500 leading-relaxed">
+                                                    This comparison shows what changes when clarity, structure, and trust are engineered deliberately — not decorated.
+                                                </p>
+                                            </div>
+
+                                            <div className="mb-8 rounded-xl overflow-hidden shadow-sm border border-slate-200 bg-white">
+                                                <BeforeAfterSlider
+                                                    beforeImage="/case-studies/lumina/lumina-old.jpg"
+                                                    afterImage="/case-studies/lumina/lumina-new.jpg"
+                                                    alt="Lumina Law Website Transformation"
+                                                />
+                                            </div>
+
+                                            <a
+                                                href="https://lumina-law-website-rebuilt.vercel.app/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="block w-full text-center bg-[#0A58FF] text-white font-bold py-4 rounded-xl hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/20 active:scale-95 flex items-center justify-center gap-2 group"
+                                            >
+                                                View Live Rebuild
+                                                <ExternalLink size={18} className="group-hover:translate-x-1 transition-transform" />
+                                            </a>
+                                            <p className="text-center text-xs text-slate-400 mt-3 font-medium">Opens in new tab</p>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            {/* Footer Action */}
-                            <div className="p-8 border-t border-slate-100 bg-slate-50">
-                                <a
-                                    href="https://luminalaw.ca"
-                                    target="_blank"
-                                    className="block w-full text-center py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-[#0A58FF] transition-all shadow-xl shadow-slate-900/10 active:scale-95"
-                                >
-                                    Visit Live Site
-                                </a>
+                                </div>
                             </div>
                         </div>
 
                     </div>
+
+                    <style jsx global>{`
+                        .scrollbar-hide::-webkit-scrollbar {
+                            display: none;
+                        }
+                        .scrollbar-hide {
+                            -ms-overflow-style: none;
+                            scrollbar-width: none;
+                        }
+                        @keyframes slideUp {
+                            from { opacity: 0; transform: translateY(20px); }
+                            to { opacity: 1; transform: translateY(0); }
+                        }
+                    `}</style>
                 </div>
             )}
         </>
     );
 }
+

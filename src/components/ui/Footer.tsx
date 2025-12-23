@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Linkedin, Mail, ArrowUpRight } from "lucide-react";
 
 export function Footer() {
     const scrollToTop = () => {
@@ -10,47 +10,81 @@ export function Footer() {
     };
 
     return (
-        <footer className="bg-[#0F172A] border-t border-slate-800 text-slate-400 py-16">
-            <div className="container-width">
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
+        <footer className="bg-[#0F172A] border-t border-slate-800 text-slate-400 py-20 relative overflow-hidden">
 
-                    {/* Brand */}
-                    <div className="space-y-4">
+            {/* Ambient Glow */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0A58FF]/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
+
+            <div className="container-width relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 pb-16 border-b border-slate-800/50">
+
+                    {/* COL 1: About (Brand) - Span 5 */}
+                    <div className="md:col-span-5 space-y-6">
                         <button
                             onClick={scrollToTop}
-                            className="text-lg font-bold text-white tracking-tight hover:text-blue-400 transition-colors"
+                            className="text-2xl font-bold text-white tracking-tight hover:text-[#0A58FF] transition-colors"
                         >
                             Omeir Mustafa
                         </button>
-                        <p className="text-sm max-w-xs leading-relaxed">
-                            Building high-trust digital systems for founders and scaling teams.
+                        <p className="text-slate-400 text-lg leading-relaxed max-w-sm">
+                            Digital architect for high-growth challengers. I build systems that turn traffic into revenue.
                         </p>
+                        <div className="pt-4">
+                            <a href="#contact-section" className="inline-flex items-center gap-2 text-[#0A58FF] font-bold hover:text-white transition-colors">
+                                Start a Conversation <ArrowUpRight size={18} />
+                            </a>
+                        </div>
                     </div>
 
-                    {/* Links */}
-                    <div className="flex flex-col sm:flex-row gap-8 sm:gap-16 text-sm font-medium">
-                        <div className="flex flex-col gap-4">
-                            <span className="text-white text-xs font-bold uppercase tracking-wider">Navigation</span>
-                            <Link href="#projects" className="hover:text-white transition-colors">Work</Link>
-                            <Link href="#approach" className="hover:text-white transition-colors">Protocol</Link>
-                            <Link href="#qa" className="hover:text-white transition-colors">Q&A</Link>
-                        </div>
-                        <div className="flex flex-col gap-4">
-                            <span className="text-white text-xs font-bold uppercase tracking-wider">Social</span>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
-                                <Linkedin size={16} /> LinkedIn
-                            </a>
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
-                                <Twitter size={16} /> Twitter / X
-                            </a>
-                        </div>
+                    {/* COL 2: Services - Span 3 */}
+                    <div className="md:col-span-3 space-y-6">
+                        <h4 className="text-white font-bold uppercase tracking-widest text-xs">Services</h4>
+                        <ul className="space-y-4">
+                            <li><span className="hover:text-white transition-colors cursor-default">Revenue Architecture</span></li>
+                            <li><span className="hover:text-white transition-colors cursor-default">UI/UX Audit</span></li>
+                            <li><span className="hover:text-white transition-colors cursor-default">Web Development</span></li>
+                            <li><span className="hover:text-white transition-colors cursor-default">Conversion Optimization</span></li>
+                        </ul>
                     </div>
+
+                    {/* COL 3: Contact - Span 4 */}
+                    <div className="md:col-span-4 space-y-6">
+                        <h4 className="text-white font-bold uppercase tracking-widest text-xs">Contact</h4>
+                        <ul className="space-y-4">
+                            <li>
+                                <a href="mailto:omeirmustafa.work@gmail.com" className="flex items-center gap-3 hover:text-white transition-colors group">
+                                    <div className="p-2 bg-slate-800 rounded-full group-hover:bg-[#0A58FF] transition-colors">
+                                        <Mail size={16} className="text-slate-300 group-hover:text-white" />
+                                    </div>
+                                    omeirmustafa.work@gmail.com
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors group">
+                                    <div className="p-2 bg-slate-800 rounded-full group-hover:bg-[#0A58FF] transition-colors">
+                                        <Linkedin size={16} className="text-slate-300 group-hover:text-white" />
+                                    </div>
+                                    LinkedIn
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
 
-                <div className="mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium">
+                {/* Bottom Row: Compact */}
+                <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-medium text-slate-500">
                     <p>© 2025 Omeir Mustafa. All rights reserved.</p>
-                    <p className="flex items-center gap-2">
-                        System Status: <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Operational
+
+                    <div className="flex items-center gap-8">
+                        <Link href="/" className="hover:text-white transition-colors">Home</Link>
+                        <Link href="#projects" className="hover:text-white transition-colors">Projects</Link>
+                        <Link href="#approach" className="hover:text-white transition-colors">Approach</Link>
+                        <Link href="#contact-section" className="hover:text-white transition-colors">Contact</Link>
+                    </div>
+
+                    <p className="flex items-center gap-2 hidden md:flex">
+                        System Status: <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" /> Operational
                     </p>
                 </div>
             </div>

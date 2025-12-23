@@ -23,7 +23,7 @@ const FAQ = [
 ];
 
 export function QA() {
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const [openIndex, setOpenIndex] = useState<number | null>(0); // Default open first? No, usually closed. Let's default null.
 
     return (
         <section id="qa" className="section-spacing bg-[#F1F5F9] relative overflow-hidden">
@@ -31,6 +31,9 @@ export function QA() {
 
                 <div className="max-w-[820px] mx-auto">
                     <div className="text-center mb-16 animate-fade-up">
+                        <span className="text-blue-600 font-bold tracking-widest uppercase text-xs mb-4 block">
+                            Q&A
+                        </span>
                         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
                             Common Questions
                         </h2>
@@ -45,24 +48,24 @@ export function QA() {
                             return (
                                 <div
                                     key={idx}
-                                    className={`bg-white/80 backdrop-blur-md rounded-2xl border transition-all duration-300 overflow-hidden group ${isOpen ? 'border-blue-200 shadow-md' : 'border-slate-100 shadow-sm hover:border-blue-100'}`}
+                                    className={`bg-white/80 backdrop-blur-md rounded-2xl border transition-all duration-300 overflow-hidden group ${isOpen ? 'border-blue-200 shadow-lg shadow-blue-900/5' : 'border-slate-200 shadow-sm hover:border-blue-100'}`}
                                 >
                                     <button
                                         onClick={() => setOpenIndex(isOpen ? null : idx)}
                                         className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none"
                                     >
-                                        <span className={`text-[18px] font-semibold transition-colors ${isOpen ? 'text-blue-600' : 'text-slate-900'}`}>
+                                        <span className={`text-[18px] font-semibold transition-colors ${isOpen ? 'text-blue-700' : 'text-slate-900'}`}>
                                             {item.q}
                                         </span>
-                                        <div className={`p-2 rounded-full transition-colors duration-300 ${isOpen ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-400 group-hover:text-blue-500'}`}>
-                                            {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+                                        <div className={`p-2 rounded-full transition-colors duration-300 shrink-0 ml-4 ${isOpen ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-400 group-hover:text-blue-500'}`}>
+                                            {isOpen ? <Minus size={18} /> : <Plus size={18} />}
                                         </div>
                                     </button>
 
                                     <div
                                         className={`transition-all duration-[320ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden ${isOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'}`}
                                     >
-                                        <div className="px-6 md:px-8 pb-8 pt-0 text-slate-600 leading-[1.6] text-[15px]">
+                                        <div className="px-6 md:px-8 pb-8 pt-0 text-slate-600 leading-[1.6] text-[15px] font-medium opacity-90">
                                             {item.a}
                                         </div>
                                     </div>

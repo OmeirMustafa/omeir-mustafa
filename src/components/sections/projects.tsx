@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowUpRight } from "lucide-react";
+import { Lock, ArrowUpRight } from "lucide-react";
 import { LuminaCaseStudy } from "@/components/case-studies/LuminaCaseStudy";
 
 export function Projects() {
@@ -21,58 +21,67 @@ export function Projects() {
                 </div>
 
                 <div className="space-y-8">
-                    {/* Featured Case: Lumina Law */}
+                    {/* Featured Case: Lumina Law (Full Width) */}
                     <div className="w-full">
                         <LuminaCaseStudy />
                     </div>
 
-                    {/* Placeholder: Kuro Coffee */}
-                    <div className="group w-full glass-card rounded-3xl p-10 border border-slate-200 opacity-60 cursor-not-allowed grayscale">
-                        <div className="flex flex-col md:flex-row gap-8 md:items-center justify-between">
-                            <div className="space-y-4 max-w-3xl">
-                                <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
+                    {/* Compact Grid: Two Up */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                        {/* Card 1: Kuro Coffee */}
+                        <div className="group glass-card rounded-3xl p-8 md:p-10 border border-[#5FA8FF]/15 hover:-translate-y-2 hover:shadow-[0_8px_26px_rgba(10,88,255,0.06)] transition-all duration-420 opacity-0 animate-[fadeUp_600ms_0.2s_forwards]">
+                            <div className="flex justify-between items-start mb-6">
+                                <span className="text-xs font-bold tracking-widest uppercase text-slate-400 group-hover:text-[#0A58FF] transition-colors">
                                     E-Commerce Performance
                                 </span>
-                                <h3 className="text-3xl md:text-4xl font-bold text-slate-400">
-                                    Kuro Coffee
-                                </h3>
-                                <p className="text-slate-400 text-lg leading-relaxed">
-                                    Designed a fast, mobile-first storefront focused on speed, clarity, and repeat purchases.
-                                </p>
-                            </div>
-                            <div className="shrink-0">
-                                <div className="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-400 uppercase tracking-wider">
-                                    Confidential
+                                <div className="p-3 bg-white/50 rounded-full group-hover:bg-[#0A58FF] transition-colors duration-300">
+                                    <ArrowUpRight size={18} className="text-slate-400 group-hover:text-white transition-colors" />
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    {/* Placeholder: Apex SaaS */}
-                    <div className="group w-full glass-card rounded-3xl p-10 border border-slate-200 opacity-60 cursor-not-allowed grayscale">
-                        <div className="flex flex-col md:flex-row gap-8 md:items-center justify-between">
-                            <div className="space-y-4 max-w-3xl">
-                                <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
-                                    Enterprise Data Dashboard
-                                </span>
-                                <h3 className="text-3xl md:text-4xl font-bold text-slate-400">
-                                    Apex SaaS
-                                </h3>
-                                <p className="text-slate-400 text-lg leading-relaxed">
-                                    Structured complex information into a calm, decision-ready dashboard experience.
-                                </p>
-                            </div>
-                            <div className="shrink-0">
-                                <div className="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-400 uppercase tracking-wider">
+                            <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#0A58FF] transition-colors">
+                                Kuro Coffee
+                            </h3>
+
+                            <p className="text-slate-600 text-[17px] leading-relaxed">
+                                Designed a fast, mobile-first storefront focused on speed, clarity, and repeat purchases.
+                            </p>
+                        </div>
+
+                        {/* Card 2: Confidential (Locked) */}
+                        <div className="group glass-card rounded-3xl p-8 md:p-10 border border-[#5FA8FF]/15 hover:-translate-y-2 hover:shadow-[0_8px_26px_rgba(10,88,255,0.06)] transition-all duration-420 opacity-0 animate-[fadeUp_600ms_0.3s_forwards]">
+                            <div className="flex justify-between items-start mb-6">
+                                <span className="text-xs font-bold tracking-widest uppercase text-slate-400 group-hover:text-[#0A58FF] transition-colors">
                                     Confidential
+                                </span>
+                                <div className="px-3 py-1.5 bg-slate-100 rounded-full flex items-center gap-1.5 group-hover:bg-slate-200 transition-colors">
+                                    <Lock size={12} className="text-slate-500" />
+                                    <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">NDA</span>
                                 </div>
                             </div>
+
+                            <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#0A58FF] transition-colors">
+                                Enterprise Data Dashboard
+                            </h3>
+
+                            <p className="text-slate-600 text-[17px] leading-relaxed">
+                                Structured complex information into a calm, decision-ready dashboard experience.
+                            </p>
                         </div>
+
                     </div>
 
                 </div>
 
             </div>
+
+            <style jsx global>{`
+                @keyframes fadeUp {
+                    from { opacity: 0; transform: translateY(12px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
         </section>
     );
 }

@@ -8,7 +8,7 @@ export function ContactSection() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <section id="contact" className="py-24 md:py-32 bg-[#F8FAFC] relative overflow-hidden"> {/* Lighter bg to contrast with dark modal popup if needed, but keeping global consist. */}
+        <section id="contact-section" className="py-24 md:py-32 bg-[#F8FAFC] relative overflow-hidden"> {/* Lighter bg to contrast with dark modal popup if needed, but keeping global consist. */}
             <div className="container-width">
                 <div className="max-w-[920px] mx-auto glass-panel rounded-3xl p-8 md:p-16 text-center shadow-2xl shadow-blue-900/5 border border-white/60 relative overflow-hidden group">
 
@@ -30,11 +30,11 @@ export function ContactSection() {
                         </div>
 
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-[1.1] tracking-tight animate-fade-up delay-100">
-                            Most websites don’t fail.<br className="hidden md:block" /> They quietly <span className="text-gradient">leak opportunity.</span>
+                            Are you ready to recover lost revenue?
                         </h2>
 
                         <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up delay-200">
-                            If you suspect your site isn’t pulling its weight, you’re likely right. The cost of inaction compounds every week.
+                            Small, methodical improvements compound into measurable growth. The longer you wait, the more qualified leads slip away.
                         </p>
 
                         <div className="animate-fade-up delay-300">
@@ -43,7 +43,7 @@ export function ContactSection() {
                                 className="inline-flex items-center justify-center px-10 py-5 rounded-2xl bg-slate-900 text-white font-bold text-lg shadow-xl shadow-slate-900/20 hover:bg-[#0A58FF] hover:shadow-[#0A58FF]/40 transition-all duration-300 hover:-translate-y-1 active:scale-95 group relative overflow-hidden"
                             >
                                 <span className="relative z-10 flex items-center gap-3">
-                                    Stop the Leak
+                                    Start a Conversation
                                     <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                 </span>
                                 {/* Gloss Effect */}
