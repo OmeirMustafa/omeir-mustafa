@@ -42,8 +42,8 @@ export function LuminaCaseStudy() {
                             <span className="text-sm text-slate-500 font-medium uppercase tracking-wide">Inquiry Increase</span>
                         </div>
                         <div>
-                            <span className="block text-4xl font-bold text-slate-900 mb-1 tracking-tight">4 Weeks</span>
-                            <span className="text-sm text-slate-500 font-medium uppercase tracking-wide">Build Time</span>
+                            <span className="block text-4xl font-bold text-slate-900 mb-1 tracking-tight">1 Week</span>
+                            <span className="text-sm text-slate-500 font-medium uppercase tracking-wide">Design & Build</span>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ export function LuminaCaseStudy() {
                         onClick={() => setIsOpen(false)}
                     />
 
-                    <div className="relative w-full max-w-[1120px] h-[100dvh] md:h-[90vh] bg-white md:rounded-[32px] shadow-2xl overflow-hidden flex flex-col md:flex-row animate-[slideUp_var(--duration-modal)_var(--ease-entrance)_forwards]">
+                    <div className="relative w-full max-w-[1000px] h-[100dvh] md:h-[85vh] bg-white md:rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-[slideUp_var(--duration-modal)_var(--ease-entrance)_forwards] border border-slate-200">
 
                         {/* Standardized Close Button (Absolute Top-Right) */}
                         <button
@@ -79,13 +79,13 @@ export function LuminaCaseStudy() {
                                 <span className="font-bold text-slate-900">Lumina Law Case Study</span>
                             </div>
 
-                            <div className="p-6 md:p-10 lg:p-12 pb-24">
+                            <div className="p-6 md:p-8 pb-24">
                                 {/* Header Section */}
-                                <div className="mb-12 max-w-3xl">
+                                <div className="mb-8 max-w-3xl">
                                     <div className="flex justify-between items-start">
                                         <div>
-                                            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-                                                Lumina Law — Strategic Rebuild for Trust & Conversion
+                                            <h2 className="text-3xl md:text-4xl font-bold text-[#0A58FF] mb-2 leading-tight">
+                                                Lumina Law: "Homepage Strategic Rebuild for Growth & Trust."
                                             </h2>
                                         </div>
                                     </div>

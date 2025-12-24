@@ -86,7 +86,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
             className="group relative px-4 py-2 text-[16px] md:text-[18px] font-medium tracking-[0.01em] text-[#5B6570] transition-colors duration-200 hover:text-[#0B1220] focus:outline-hidden focus:ring-2 focus:ring-[#0A58FF]/50 rounded-lg select-none cursor-pointer overflow-hidden"
         >
             <span className="relative z-10">{children}</span>
-            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#0A58FF] to-[#5FA8FF] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left" />
+            <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-gradient-to-r from-transparent via-[#0A58FF] to-transparent group-hover:w-full transition-[width] duration-300 ease-out -translate-x-1/2" />
         </Link>
     );
 }

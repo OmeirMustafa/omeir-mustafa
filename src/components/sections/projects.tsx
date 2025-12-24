@@ -11,7 +11,7 @@ export function Projects() {
 
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 animate-fade-up">
                     <div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+                        <h2 className="text-4xl md:text-5xl font-bold text-[#0A58FF] tracking-tight mb-4">
                             Curated Engagements
                         </h2>
                         <p className="text-slate-500 text-lg max-w-xl">
@@ -45,6 +45,10 @@ export function Projects() {
                             </h3>
 
                             <p className="text-slate-600 text-[17px] leading-relaxed">
+                                <span className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 text-slate-500 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                                    <Lock size={12} /> Coming Soon
+                                </span>
+                                <br />
                                 Designed a fast, mobile-first storefront focused on speed, clarity, and repeat purchases.
                             </p>
                         </div>
