@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import React from "react";
-import { ArrowDown } from "lucide-react";
 
 export function Hero() {
     const handleScrollProjects = () => {
@@ -13,6 +11,7 @@ export function Hero() {
     return (
         <section id="hero" className="min-h-[90vh] flex flex-col justify-center pt-32 md:pt-48 relative overflow-hidden">
             {/* Hero Background Video/Image - Standard IMG tag for reliable WebP loop */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
                 src="/hero-background-glassmotion.webp"
                 alt="Abstract glass motion background"
@@ -24,8 +23,8 @@ export function Hero() {
             <div className="container-width relative z-10 w-full flex flex-col items-center text-center">
 
                 <div className="max-w-[900px]">
-                    <h1 className="text-[32px] md:text-[44px] lg:text-[56px] font-bold tracking-tight text-slate-900 leading-[1.05] mb-8 animate-fade-up opacity-0">
-                        Turn your leaking website into a <span className="gradient-text">predictable revenue engine</span>.
+                    <h1 className="text-[32px] md:text-[44px] lg:text-[56px] font-bold tracking-tight text-ink-strong leading-[1.05] mb-8 animate-fade-up opacity-0">
+                        Turn your leaking website into a <span className="mark-highlight px-2">predictable revenue engine</span>.
                     </h1>
 
                     <h2 className="text-[16px] md:text-[18px] text-slate-500 max-w-[70ch] mx-auto leading-[1.6] mb-12 font-regular animate-fade-up delay-100 opacity-0">
@@ -42,21 +41,19 @@ export function Hero() {
                                         contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                                     }
                                 }}
-                                className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-slate-900 text-white font-medium text-xl shadow-lg hover:shadow-[#0A58FF]/40 hover:bg-[#0A58FF] transition-all duration-300 hover:-translate-y-1 active:scale-95 min-w-[220px] group relative overflow-hidden"
+                                className="btn-adventure text-xl min-w-[220px] group relative overflow-hidden"
                             >
                                 <span className="relative z-10 flex items-center gap-2">
                                     Book an Audit
                                 </span>
-                                {/* Pulse Entry & Steady Glow */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#0A58FF] to-[#5FA8FF] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-[cubic-bezier(0.25,0.8,0.25,1)]" />
                             </button>
 
                             {/* Secondary CTA: Strategic Work */}
                             <button
                                 onClick={handleScrollProjects}
-                                className="inline-flex items-center justify-center px-6 py-4 rounded-2xl border border-slate-300 text-slate-900 font-medium text-xl shadow-sm hover:shadow-[0_0_20px_rgba(10,88,255,0.15)] hover:border-[#0A58FF]/50 transition-all hover:-translate-y-1 active:scale-95 min-w-[220px] bg-transparent group relative"
+                                className="inline-flex items-center justify-center px-6 py-4 rounded-full border border-slate-200 text-ink-strong font-medium text-xl shadow-sm hover:bg-white hover:border-adventure/30 transition-all hover:-translate-y-1 active:scale-95 min-w-[220px] bg-white/50 backdrop-blur-sm group relative"
                             >
-                                <span className="relative z-10 flex items-center gap-2 group-hover:text-[#0A58FF] transition-colors">
+                                <span className="relative z-10 flex items-center gap-2 group-hover:text-adventure transition-colors">
                                     Explore Strategic Work
                                 </span>
                             </button>
@@ -64,7 +61,7 @@ export function Hero() {
 
                         {/* Microcopy - Clearer & Aligned */}
                         <p className="text-[17px] text-slate-500 font-medium tracking-wide text-center">
-                            30-min site & product audit — <span className="text-[#0A58FF] font-semibold">free</span>
+                            30-min site & product audit — <span className="text-adventure font-bold">free</span>
                         </p>
                     </div>
                 </div>

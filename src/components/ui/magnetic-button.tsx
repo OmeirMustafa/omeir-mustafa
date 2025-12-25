@@ -12,7 +12,7 @@ interface MagneticButtonProps extends HTMLMotionProps<"button"> {
 export const MagneticButton = ({
     children,
     className,
-    strength = 30, // Default strength
+    // strength, // Removed unused
     ...props
 }: MagneticButtonProps) => {
     const ref = useRef<HTMLButtonElement>(null);

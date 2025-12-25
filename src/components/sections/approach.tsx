@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ScanSearch, Compass, Zap, TrendingUp, ChevronRight } from "lucide-react";
+import { ScanSearch, Compass, Zap, TrendingUp } from "lucide-react";
 
 const STEPS = [
     {

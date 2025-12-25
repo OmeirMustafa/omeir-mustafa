@@ -11,7 +11,7 @@ export function Projects() {
 
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 animate-fade-up">
                     <div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-[#0A58FF] tracking-tight mb-4">
+                        <h2 className="text-4xl md:text-5xl font-bold text-adventure tracking-tight mb-4">
                             Curated Engagements
                         </h2>
                         <p className="text-slate-500 text-lg max-w-xl">
@@ -30,17 +30,17 @@ export function Projects() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                         {/* Card 1: Kuro Coffee */}
-                        <div className="group glass-card rounded-3xl p-8 md:p-10 border border-[#5FA8FF]/15 transition-all duration-420 opacity-0 animate-[fadeUp_450ms_200ms_var(--ease-entrance)_forwards]">
+                        <div className="group paper-card p-8 md:p-10 transition-all duration-420 opacity-0 animate-[fadeUp_450ms_200ms_var(--ease-entrance)_forwards]">
                             <div className="flex justify-between items-start mb-6">
-                                <span className="text-xs font-bold tracking-widest uppercase text-slate-400 group-hover:text-[#0A58FF] transition-colors">
+                                <span className="text-xs font-bold tracking-widest uppercase text-slate-400 group-hover:text-adventure transition-colors">
                                     E-Commerce Performance
                                 </span>
-                                <div className="p-3 bg-white/50 rounded-full group-hover:bg-[#0A58FF] transition-colors duration-300">
-                                    <ArrowUpRight size={18} className="text-slate-400 group-hover:text-white transition-colors" />
+                                <div className="p-3 bg-optimism-light rounded-full group-hover:bg-optimism transition-colors duration-300">
+                                    <ArrowUpRight size={18} className="text-ink-strong group-hover:text-ink-strong transition-colors" />
                                 </div>
                             </div>
 
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#0A58FF] transition-colors">
+                            <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-adventure transition-colors">
                                 Kuro Coffee
                             </h3>
 
@@ -54,9 +54,9 @@ export function Projects() {
                         </div>
 
                         {/* Card 2: Confidential (Locked) */}
-                        <div className="group glass-card rounded-3xl p-8 md:p-10 border border-[#5FA8FF]/15 transition-all duration-420 opacity-0 animate-[fadeUp_450ms_300ms_var(--ease-entrance)_forwards]">
+                        <div className="group paper-card p-8 md:p-10 transition-all duration-420 opacity-0 animate-[fadeUp_450ms_300ms_var(--ease-entrance)_forwards]">
                             <div className="flex justify-between items-start mb-6">
-                                <span className="text-xs font-bold tracking-widest uppercase text-slate-400 group-hover:text-[#0A58FF] transition-colors">
+                                <span className="text-xs font-bold tracking-widest uppercase text-slate-400 group-hover:text-adventure transition-colors">
                                     Confidential
                                 </span>
                                 <div className="px-3 py-1.5 bg-slate-100 rounded-full flex items-center gap-1.5 group-hover:bg-slate-200 transition-colors">
@@ -65,7 +65,7 @@ export function Projects() {
                                 </div>
                             </div>
 
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#0A58FF] transition-colors">
+                            <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-adventure transition-colors">
                                 Enterprise Data Dashboard
                             </h3>
 

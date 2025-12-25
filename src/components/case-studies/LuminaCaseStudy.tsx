@@ -85,7 +85,7 @@ export function LuminaCaseStudy() {
                                     <div className="flex justify-between items-start">
                                         <div>
                                             <h2 className="text-3xl md:text-4xl font-bold text-[#0A58FF] mb-2 leading-tight">
-                                                Lumina Law: "Homepage Strategic Rebuild for Growth & Trust."
+                                                Lumina Law: &quot;Homepage Strategic Rebuild for Growth & Trust.&quot;
                                             </h2>
                                         </div>
                                     </div>

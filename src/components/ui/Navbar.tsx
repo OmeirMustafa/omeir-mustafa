@@ -22,7 +22,7 @@ export function Navbar() {
             <div className="container-width">
                 <div
                     className={`flex items-center justify-between px-8 py-5 rounded-2xl transition-all duration-300 ${scrolled
-                        ? "bg-white/70 backdrop-blur-xl shadow-sm border border-white/40"
+                        ? "bg-white/95 backdrop-blur-md shadow-sm border border-slate-100"
                         : "bg-transparent"
                         }`}
                 >
@@ -37,17 +37,14 @@ export function Navbar() {
                         aria-label="Omeir Mustafa — Digital & Product Architect"
                     >
                         {/* Primary Brand */}
-                        <div className="relative z-10 text-xl md:text-2xl font-bold tracking-tight bg-gradient-to-r from-[#0A58FF] to-[#5FA8FF] text-transparent bg-clip-text group-hover:from-[#0A58FF] group-hover:to-[#0A58FF] transition-all duration-300">
+                        <div className="relative z-10 text-xl md:text-2xl font-bold tracking-tight text-adventure group-hover:text-adventure-dark transition-colors duration-300">
                             Omeir Mustafa
                         </div>
 
                         {/* Secondary Subtitle */}
-                        <div className="relative z-10 text-xs md:text-sm text-gray-400 group-hover:text-slate-500 transition-colors duration-300 font-medium">
+                        <div className="relative z-10 text-xs md:text-sm text-slate-500 group-hover:text-ink-strong transition-colors duration-300 font-medium">
                             Digital & Product Architect
                         </div>
-
-                        {/* Hover Glow Background */}
-                        <div className="absolute inset-0 -inset-x-4 -inset-y-2 blur-xl bg-[#0A58FF]/0 group-hover:bg-[#0A58FF]/10 transition-all duration-300 rounded-lg scale-90 opacity-0 group-hover:opacity-100 pointer-events-none" />
                     </Link>
 
                     {/* CENTER: Navigation */}
@@ -66,10 +63,10 @@ export function Navbar() {
                                     contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                                 }
                             }}
-                            className="bg-slate-900 text-white px-7 py-3.5 rounded-xl text-[16px] font-medium hover:bg-[#0A58FF] transition-colors shadow-lg shadow-slate-900/10 active:scale-95 flex items-center gap-2 group min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A58FF] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                            className="btn-optimism shadow-lg shadow-yellow-400/20 flex items-center gap-2 group min-h-[48px]"
                         >
                             Contact Now
-                            <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
+                            <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-12" />
                         </button>
                     </div>
                 </div>
@@ -83,10 +80,10 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
     return (
         <Link
             href={href}
-            className="group relative px-4 py-2 text-[16px] md:text-[18px] font-medium tracking-[0.01em] text-[#5B6570] transition-colors duration-200 hover:text-[#0B1220] focus:outline-hidden focus:ring-2 focus:ring-[#0A58FF]/50 rounded-lg select-none cursor-pointer overflow-hidden"
+            className="group relative px-4 py-2 text-[16px] md:text-[18px] font-medium tracking-[0.01em] text-ink transition-colors duration-200 hover:text-ink-strong focus:outline-hidden focus:ring-2 focus:ring-adventure/50 rounded-lg select-none cursor-pointer overflow-hidden"
         >
             <span className="relative z-10">{children}</span>
-            <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-gradient-to-r from-transparent via-[#0A58FF] to-transparent group-hover:w-full transition-[width] duration-300 ease-out -translate-x-1/2" />
+            <span className="absolute bottom-0 left-1/2 w-0 h-[3px] bg-optimism group-hover:w-full transition-[width] duration-300 ease-out -translate-x-1/2 rounded-full" />
         </Link>
     );
 }

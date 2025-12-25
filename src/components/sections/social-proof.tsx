@@ -56,7 +56,7 @@ export function SocialProof() {
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
                             {LOGOS.map((Logo, idx) => (
                                 <div key={idx} className="flex flex-col items-center justify-center gap-2 group cursor-none">
-                                    <Logo.icon size={28} className="text-slate-900 group-hover:text-[#0A58FF] transition-colors" />
+                                    <Logo.icon size={28} className="text-slate-900 group-hover:text-adventure transition-colors" />
                                     <span className="text-xs font-semibold text-slate-700">{Logo.name}</span>
                                 </div>
                             ))}
@@ -76,10 +76,10 @@ export function SocialProof() {
                         <div className="overflow-hidden min-h-[140px] flex items-center mb-8">
                             <div className="transition-opacity duration-300 w-full animate-fade-in key={currentInitial}">
                                 <p className="text-lg text-slate-800 leading-relaxed font-medium mb-4">
-                                    "{TESTIMONIALS[currentInitial].quote}"
+                                    &quot;{TESTIMONIALS[currentInitial].quote}&quot;
                                 </p>
                                 <div className="flex items-center gap-3">
-                                    <div className="w-8 h-[1px] bg-[#0A58FF]/40" />
+                                    <div className="w-8 h-[2px] bg-optimism" />
                                     <p className="text-sm text-slate-500">
                                         <span className="font-semibold text-slate-900">{TESTIMONIALS[currentInitial].author}</span>
                                         <span className="mx-1">•</span>
@@ -93,14 +93,14 @@ export function SocialProof() {
                         <div className="absolute bottom-6 right-6 flex gap-2">
                             <button
                                 onClick={prevSlide}
-                                className="p-3 rounded-full bg-slate-100 hover:bg-[#0A58FF] hover:text-white transition-colors group cursor-none"
+                                className="p-3 rounded-full bg-slate-100 hover:bg-adventure hover:text-white transition-colors group cursor-none"
                                 aria-label="Previous testimonial"
                             >
                                 <ChevronLeft size={20} className="text-slate-600 group-hover:text-white" />
                             </button>
                             <button
                                 onClick={nextSlide}
-                                className="p-3 rounded-full bg-slate-100 hover:bg-[#0A58FF] hover:text-white transition-colors group cursor-none"
+                                className="p-3 rounded-full bg-slate-100 hover:bg-adventure hover:text-white transition-colors group cursor-none"
                                 aria-label="Next testimonial"
                             >
                                 <ChevronRight size={20} className="text-slate-600 group-hover:text-white" />

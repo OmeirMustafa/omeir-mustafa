@@ -10,14 +10,16 @@ export function ContactSection() {
     return (
         <section id="contact-section" className="py-24 md:py-32 bg-[#F8FAFC] relative overflow-hidden"> {/* Lighter bg to contrast with dark modal popup if needed, but keeping global consist. */}
             <div className="container-width">
-                <div className="max-w-[920px] mx-auto glass-panel rounded-3xl p-8 md:p-16 text-center shadow-2xl shadow-blue-900/5 border border-white/60 relative overflow-hidden group">
+                <div className="max-w-[920px] mx-auto paper-card p-8 md:p-16 text-center shadow-lg relative overflow-hidden group">
 
                     {/* Background: Subtle Moving Gradient Mesh */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white/80 to-blue-50/50 opacity-100" />
+                    {/* Background: Subtle Optimism Tint */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-optimism/10 opacity-50" />
 
                     {/* Animated Accents */}
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-[#0A58FF]/5 to-transparent rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 animate-pulse-slow" />
-                    <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-t from-[#0A58FF]/5 to-transparent rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 animate-pulse-slow delay-1000" />
+                    {/* Simple Float Animations */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-adventure/5 rounded-full blur-3xl animate-float delay-100" />
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-optimism/10 rounded-full blur-3xl animate-float delay-300" />
 
                     <div className="relative z-10">
                         {/* Status Indicator */}
@@ -40,14 +42,14 @@ export function ContactSection() {
                         <div className="animate-fade-up delay-300">
                             <button
                                 onClick={() => setIsModalOpen(true)}
-                                className="inline-flex items-center justify-center px-10 py-5 rounded-2xl bg-slate-900 text-white font-bold text-lg shadow-xl shadow-slate-900/20 hover:bg-[#0A58FF] hover:shadow-[#0A58FF]/40 transition-all duration-300 hover:-translate-y-1 active:scale-95 group relative overflow-hidden"
+                                className="btn-adventure text-lg inline-flex items-center justify-center group relative overflow-hidden"
                             >
                                 <span className="relative z-10 flex items-center gap-3">
                                     Start a Conversation
                                     <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                 </span>
                                 {/* Gloss Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
+                                <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:animate-[shimmer_1s_infinite]" />
                             </button>
                         </div>
                     </div>
