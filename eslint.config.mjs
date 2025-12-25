@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "backup_old_site/**",
+    "scripts/**",
+    "reports/**",
     "next-env.d.ts",
   ]),
 ]);
